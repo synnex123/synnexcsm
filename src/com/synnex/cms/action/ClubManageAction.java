@@ -28,7 +28,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Logger logger = LoggerFactory.getLogger(ClubManageAction.class);
+	private static Logger logger = LoggerFactory.getLogger(ClubManageAction.class);
 	private ClubDto clubDto=new ClubDto();
 	private ClubService clubService;
 	private UserService userService;

@@ -27,7 +27,7 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Logger logger = LoggerFactory.getLogger(ApplyManageAction.class);
+	private static Logger logger = LoggerFactory.getLogger(ApplyManageAction.class);
 	private Apply apply=new Apply();
 	private ApplyService applyService;
 	private Integer userId;

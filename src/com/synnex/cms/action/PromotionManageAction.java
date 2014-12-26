@@ -33,7 +33,7 @@ public class PromotionManageAction extends ActionSupport implements ModelDriven<
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Logger logger = LoggerFactory.getLogger(PromotionManageAction.class);
+	private static Logger logger = LoggerFactory.getLogger(PromotionManageAction.class);
 	private Promotion promotion = new Promotion();
 	private PromotionService  promotionService;
 	private ClubService clubService;

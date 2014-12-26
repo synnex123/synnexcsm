@@ -24,7 +24,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Logger logger = LoggerFactory.getLogger(UserManageAction.class);
+	private static Logger logger = LoggerFactory.getLogger(UserManageAction.class);
 	private UserService userService;
 	private User user = new User();
 	private String password1;

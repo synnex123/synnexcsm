@@ -25,7 +25,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Logger logger = LoggerFactory.getLogger(GetApplyAction.class);
+	private static Logger logger = LoggerFactory.getLogger(GetApplyAction.class);
 	private ApplyDto applyDto =new ApplyDto();
 	private ApplyService applyService;
 	private Integer pageIndex;

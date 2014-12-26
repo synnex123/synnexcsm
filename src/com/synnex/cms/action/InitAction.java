@@ -30,7 +30,7 @@ public class InitAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Logger logger = LoggerFactory.getLogger(InitAction.class);
+	private static Logger logger = LoggerFactory.getLogger(InitAction.class);
 	private ClubService clubService;
 	private String location;
 	

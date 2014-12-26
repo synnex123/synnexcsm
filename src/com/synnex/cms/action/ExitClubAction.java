@@ -20,7 +20,7 @@ public class ExitClubAction extends ActionSupport implements ModelDriven<SearchU
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Logger logger = LoggerFactory.getLogger(ExitClubAction.class);
+	private static Logger logger = LoggerFactory.getLogger(ExitClubAction.class);
 	private SearchUserClubDto searchUserClubDto=new SearchUserClubDto();
 	private UserService userService;
 	@Override

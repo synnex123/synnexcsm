@@ -27,7 +27,7 @@ public class GetPromotionAction extends ActionSupport implements ModelDriven<Pro
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Logger logger = LoggerFactory.getLogger(GetPromotionAction.class);
+	private static Logger logger = LoggerFactory.getLogger(GetPromotionAction.class);
 	private Promotion promotion = new Promotion();
 	private PromotionService promotionService;
 	private ClubService clubService;

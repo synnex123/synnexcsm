@@ -22,7 +22,7 @@ public class InitApplyAction extends ActionSupport implements ModelDriven<Club>{
 	 * 
 	 */
 	private static final long serialVersionUID = -7316643920452188939L;
-	Logger logger = LoggerFactory.getLogger(InitApplyAction.class);
+	private static Logger logger = LoggerFactory.getLogger(InitApplyAction.class);
 	private Club club = new Club();
 	private ClubService clubService;
 	private ApplyService applyService;

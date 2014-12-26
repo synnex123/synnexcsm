@@ -21,7 +21,7 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Logger logger = LoggerFactory.getLogger(UserSearchAction.class);
+	private static Logger logger = LoggerFactory.getLogger(UserSearchAction.class);
 	private UserService userService;
 	private SearchDto searchDto=new SearchDto();
 	public void setUserService(UserService userService) {
