@@ -64,7 +64,7 @@ public class GetPromotionAction extends ActionSupport implements ModelDriven<Pro
 			List<PromotionDto> promotionlist=new ArrayList<>();
 			for (int i = 0; i < userclubIdlist.size(); i++) {
 				//通过clubId获取当前俱乐部的所有选举信息
-				List<PromotionDto> promotionlist1=promotionService.GetOnGoingPromotionByClubId((Integer)userclubIdlist.get(i));
+				List<PromotionDto> promotionlist1=promotionService.getOnGoingPromotionByClubId((Integer)userclubIdlist.get(i));
 				for (int j = 0; j < promotionlist1.size(); j++) {
 					//将每次获取到的选举信息放入最后要输出要页面的list里面
 					promotionlist.add(promotionlist1.get(j));
@@ -91,7 +91,7 @@ public class GetPromotionAction extends ActionSupport implements ModelDriven<Pro
 			HttpServletRequest request=ServletActionContext.getRequest();
 			List<User> promotionuserlist=new ArrayList<User>();
 			clubName = new String(clubName.getBytes("iso8859-1"),"UTF-8");
-			promotionuserlist = promotionService.GetPromotionUserByPromotionId(promotion.getPromotionId());
+			promotionuserlist = promotionService.getPromotionUserByPromotionId(promotion.getPromotionId());
 			HttpSession session=request.getSession();
 			session.setAttribute("promotionuserlist",promotionuserlist);
 			request.setAttribute("clubName", clubName);

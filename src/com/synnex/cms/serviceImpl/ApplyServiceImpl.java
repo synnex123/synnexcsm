@@ -51,8 +51,8 @@ public class ApplyServiceImpl implements ApplyService {
 	 * 
 	 * @param applyId
 	 */
-	public boolean CancelApply(Integer applyId) throws HibernateException {
-		return applyDao.CancelApply(applyId);
+	public boolean cancelApply(Integer applyId) throws HibernateException {
+		return applyDao.cancelApply(applyId);
 
 	}
 
@@ -70,10 +70,10 @@ public class ApplyServiceImpl implements ApplyService {
 	 * 
 	 * @params applyId,checkTime,userId,clubId
 	 */
-	public boolean PassApply(Integer applyId, Timestamp checkTime, UserClub uc)
+	public boolean passApply(Integer applyId, Timestamp checkTime, UserClub uc)
 			throws HibernateException {
-		applyDao.PassApplyInserUser(uc);
-		applyDao.PassApply(applyId, checkTime);
+		applyDao.passApplyInserUser(uc);
+		applyDao.passApply(applyId, checkTime);
 		return true;
 
 	}
@@ -85,9 +85,9 @@ public class ApplyServiceImpl implements ApplyService {
 	 * 
 	 * @params applyId,checkResponse,checkTime
 	 */
-	public boolean RejectApply(Integer applyId, String checkRes,
+	public boolean rejectApply(Integer applyId, String checkRes,
 			Timestamp checkTime) throws HibernateException {
-		return applyDao.RejectApply(applyId, checkRes, checkTime);
+		return applyDao.rejectApply(applyId, checkRes, checkTime);
 	}
 
 	/*

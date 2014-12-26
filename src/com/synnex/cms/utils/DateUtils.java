@@ -26,7 +26,7 @@ public class DateUtils {
 	 * @return Timestamp nowtime
 	 * @param Calendar nowtime
 	 */
-	public static Timestamp SwitchSqlDate(Calendar cal) {  
+	public static Timestamp switchSqlDate(Calendar cal) {  
 		Date date = cal.getTime();  
 		Timestamp datetime = new Timestamp(date.getTime()); 
 		return datetime;  

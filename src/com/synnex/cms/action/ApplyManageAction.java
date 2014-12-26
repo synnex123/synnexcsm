@@ -87,9 +87,6 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 					out.println("{\"status\":1,\"url\":\"init.action?location=chengdu\"}");
 					EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME, PASSWORD);
 				};
-
-
-				
 			} catch (HibernateException e) {
 				logger.warn("exception at"+this.getClass().getName(), e);
 			} catch (IOException e) {
@@ -108,7 +105,7 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 		HttpServletResponse response=ServletActionContext.getResponse();
 		try {
 			PrintWriter out = response.getWriter();
-			if (applyService.CancelApply(apply.getApplyId())) {
+			if (applyService.cancelApply(apply.getApplyId())) {
 				out.println("{\"status\":1,\"msg\":\"succeed to cancel\"}");
 			}else{
 				out.println("{\"status\":0,\"msg\":\"failed to cancel\"}");	
@@ -117,7 +114,6 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 		} catch (IOException e) {
 			logger.warn("exception at"+this.getClass().getName(), e);
 		}
-
 	}	
 /*
  * @author joeyy
@@ -134,7 +130,7 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 		
 		try {
 			PrintWriter out = response.getWriter();
-			if (applyService.RejectApply(applyId,checkRes,DateUtils.getSysNow())) {
+			if (applyService.rejectApply(applyId,checkRes,DateUtils.getSysNow())) {
 				//获取申请详细信息用于邮件内容
 				ApplyDto apply1=applyService.getApplyDetails(apply.getApplyId()).get(0);  
 			    String subject = "您的申请被驳回"+DateUtils.getNowDate() ;  
@@ -181,7 +177,7 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 		uc.setUserId(userId);
 		try {
 			PrintWriter out = response.getWriter();
-			if (applyService.PassApply(apply.getApplyId(),DateUtils.getSysNow(),uc)) {
+			if (applyService.passApply(apply.getApplyId(),DateUtils.getSysNow(),uc)) {
 				ApplyDto apply1=applyService.getApplyDetails(apply.getApplyId()).get(0);  
 			    String subject = "您的申请已被通过"+DateUtils.getNowDate() ;  
 			    String content = "您于"+apply1.getApplyTime()+"发起的加入"+apply1.getClubName()+"申请"+"已通过"+DateUtils.getNowDate()  

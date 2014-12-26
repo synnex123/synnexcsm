@@ -32,7 +32,7 @@ public interface PromotionService {
 	 * 
 	 * @param clubId of loginuser
 	 */
-	public List<PromotionDto> GetOnGoingPromotionByClubId(Integer clubId)
+	public List<PromotionDto> getOnGoingPromotionByClubId(Integer clubId)
 			throws HibernateException;
 
 	/*
@@ -42,7 +42,7 @@ public interface PromotionService {
 	 * 
 	 * @param promotionId
 	 */
-	public List<User> GetPromotionUserByPromotionId(Integer promotionId)
+	public List<User> getPromotionUserByPromotionId(Integer promotionId)
 			throws HibernateException;
 
 	/*
@@ -73,6 +73,6 @@ public interface PromotionService {
 	 * 
 	 * @param Entity PromotionVoteRecord
 	 */
-	public String JudgePromotion(PromotionVoteRecord pvr) throws HibernateException;
+	public String judgePromotion(PromotionVoteRecord pvr) throws HibernateException;
 
 }

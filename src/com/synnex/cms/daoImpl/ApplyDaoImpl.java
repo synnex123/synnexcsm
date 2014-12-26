@@ -117,7 +117,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 	 * 
 	 * @Author Joeyy 2014/12/01 function CancelApply
 	 */
-	public boolean CancelApply(Integer applyId) throws HibernateException {
+	public boolean cancelApply(Integer applyId) throws HibernateException {
 		String hql = "";
 		try {
 			session = getSession();
@@ -184,7 +184,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 	 * 
 	 * @param applyId,checkTime
 	 */
-	public boolean PassApply(Integer applyId, Timestamp checkTime)
+	public boolean passApply(Integer applyId, Timestamp checkTime)
 			throws HibernateException {
 		String hql = "";
 		try {
@@ -204,7 +204,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 	/*
 	 * @Author Joeyy 2014/12/03 function RejectApplyBy applyId
 	 */
-	public boolean RejectApply(Integer applyId, String checkRes,
+	public boolean rejectApply(Integer applyId, String checkRes,
 			Timestamp checkTime) throws HibernateException {
 		String hql = "";
 		try {
@@ -253,7 +253,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 	 * 
 	 * @param Entity UserClub
 	 */
-	public void PassApplyInserUser(UserClub uc) throws HibernateException {
+	public void passApplyInserUser(UserClub uc) throws HibernateException {
 		try {
 			session = getSession();
 			session.save(uc);

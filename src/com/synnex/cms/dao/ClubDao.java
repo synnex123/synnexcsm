@@ -32,7 +32,7 @@ public interface ClubDao extends BaseDao {
 	 * 
 	 * @param promotionId
 	 */
-	public Integer GetClubIdByPromotionId(Integer promotionId) throws HibernateException;
+	public Integer getClubIdByPromotionId(Integer promotionId) throws HibernateException;
 
 	/*
 	 * @author joeyy 2014/12/12 function UpdateClubInfo for change manager
@@ -41,7 +41,7 @@ public interface ClubDao extends BaseDao {
 	 * 
 	 * @param Entity club
 	 */
-	public boolean UpdateClubInfoChangeManager(Club club) throws HibernateException;
+	public boolean updateClubInfoChangeManager(Club club) throws HibernateException;
 
 	/*
 	 * @author joeyy 2014/12/12 function CountClubMemberByPromotionId
@@ -50,7 +50,7 @@ public interface ClubDao extends BaseDao {
 	 * 
 	 * @param promotionId
 	 */
-	public Integer CountClubMemberByPromotionId(Integer promotionId)
+	public Integer countClubMemberByPromotionId(Integer promotionId)
 			throws HibernateException;
 
 	/*

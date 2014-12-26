@@ -78,7 +78,7 @@ public class ClubDaoImpl  extends BaseDaoImpl implements ClubDao {
 	 * @param promotionId
 	 * 
 	 */
-public Integer GetClubIdByPromotionId(Integer promotionId) throws HibernateException{
+public Integer getClubIdByPromotionId(Integer promotionId) throws HibernateException{
 		String hql="";
 		Integer clubId=null;
 		try {
@@ -102,7 +102,7 @@ public Integer GetClubIdByPromotionId(Integer promotionId) throws HibernateExcep
  * @param Entity club
  * 
  */
-public boolean UpdateClubInfoChangeManager(Club club) throws HibernateException {
+public boolean updateClubInfoChangeManager(Club club) throws HibernateException {
 	String hql="";
 	try {
 		session=getSession();
@@ -123,7 +123,7 @@ public boolean UpdateClubInfoChangeManager(Club club) throws HibernateException 
 	 * @return The number of the club
 	 * @param promotionId 
 	 */
-	public Integer CountClubMemberByPromotionId(Integer promotionId) throws HibernateException {
+	public Integer countClubMemberByPromotionId(Integer promotionId) throws HibernateException {
 		String hql="";
 		Integer countmember;
 		try {

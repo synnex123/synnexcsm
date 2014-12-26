@@ -117,7 +117,7 @@ public class PromotionManageAction extends ActionSupport implements ModelDriven<
 			//获取当前时间+10天为选举过期时间
 			int nowDay =expireTime.get(Calendar.DAY_OF_MONTH);
 			expireTime.set(Calendar.DATE, nowDay+10);
-			promotion.setExpireTime(DateUtils.SwitchSqlDate(expireTime));
+			promotion.setExpireTime(DateUtils.switchSqlDate(expireTime));
 			User admin=new User();
 			admin=UserUtil.getUser(request);
 			
@@ -136,7 +136,7 @@ public class PromotionManageAction extends ActionSupport implements ModelDriven<
 				}	
 			}
 			promotion.setClubId(adminclubId);
-			promotion.setPromotionName(PromotionUtil.GetPromotionName(request));
+			promotion.setPromotionName(PromotionUtil.getPromotionName(request));
 			promotion.setPromotionState(0);
 			//若成功发起请求则给所有俱乐部成员发邮件通知
 			if (promotionService.producePromotion(promotion)) {
@@ -146,7 +146,7 @@ public class PromotionManageAction extends ActionSupport implements ModelDriven<
 				+"\n"
 				+"更换原因为:"+promotion.getPromotionReason()
 				+"\n"
-				+"有效期至("+DateUtils.SwitchSqlDate(expireTime)+")"
+				+"有效期至("+DateUtils.switchSqlDate(expireTime)+")"
 				+"\n请登录系统进行投票"
 				+"http://"+request.getRemoteHost()+":8080"+request.getContextPath()+ "/user/login.jsp"; 
 
@@ -192,7 +192,7 @@ public class PromotionManageAction extends ActionSupport implements ModelDriven<
 				return;
 			}else{
 				promotionService.savePromotionRecord(pvr);
-				if ("sloved".equals(promotionService.JudgePromotion(pvr))) {
+				if ("sloved".equals(promotionService.judgePromotion(pvr))) {
 					out.println("{\"msg\":\"succeed to vote and result have sloved \"}");
 					String subject="您所在的"+clubService.getClubByPromotionId(pvr.getPromotionId()).getClubName()+"俱乐部的更换管理员投票已结束("+DateUtils.getNowDate()+")";
 					String content="您所在的"+clubService.getClubByPromotionId(pvr.getPromotionId()).getClubName()+"俱乐部的更换管理员投票已结束"+"\n"+
@@ -207,7 +207,7 @@ public class PromotionManageAction extends ActionSupport implements ModelDriven<
 						EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME, PASSWORD);
 					}
 		
-				}else if ("keep".equals(promotionService.JudgePromotion(pvr))) {		
+				}else if ("keep".equals(promotionService.judgePromotion(pvr))) {		
 					out.println("{\"msg\":\"succeed to vote and keep going \"}");	
 				}else{
 					out.println("{\"msg\":\"failed to vote\"}");					

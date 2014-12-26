@@ -11,7 +11,7 @@ public interface PromotionVoteRecordDao extends BaseDao {
 	/*
 	 * @author joeyy 2014/12/18 function savepromtionvoterecord
 	 */
-	public boolean SavePromotion(PromotionVoteRecord pvr) throws HibernateException;
+	public boolean savePromotion(PromotionVoteRecord pvr) throws HibernateException;
 
 	/*
 	 * @author joeyy 2014/12/18 function judege if someone have voted
@@ -30,7 +30,7 @@ public interface PromotionVoteRecordDao extends BaseDao {
 	 * 
 	 * @param Entity PromotionVoteRecord
 	 */
-	public List<JudgePromotionDto> JudgeVoteCount(PromotionVoteRecord pvr)
+	public List<JudgePromotionDto> judgeVoteCount(PromotionVoteRecord pvr)
 			throws HibernateException;
 
 	/*

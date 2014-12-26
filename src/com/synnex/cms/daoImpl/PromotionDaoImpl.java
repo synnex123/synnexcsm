@@ -50,7 +50,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 	 * 
 	 * @param clubId of CurrentUser
 	 */
-	public List<PromotionDto> GetOnGoingPromotionByClubId(Integer clubId) throws HibernateException{
+	public List<PromotionDto> getOnGoingPromotionByClubId(Integer clubId) throws HibernateException{
 		String hql = "";
 		List<PromotionDto> resultlist = new ArrayList<PromotionDto>();
 		try {
@@ -94,7 +94,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 	 * 
 	 * @param promotionId
 	 */
-	public List<User> GetPromotionUserByPromotionId(Integer promotionId)
+	public List<User> getPromotionUserByPromotionId(Integer promotionId)
 			throws HibernateException {
 		List<User> userlist = new ArrayList<User>();
 		String hql = "";
@@ -135,7 +135,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 	 * 
 	 * @param promotionId,endtime
 	 */
-	public boolean EndPromotion(Integer promotionId, Timestamp endtime) throws HibernateException{
+	public boolean endPromotion(Integer promotionId, Timestamp endtime) throws HibernateException{
 		String hql = "";
 		try {
 			session = getSession();
@@ -153,7 +153,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 	/*
 	 * function update PromotionInfo if promotion is end or failed 2014/12/12
 	 */
-	public void UpdatePromotion(Integer promotionId, Integer promotionState)
+	public void updatePromotion(Integer promotionId, Integer promotionState)
 			throws HibernateException {
 		String hql = "";
 		try {
@@ -172,7 +172,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 	/*
 	 * function Check one club only can have one promotion 2014/12/15
 	 */
-	public Promotion CheckExist(Promotion promotion) throws HibernateException {
+	public Promotion checkExist(Promotion promotion) throws HibernateException {
 		String hql = "";
 		Promotion p = new Promotion();
 		try {

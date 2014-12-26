@@ -18,7 +18,7 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 	/*
 	 * @author joeyy 2014/12/18 function savepromtionvoterecord
 	 */
-	public boolean SavePromotion(PromotionVoteRecord pvr) throws HibernateException {
+	public boolean savePromotion(PromotionVoteRecord pvr) throws HibernateException {
 		try {
 			session = getSession();
 			session.save(pvr);
@@ -60,7 +60,7 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 	 * 
 	 * @param Entity PromotionVoteRecord
 	 */
-	public List<JudgePromotionDto> JudgeVoteCount(PromotionVoteRecord pvr)
+	public List<JudgePromotionDto> judgeVoteCount(PromotionVoteRecord pvr)
 			throws HibernateException {
 		String hql = "";
 		@SuppressWarnings("rawtypes")

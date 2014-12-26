@@ -33,7 +33,7 @@ public interface ApplyDao extends BaseDao {
 	 * 
 	 * @Author Joeyy 2014/12/01 function CancelApply
 	 */
-	public boolean CancelApply(Integer applyId) throws HibernateException;
+	public boolean cancelApply(Integer applyId) throws HibernateException;
 
 	/*
 	 * @Author Joeyy 2014/12/03 function getApplyByManagerId for checkapply.jsp
@@ -46,13 +46,13 @@ public interface ApplyDao extends BaseDao {
 	 * 
 	 * @param applyId,checkTime
 	 */
-	public boolean PassApply(Integer applyId, Timestamp checkTime)
+	public boolean passApply(Integer applyId, Timestamp checkTime)
 			throws HibernateException;
 
 	/*
 	 * @Author Joeyy 2014/12/03 function RejectApplyBy applyId
 	 */
-	public boolean RejectApply(Integer applyId, String checkRes,
+	public boolean rejectApply(Integer applyId, String checkRes,
 			Timestamp checkTime) throws HibernateException;
 
 	/*
@@ -66,7 +66,7 @@ public interface ApplyDao extends BaseDao {
 	 * 
 	 * @param Entity UserClub
 	 */
-	public void PassApplyInserUser(UserClub uc) throws HibernateException;
+	public void passApplyInserUser(UserClub uc) throws HibernateException;
 
 	/*
 	 * @author joeyy 2014/12/22 function getApplyByClubId

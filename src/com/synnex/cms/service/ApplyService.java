@@ -38,7 +38,7 @@ public interface ApplyService {
 	 * 
 	 * @param applyId
 	 */
-	public boolean CancelApply(Integer applyId) throws HibernateException;
+	public boolean cancelApply(Integer applyId) throws HibernateException;
 
 	/*
 	 * @Author Joeyy function getApplyByManagerId for checkapply 2014/12/01
@@ -51,7 +51,7 @@ public interface ApplyService {
 	 * 
 	 * @params applyId,checkTime,userId,clubId
 	 */
-	public boolean PassApply(Integer applyId, Timestamp checkTime, UserClub uc)
+	public boolean passApply(Integer applyId, Timestamp checkTime, UserClub uc)
 			throws HibernateException;
 
 	/*
@@ -61,7 +61,7 @@ public interface ApplyService {
 	 * 
 	 * @params applyId,checkResponse,checkTime
 	 */
-	public boolean RejectApply(Integer applyId, String checkRes,
+	public boolean rejectApply(Integer applyId, String checkRes,
 			Timestamp checkTime) throws HibernateException;
 
 	/*

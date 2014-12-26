@@ -56,7 +56,7 @@ public class PromotionServiceImpl implements PromotionService {
 	 * @param Entity promotion
 	 */
 	public boolean producePromotion(Promotion promotion) throws HibernateException {
-		if (promotionDao.CheckExist(promotion) != null) {
+		if (promotionDao.checkExist(promotion) != null) {
 			return false;
 		} else {
 			return promotionDao.savepromotion(promotion);
@@ -70,10 +70,10 @@ public class PromotionServiceImpl implements PromotionService {
 	 * 
 	 * @param clubId of loginuser
 	 */
-	public List<PromotionDto> GetOnGoingPromotionByClubId(Integer clubId)
+	public List<PromotionDto> getOnGoingPromotionByClubId(Integer clubId)
 			throws HibernateException {
 		List<PromotionDto> resultlist = promotionDao
-				.GetOnGoingPromotionByClubId(clubId);
+				.getOnGoingPromotionByClubId(clubId);
 		// 取出返回的list中的结束时间和过期时间
 		for (int i = 0; i < resultlist.size(); i++) {
 			Timestamp nowtime = DateUtils.getSysNow();
@@ -85,7 +85,7 @@ public class PromotionServiceImpl implements PromotionService {
 				if (endtime != null) {
 					try {
 						Integer promotionState = 2;
-						promotionDao.UpdatePromotion(promotionId,
+						promotionDao.updatePromotion(promotionId,
 								promotionState);
 					} catch (Exception e) {
 						throw e;
@@ -94,7 +94,7 @@ public class PromotionServiceImpl implements PromotionService {
 				if (expiretime.getTime() <= nowtime.getTime()) {
 					try {
 						Integer promotionState = 4;
-						promotionDao.UpdatePromotion(promotionId,
+						promotionDao.updatePromotion(promotionId,
 								promotionState);
 					} catch (Exception e) {
 						throw e;
@@ -116,10 +116,10 @@ public class PromotionServiceImpl implements PromotionService {
 	 * 
 	 * @param promotionId
 	 */
-	public List<User> GetPromotionUserByPromotionId(Integer promotionId)
+	public List<User> getPromotionUserByPromotionId(Integer promotionId)
 			throws HibernateException {
 		List<User> userlist = null;
-			userlist = promotionDao.GetPromotionUserByPromotionId(promotionId);
+			userlist = promotionDao.getPromotionUserByPromotionId(promotionId);
 	
 		return userlist;
 
@@ -136,7 +136,7 @@ public class PromotionServiceImpl implements PromotionService {
 	public boolean savePromotionRecord(PromotionVoteRecord pvr)
 			throws HibernateException {
 		//
-		if (promotionVoteRecordDao.SavePromotion(pvr)) {
+		if (promotionVoteRecordDao.savePromotion(pvr)) {
 			// 对投票结果进行统计计算
 			return true;
 		} else {
@@ -169,7 +169,7 @@ public class PromotionServiceImpl implements PromotionService {
 	 * 
 	 * @param Entity PromotionVoteRecord
 	 */
-	public String JudgePromotion(PromotionVoteRecord pvr) throws HibernateException {
+	public String judgePromotion(PromotionVoteRecord pvr) throws HibernateException {
 		/*
 		 * 每次投票完成后对投票结果进行判断
 		 * 
@@ -183,11 +183,11 @@ public class PromotionServiceImpl implements PromotionService {
 		JudgePromotionDto judge2 = new JudgePromotionDto();
 		try {
 			// 取出该次选举对应的俱乐部的总人数
-			countclubmember = clubDao.CountClubMemberByPromotionId(pvr
+			countclubmember = clubDao.countClubMemberByPromotionId(pvr
 					.getPromotionId());
 			// 取出得票数和对应的得票人用List集合存储
 			List<JudgePromotionDto> judgeresult = promotionVoteRecordDao
-					.JudgeVoteCount(pvr);
+					.judgeVoteCount(pvr);
 			// 如果有两个人以上都有票数
 			if (judgeresult.size() >= 2) {
 				judge1 = judgeresult.get(0);
@@ -203,17 +203,17 @@ public class PromotionServiceImpl implements PromotionService {
 						// 将原俱乐部负责人的userType设为1
 						userDao.downUserType(oldmanagerId);
 						// 将promotion的endtime设为当前操作时间
-						promotionDao.EndPromotion(pvr.getPromotionId(),
+						promotionDao.endPromotion(pvr.getPromotionId(),
 								DateUtils.getSysNow());
 						// 从promotionvoterecord中删除对应promotionId的所有数据
 						promotionVoteRecordDao.delete(pvr.getPromotionId());
-						Integer clubId = clubDao.GetClubIdByPromotionId(pvr
+						Integer clubId = clubDao.getClubIdByPromotionId(pvr
 								.getPromotionId());
 						Club club = new Club();
 						club.setClubId(clubId);
 						club.setManagerId(judge1.getVoteduserId());
 						// 将clubinfo表中的俱乐部负责人修改成新负责人
-						clubDao.UpdateClubInfoChangeManager(club);
+						clubDao.updateClubInfoChangeManager(club);
 					} catch (Exception e) {
 						throw e;
 					}
@@ -237,17 +237,17 @@ public class PromotionServiceImpl implements PromotionService {
 						// 将原俱乐部负责人的userType设为1
 						userDao.downUserType(oldmanagerId);
 						// 将promotion的endtime设为当前操作时间
-						promotionDao.EndPromotion(pvr.getPromotionId(),
+						promotionDao.endPromotion(pvr.getPromotionId(),
 								DateUtils.getSysNow());
 						// 从promotionvoterecord中删除对应promotionId的所有数据
 						promotionVoteRecordDao.delete(pvr.getPromotionId());
-						Integer clubId = clubDao.GetClubIdByPromotionId(pvr
+						Integer clubId = clubDao.getClubIdByPromotionId(pvr
 								.getPromotionId());
 						Club club = new Club();
 						club.setClubId(clubId);
 						club.setManagerId(judge1.getVoteduserId());
 						// 将clubinfo表中的俱乐部负责人修改成新负责人
-						clubDao.UpdateClubInfoChangeManager(club);
+						clubDao.updateClubInfoChangeManager(club);
 					} catch (Exception e) {
 						throw e;
 					}
