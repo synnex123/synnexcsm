@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="ajaxAction" location="1075,600" size="460,70">
+    <action name="UserLogin" location="15,23" size="150,40" />
+    <action name="CheckPassword" location="260,23" size="150,40" />
+  </package>
+  <package name="userManage" location="225,780" size="525,455">
+    <action name="UserRegist" location="65,47" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="login.jsp" />
+      </result>
+      <result name="error">
+        <resourceEdge source="error" routing="0" target="user_add.jsp" />
+      </result>
+    </action>
+    <action name="UserChangePassword" location="65,163" size="150,40" />
+    <action name="InitUpdateUserInfo" location="310,162" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="updatemyinfo.jsp" />
+      </result>
+    </action>
+    <action name="UpdateUserInfo" location="310,268" size="150,40" />
+    <action name="Logout" location="310,372" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="login.jsp" />
+      </result>
+    </action>
+  </package>
+  <package name="apply" location="45,10" size="525,455">
+    <action name="initApply" location="310,47" size="150,62">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="applydetails.jsp" />
+      </result>
+      <result name="error">
+        <resourceEdge source="error" routing="0" target="applydetails.jsp" />
+      </result>
+    </action>
+    <action name="*Apply" location="310,163" size="150,40" />
+    <action name="getMyApply" location="310,267" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="myapply.jsp" />
+      </result>
+    </action>
+    <action name="getApplyDetail" location="310,362" size="150,62">
+      <result name="userdetail">
+        <resourceEdge source="userdetail" routing="0" target="userapplydetails.jsp" />
+      </result>
+      <result name="managerdetail">
+        <resourceEdge source="managerdetail" routing="0" target="checkapplydetails.jsp" />
+      </result>
+    </action>
+    <action name="getApplyByManagerId" location="65,372" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="checkapply.jsp" />
+      </result>
+    </action>
+  </package>
+  <package name="clubManage" location="1004,708" size="525,245">
+    <action name="AddClub" location="65,58" size="150,40" />
+    <action name="InitDeleteClub" location="65,162" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="deleteclub.jsp" />
+      </result>
+    </action>
+    <action name="DeleteClub" location="310,163" size="150,40" />
+  </package>
+  <package name="init" location="1002,1084" size="280,210">
+    <action name="init" location="65,71" size="150,83">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="main.jsp" />
+      </result>
+      <result name="welcome">
+        <resourceEdge source="welcome" routing="0" target="index.jsp" />
+      </result>
+      <result name="error">
+        <resourceEdge source="error" routing="0" target="error.jsp" />
+      </result>
+    </action>
+  </package>
+  <package name="Promotion" location="1028,-6" size="525,420">
+    <action name="producePromotion" location="65,233" size="150,40" />
+    <action name="initPromotion" location="65,337" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="changeadmin.jsp" />
+      </result>
+    </action>
+    <action name="getPromotion" location="310,337" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="promotionvote.jsp" />
+      </result>
+    </action>
+    <action name="getPromotionVote" location="310,162" size="150,41">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="promotion.jsp" />
+      </result>
+    </action>
+    <action name="doPromotion" location="310,58" size="150,40" />
+  </package>
+  <webResource name="login.jsp" path="/login.jsp" location="290,682" size="150,55" />
+  <webResource name="user_add.jsp" path="/user_add.jsp" location="10,822" size="150,55" />
+  <webResource name="updatemyinfo.jsp" path="updatemyinfo.jsp" location="535,682" size="150,55" />
+  <webResource name="login.jsp" path="login.jsp" location="815,1137" size="150,55" />
+  <webResource name="applydetails.jsp" path="/applydetails.jsp" location="775,52" size="150,55" />
+  <webResource name="myapply.jsp" path="/myapply.jsp" location="635,262" size="150,55" />
+  <webResource name="userapplydetails.jsp" path="/userapplydetails.jsp" location="355,507" size="150,55" />
+  <webResource name="checkapplydetails.jsp" path="/checkapplydetails.jsp" location="635,367" size="150,55" />
+  <webResource name="checkapply.jsp" path="/checkapply.jsp" location="110,507" size="150,55" />
+  <webResource name="deleteclub.jsp" path="deleteclub.jsp" location="1071,1003" size="150,55" />
+  <webResource name="main.jsp" path="/main.jsp" location="738,1323" size="150,55" />
+  <webResource name="index.jsp" path="/index.jsp" location="937,1324" size="150,55" />
+  <webResource name="error.jsp" path="/error.jsp" location="1155,1320" size="150,55" />
+  <webResource name="changeadmin.jsp" path="/changeadmin.jsp" location="899,508" size="150,55" />
+  <webResource name="promotionvote.jsp" path="/promotionvote.jsp" location="1330,481" size="150,55" />
+  <webResource name="promotion.jsp" path="/promotion.jsp" location="1073,494" size="150,55" />
+</Struts2Diagram>
+

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		   xmlns:aop="http://www.springframework.org/schema/aop"
+		   xmlns:tx="http://www.springframework.org/schema/tx"
+	       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		   http://www.springframework.org/schema/aop
+		   http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		   http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd" >
+		
+<!-- 定义受环境影响易变的变量 -->
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="locations">
+		<list>
+			<!-- 标准配置 -->
+			<value>classpath*:/jdbc.properties</value>
+		</list>
+	</property>
+</bean>
+
+<!-- 配置一个数据源com.mysql.jdbc.Driver-->
+<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<property name="driverClassName" value="${jdbc.driver}" />
+	<property name="url" value="${jdbc.url}" />
+	<property name="username" value="${jdbc.username}" />
+	<property name="password" value="${jdbc.password}" />
+
+	<!-- Connection Pooling Info -->
+	<property name="maxIdle" value="${dbcp.maxIdle}"/>
+	<property name="maxActive" value="${dbcp.maxActive}"/>
+	<property name="timeBetweenEvictionRunsMillis" value="3600000" />
+	<property name="minEvictableIdleTimeMillis" value="3600000" />
+	<property name="defaultAutoCommit" value="false" />
+</bean>
+<!-- 配置sessionFactory -->
+<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	   <property name="dataSource" ref="dataSource"/>
+	   <property name="hibernateProperties">
+	       <props>
+	           <!-- 数据库方言 -->
+	           <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+	           <!-- 显示sql语句 -->
+	           <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+			   <!-- 在启动的时候，删除并重新创建数据库表结构 -->
+			   <prop key="hibernate.hbm2ddl.auto">update</prop>
+			   <!-- 格式化SQL显示 -->
+			   <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+	       </props>
+	    </property>
+	    <!-- 映射文件 -->
+	   <property name="mappingLocations">
+	       <list>
+	           <value>classpath:com/synnex/cms/entity/*.hbm.xml</value>
+	       </list>
+	   </property>
+</bean>
+<!-- 配置事务管理器 -->
+<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	<property name="sessionFactory" ref="sessionFactory"/>
+</bean>
+
+<!-- 配置事务特性 -->
+<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	<tx:attributes>
+		<tx:method name="*" propagation="REQUIRED" />
+	</tx:attributes>
+</tx:advice>
+
+<!-- 配置那些类的方法进行事务管理 -->
+<aop:config>
+	<aop:pointcut id="allServiceMethod" expression="execution(public * com.synnex.cms.service.*Service.*(..))" />
+	<aop:advisor advice-ref="txAdvice" pointcut-ref="allServiceMethod" />
+</aop:config>
+
+
+<!--配置action的类-->
+<bean name="userManage" class="com.synnex.cms.action.UserManageAction"  scope="prototype">
+	<property name="userService" ref="userService"></property>
+</bean>
+<bean name="userSearch" class="com.synnex.cms.action.UserSearchAction" scope="prototype">
+	<property name="userService" ref="userService"></property>
+</bean>
+<bean  name="init" class="com.synnex.cms.action.InitAction" scope="prototype">   
+	<property name="clubService" ref="clubService"></property>
+</bean>
+<bean name="ajaxAction" class="com.synnex.cms.action.UserLoginAction" scope="prototype">
+	<property name="userService" ref="userService"></property>
+</bean>
+<bean name="applyInit" class="com.synnex.cms.action.InitApplyAction" scope="prototype">
+	<property name="applyService" ref="applyService"></property>
+	<property name="clubService" ref="clubService"></property>
+</bean>
+<bean name="applyManage" class="com.synnex.cms.action.ApplyManageAction" scope="prototype">
+	<property name="applyService" ref="applyService"></property>
+	<property name="clubService" ref="clubService"></property>
+	<property name="userService" ref="userService"></property>
+</bean>
+<bean name="applyGet" class="com.synnex.cms.action.GetApplyAction" scope="prototype">
+	<property name="applyService" ref="applyService"></property>
+</bean>
+<bean name="clubManage" class="com.synnex.cms.action.ClubManageAction" scope="prototype">
+	<property name="clubService" ref="clubService"></property>
+	<property name="userService" ref="userService"></property>
+</bean>
+<bean name="promotionManage" class="com.synnex.cms.action.PromotionManageAction" scope="prototype">
+	<property name="promotionService" ref="promotionService"></property>
+	<property name="clubService" ref="clubService"></property>
+	<property name="userService" ref="userService"></property>
+</bean>
+<bean name="promotionGet" class="com.synnex.cms.action.GetPromotionAction" scope="prototype">
+	<property name="promotionService" ref="promotionService"></property>
+	<property name="clubService" ref="clubService"></property>
+</bean>
+<bean name="clubExit" class="com.synnex.cms.action.ExitClubAction" scope="prototype">
+	<property name="userService" ref="userService"></property>
+</bean>
+<!-- 配置Dao -->
+<bean name="userDao" class="com.synnex.cms.daoImpl.UserDaoImpl">
+	<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<bean name="clubDao" class="com.synnex.cms.daoImpl.ClubDaoImpl" >
+	<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<bean name="applyDao" class="com.synnex.cms.daoImpl.ApplyDaoImpl" >
+	<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<bean name="promotionDao" class="com.synnex.cms.daoImpl.PromotionDaoImpl" >
+	<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<bean name="PromotionVoteRecordDao" class="com.synnex.cms.daoImpl.PromotionVoteRecordDaoImpl">
+	<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+
+<!-- 配置Service -->
+<bean name="userService" class="com.synnex.cms.serviceImpl.UserServiceImpl">
+	<property name="userDao" ref="userDao"></property>
+</bean>
+<bean name="clubService" class="com.synnex.cms.serviceImpl.ClubServiceImpl" >
+	<property name="clubDao" ref="clubDao"></property>
+	<property name="userDao" ref="userDao"></property>
+</bean>
+<bean name="applyService" class="com.synnex.cms.serviceImpl.ApplyServiceImpl" >
+	<property name="applyDao" ref="applyDao"></property>
+</bean>
+<bean name="promotionService" class="com.synnex.cms.serviceImpl.PromotionServiceImpl" >
+	<property name="promotionDao" ref="promotionDao"></property>
+	<property name="clubDao" ref="clubDao"></property>
+	<property name="userDao" ref="userDao"></property>
+	<property name="PromotionVoteRecordDao" ref="PromotionVoteRecordDao"></property>
+</bean>
+
+
+</beans>
