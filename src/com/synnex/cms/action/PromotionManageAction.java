@@ -148,7 +148,7 @@ public class PromotionManageAction extends ActionSupport implements ModelDriven<
 				+"\n"
 				+"有效期至("+DateUtils.SwitchSqlDate(expireTime)+")"
 				+"\n请登录系统进行投票"
-				+"http://192.168.87.92:8080/CMSSSH2v1/user/login.jsp"; 
+				+"http://"+request.getRemoteHost()+":8080"+request.getContextPath()+ "/user/login.jsp"; 
 
 				//取得此俱乐部的所有成员
 				List<User> userlist=userService.getAllUserByClubId(adminclubId);
@@ -198,7 +198,7 @@ public class PromotionManageAction extends ActionSupport implements ModelDriven<
 					String content="您所在的"+clubService.getClubByPromotionId(pvr.getPromotionId()).getClubName()+"俱乐部的更换管理员投票已结束"+"\n"+
 					"新的负责人为"+userService.getUserByUserId(clubService.getClubByPromotionId(pvr.getPromotionId()).getManagerId()).getUserName()
 					+"\n"
-					+ "请前往查看http://192.168.87.92:8080/CMSSSH2v1/user/login.jsp";
+					+ "请前往查看"+"http://"+request.getRemoteHost()+":8080"+request.getContextPath()+ "/user/login.jsp"; 
 					//取得此俱乐部的所有成员
 					List<User> userlist=userService.getAllUserByClubId(clubService.getClubByPromotionId(pvr.getPromotionId()).getClubId());
 					//向此俱乐部中所有成员发邮件

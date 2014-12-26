@@ -2,6 +2,7 @@ package com.synnex.cms.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
@@ -70,21 +71,24 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 	 */
 	public void saveApply(){
 		HttpServletResponse response=ServletActionContext.getResponse();
+		HttpServletRequest request=ServletActionContext.getRequest();
 			apply.setApplyTime(DateUtils.getSysNow());
 			apply.setApplyStatus(0);
 			applyService.saveApply(apply);
 			try {
+				PrintWriter out =response.getWriter();
 				if (applyService.getSubmittedApplyByClubId(apply.getClubId()).size()>=5) {  
 				    String subject = "请尽快处理俱乐部申请，未处理申请已达"+"("+applyService.getSubmittedApplyByClubId(apply.getClubId()).size()+")"+"条";  
 				    String content = "您负责的俱乐部的未处理申请已达到"+applyService.getSubmittedApplyByClubId(apply.getClubId()).size()+"条，请尽快登录系统处理"
 				    		+ "\n"
-				    		+ "http://192.168.87.92:8080/CMSSSH2v1/user/login.jsp";  
+				    		+"http://"+request.getRemoteHost()+":8080"+request.getContextPath()+ "/user/login.jsp";  
 					Integer managerId=clubService.getClubByClubId(apply.getClubId()).getManagerId();
 					String to = userService.getUserByUserId(managerId).getUserEmail();
+					out.println("{\"status\":1,\"url\":\"init.action?location=chengdu\"}");
 					EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME, PASSWORD);
 				};
-			PrintWriter out =response.getWriter();
-			out.println("{\"status\":1,\"url\":\"init.action?location=chengdu\"}");
+
+
 				
 			} catch (HibernateException e) {
 				logger.warn("exception at"+this.getClass().getName(), e);
@@ -124,6 +128,7 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
  */
 	public void rejectApply(){
 		HttpServletResponse response=ServletActionContext.getResponse();
+		HttpServletRequest request=ServletActionContext.getRequest();
 		String checkRes=apply.getCheckRes();
 		Integer applyId=apply.getApplyId();
 		
@@ -140,13 +145,14 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 			    		+ "rejected reason:"+apply1.getCheckRes()
 			    		+"\n"
 			    		+ "请登录系统查看"
-			    		+ "http://192.168.87.92:8080/CMSSSH2v1/user/login.jsp";  
+			    		+ "http://"+request.getRemoteHost()+":8080"+request.getContextPath()+ "/user/login.jsp";   
 				Integer userId=apply1.getRequesterId();
 				//获取当前选择的apply获取请求人的email
 				String to = userService.getUserByUserId(userId).getUserEmail();
+				out.println("{\"status\":1,\"msg\":\"succeed to reject\"}");
 				EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME, PASSWORD);
 
-				out.println("{\"status\":1,\"msg\":\"succeed to reject\"}");
+
 			}else{
 				out.println("{\"status\":0,\"msg\":\"failed to reject\"}");
 			}
@@ -167,7 +173,8 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 	 * @param applyId,userId,clubId,checkTime
 	 */
 	public void processApply(){
-		HttpServletResponse response=ServletActionContext.getResponse();  
+		HttpServletResponse response=ServletActionContext.getResponse(); 
+		HttpServletRequest request=ServletActionContext.getRequest();
 
 		UserClub uc=new UserClub();
 		uc.setClubId(apply.getClubId());
@@ -180,11 +187,12 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 			    String content = "您于"+apply1.getApplyTime()+"发起的加入"+apply1.getClubName()+"申请"+"已通过"+DateUtils.getNowDate()  
 			    		+ "\n"
 			    		+ "请登录系统查看"
-			    		+ "http://192.168.87.92:8080/CMSSSH2v1/user/login.jsp";  
+			    		+ "http://"+request.getRemoteHost()+":8080"+request.getContextPath()+ "/user/login.jsp";    
 				Integer userId=apply1.getRequesterId();
 				String to = userService.getUserByUserId(userId).getUserEmail();
-				EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME, PASSWORD);
 				out.println("{\"status\":1,\"msg\":\"succeed to process\"}");
+				EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME, PASSWORD);
+
 			}else{
 				out.println("{\"status\":0,\"msg\":\"failed to process\"}");	
 			}
