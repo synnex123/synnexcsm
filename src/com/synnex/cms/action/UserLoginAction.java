@@ -49,7 +49,7 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 	public User getModel() {
 		return user;
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/06
 	 * function judge if two inputs are consistent
@@ -75,7 +75,7 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 		}
 
 	}
-	/*
+	/**
 	 * @author
 	 * 2014/12/06
 	 * function userLogin

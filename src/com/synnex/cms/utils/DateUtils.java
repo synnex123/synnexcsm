@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * @author joeyy
  *2014/11/25
  */
-/*
+/**
  * function getcurrentTime and format it
  */
 public class DateUtils {
@@ -21,7 +21,7 @@ public class DateUtils {
 	public static Timestamp getSysNow(){
 		return new Timestamp(System.currentTimeMillis());	
 	}
-	/*
+	/**
 	 * function switch calendar to java.sql.Timestamp
 	 * @return Timestamp nowtime
 	 * @param Calendar nowtime
@@ -31,7 +31,7 @@ public class DateUtils {
 		Timestamp datetime = new Timestamp(date.getTime()); 
 		return datetime;  
 		}  
-	/*
+	/**
 	 * function getnowTime to String
 	 * @return String Time
 	 * @param Date date
@@ -39,14 +39,14 @@ public class DateUtils {
 	 public static String getDate(Date date){
 	        return getDate(date, "yyyy-MM-dd HH:mm:ss");
 	    }
-	 /*
+	 /**
 	  * function GetNowDate to String
 	  * @return String NowTime
 	  */
 	 public static String getNowDate(){
 	        return getDate(new Date());
 	    }
-	 /*
+	 /**
 	  * function GetDateTo formatStr
 	  * @return formatStr
 	  * @param Date date

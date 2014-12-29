@@ -10,19 +10,19 @@ import com.synnex.cms.entity.User;
 import com.synnex.cms.entity.UserClub;
 
 public interface UserService {
-	/*
+	/**
 	 * 2014/11/19 function register
 	 * 
 	 * @author joeyy
 	 */
 	public boolean save(User user) throws HibernateException;
 
-	/*
+	/**
 	 * @author joeyy 2014/11/24 function login
 	 */
 	public User checklogin(User user) throws HibernateException;
 
-	/*
+	/**
 	 * @author joeyy 2014/11/25 function change userpassword
 	 */
 	public boolean updateUserInfo(User user) throws HibernateException;
@@ -56,14 +56,14 @@ public interface UserService {
 	 */
 	public User getUserByName(String userName) throws HibernateException;
 
-	/*
+	/**
 	 * @author joeyy 2014/12/10 fucntion changeUserPassword
 	 */
 	public boolean updatepassword(User user) throws HibernateException;
 
 	public User getUserByUserId(Integer userId) throws HibernateException;
 
-	/*
+	/**
 	 * @author joeyy 2014/12/24 function getAllUserByClubId
 	 * 
 	 * @return List<User> in one club

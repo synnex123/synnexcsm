@@ -48,7 +48,7 @@ public class PromotionServiceImpl implements PromotionService {
 
 	Session session = null;
 
-	/*
+	/**
 	 * function producepromotion 2014/12/11
 	 * 
 	 * @return true if save is succeed,else return false
@@ -63,7 +63,7 @@ public class PromotionServiceImpl implements PromotionService {
 		}
 	}
 
-	/*
+	/**
 	 * function GetOnGoingPromotionById and update promotion 2014/12/11
 	 * 
 	 * @return promotion infomation
@@ -109,7 +109,7 @@ public class PromotionServiceImpl implements PromotionService {
 		return resultlist;
 	}
 
-	/*
+	/**
 	 * function GetPromotionUserByPromotionId 2014/12/09
 	 * 
 	 * @return userlist except club's manager
@@ -125,7 +125,7 @@ public class PromotionServiceImpl implements PromotionService {
 
 	}
 
-	/*
+	/**
 	 * function SavePromotion 2014/12/09
 	 * 
 	 * @return true if save is succeed,else return false
@@ -144,7 +144,7 @@ public class PromotionServiceImpl implements PromotionService {
 		}
 	}
 
-	/*
+	/**
 	 * function judge if promotion is exist 2014/12/08
 	 * 
 	 * @return true if it is exist,else return false
@@ -161,7 +161,7 @@ public class PromotionServiceImpl implements PromotionService {
 		}
 	}
 
-	/*
+	/**
 	 * function judge promotion's result and update information by this result
 	 * 2014/12/12
 	 * 
@@ -197,9 +197,9 @@ public class PromotionServiceImpl implements PromotionService {
 						.getCountPromotion() + judge2.getCountPromotion()))) {
 					try {
 						// 将得票第一的人的userType设为0
-						userDao.UpUserType(judge1.getVoteduserId());
+						userDao.upUserType(judge1.getVoteduserId());
 						Integer oldmanagerId = userDao
-								.GetManagerIdByPromotionId(pvr.getPromotionId());
+								.getManagerIdByPromotionId(pvr.getPromotionId());
 						// 将原俱乐部负责人的userType设为1
 						userDao.downUserType(oldmanagerId);
 						// 将promotion的endtime设为当前操作时间
@@ -231,9 +231,9 @@ public class PromotionServiceImpl implements PromotionService {
 				if (judge1.getCountPromotion() > countclubmember * 0.5) {
 					try {
 						// 将得票第一的人的userType设为0
-						userDao.UpUserType(judge1.getVoteduserId());
+						userDao.upUserType(judge1.getVoteduserId());
 						Integer oldmanagerId = userDao
-								.GetManagerIdByPromotionId(pvr.getPromotionId());
+								.getManagerIdByPromotionId(pvr.getPromotionId());
 						// 将原俱乐部负责人的userType设为1
 						userDao.downUserType(oldmanagerId);
 						// 将promotion的endtime设为当前操作时间

@@ -60,7 +60,7 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 		return apply;
 	}
 	
-	/*
+	/**
 	 * @author walkerc
 	 * 2014/12/18
 	 * function saveApply
@@ -94,7 +94,7 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 			}
 
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/18
 	 * function cancelApplyByUser
@@ -115,7 +115,7 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 			logger.warn("exception at"+this.getClass().getName(), e);
 		}
 	}	
-/*
+/**
  * @author joeyy
  * 2014/12/18
  * function rejectApplyByManager
@@ -161,7 +161,7 @@ public class ApplyManageAction extends ActionSupport implements ModelDriven<Appl
 		}
 
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/18
 	 * function processApplyByManager

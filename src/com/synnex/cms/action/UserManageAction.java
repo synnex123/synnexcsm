@@ -48,7 +48,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 	public User getModel() {		
 		return user;
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/10
 	 * function changePasswordByUser
@@ -78,7 +78,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 			logger.warn("exception at"+this.getClass().getName(), e);
 		}
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/10
 	 * function UserRegist

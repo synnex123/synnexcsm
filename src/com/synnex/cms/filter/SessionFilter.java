@@ -14,7 +14,9 @@ import com.synnex.cms.entity.User;
 import com.synnex.cms.utils.UserUtil;
 
 /**
- * Servlet Filter implementation class SecurityFilter
+ * @author joeyy
+ * fucntion for forced return to login.jsp if session is out of time
+ *
  */
 public class SessionFilter implements Filter {
 
@@ -23,14 +25,12 @@ public class SessionFilter implements Filter {
      * Default constructor. 
      */
     public SessionFilter() {
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 	/**

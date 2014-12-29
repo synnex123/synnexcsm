@@ -17,7 +17,7 @@ import com.synnex.cms.entity.UserClub;
  * @author joeyy
  * 
  */
-/*
+/**
  * function register 2014/11/19
  */
 public class UserDaoImpl extends BaseDaoImpl implements UserDao {
@@ -31,7 +31,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		}
 	}
 
-	/*
+	/**
 	 * @author Pete
 	 * 
 	 * @modified by Joeyy function for exclude and promotion 2014/12/1
@@ -59,7 +59,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return resultList;
 	}
 
-	/*
+	/**
 	 * @author Pete function for exclude 2014/12/2
 	 */
 	public User getUserByName(String userName) throws HibernateException {
@@ -77,7 +77,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return user;
 	}
 
-	/*
+	/**
 	 * @author Pete function for exclude 2014/12/2
 	 */
 	public User getUserByUserId(int userId) throws HibernateException {
@@ -95,7 +95,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return user;
 	}
 
-	/*
+	/**
 	 * function login 2014/11/24
 	 */
 	@SuppressWarnings("unchecked")
@@ -122,7 +122,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		}
 	}
 
-	/*
+	/**
 	 * @author Pete function for exclude 2014/12/2
 	 */
 	public int countClubMember(int clubId) throws HibernateException {
@@ -140,7 +140,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return count;
 	}
 
-	/*
+	/**
 	 * function change userpassword 2014/11/25
 	 */
 	public boolean updateUserInfo(User user) throws HibernateException {
@@ -153,12 +153,13 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return true;
 	}
 
-	/*
+	/**
 	 * @author joryy 2014/12/08 function down UserType for promotion
 	 * 
 	 * @return true if it's succeed ,else return false
 	 * 
-	 * @param UserId who'll be downType
+	 * @param UserId
+	 *            who'll be downType
 	 */
 	public boolean downUserType(Integer userId) throws HibernateException {
 		String hql = "";
@@ -174,14 +175,14 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return true;
 	}
 
-	/*
+	/**
 	 * @author joryy 2014/12/08 function GetManagerIdByPromotionId
 	 * 
 	 * @return managerId
 	 * 
 	 * @param promotionId
 	 */
-	public Integer GetManagerIdByPromotionId(Integer promotionId)
+	public Integer getManagerIdByPromotionId(Integer promotionId)
 			throws HibernateException {
 		String hql = "";
 		Integer userId = null;
@@ -197,14 +198,15 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return userId;
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/08 function up UserType for promotion
 	 * 
 	 * @return true if it's succeed ,else return false
 	 * 
-	 * @param UserId who'll be upType
+	 * @param UserId
+	 *            who'll be upType
 	 */
-	public boolean UpUserType(Integer userId) throws HibernateException {
+	public boolean upUserType(Integer userId) throws HibernateException {
 		String hql = "";
 		try {
 			session = getSession();
@@ -352,9 +354,9 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return resultList;
 	}
 
-	/*
+	/**
 	 * @Author Walker Cheng function update the user information by userId
-	 * bucause of delete club 2014/12/12
+	 *         bucause of delete club 2014/12/12
 	 */
 	public Boolean updateUserInfoById(Integer userId, Session session)
 			throws HibernateException {
@@ -375,12 +377,13 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return true;
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/15 function check if user is exist
 	 * 
 	 * @return true if user is exist ,else return false
 	 * 
-	 * @param Entity User
+	 * @param Entity
+	 *            User
 	 */
 	public User checkexist(User user) throws HibernateException {
 		String hql = "";
@@ -397,7 +400,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
 	}
 
-	/*
+	/**
 	 * @Author Walker Cheng function query the number of member 2014/12/15
 	 */
 	public Integer queryMemberNumber(Integer clubId) throws HibernateException,
@@ -417,7 +420,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return number;
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/03 function changepassword
 	 */
 	public boolean updatepassword(User user) throws HibernateException {
@@ -430,7 +433,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return true;
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/24 function getAllUserByClubId on one club
 	 * 
 	 * @return List<User> in one club
@@ -458,9 +461,9 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return userlist;
 	}
 
-	/*
+	/**
 	 * @Author Walker Cheng delete the information of UserClub data base due to
-	 * exit the club 2014/12/26
+	 *         exit the club 2014/12/26
 	 */
 	public void deleteUserClubInfoDuoToExitClub(UserClub userClub)
 			throws HibernateException {

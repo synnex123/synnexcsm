@@ -1,6 +1,12 @@
 package com.synnex.cms.dto;
 
 import java.sql.Timestamp;
+/**
+ * 
+ * 
+ * function for data transfer(Promotion,Club,User)
+ *
+ */
 
 public class PromotionDto {
 	private Integer promotionId;

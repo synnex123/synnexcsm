@@ -8,12 +8,12 @@ import com.synnex.cms.dto.JudgePromotionDto;
 import com.synnex.cms.entity.PromotionVoteRecord;
 
 public interface PromotionVoteRecordDao extends BaseDao {
-	/*
+	/**
 	 * @author joeyy 2014/12/18 function savepromtionvoterecord
 	 */
 	public boolean savePromotion(PromotionVoteRecord pvr) throws HibernateException;
 
-	/*
+	/**
 	 * @author joeyy 2014/12/18 function judege if someone have voted
 	 * 
 	 * @return List<PromotionVoteRecord>
@@ -23,7 +23,7 @@ public interface PromotionVoteRecordDao extends BaseDao {
 	public List<PromotionVoteRecord> isExist(PromotionVoteRecord pvr)
 			throws HibernateException;
 
-	/*
+	/**
 	 * @author joeyy 2014/12/18 function JudgeVoteCount for one person
 	 * 
 	 * @return List<JudgePromotionDto> contains voted person and vote
@@ -33,7 +33,7 @@ public interface PromotionVoteRecordDao extends BaseDao {
 	public List<JudgePromotionDto> judgeVoteCount(PromotionVoteRecord pvr)
 			throws HibernateException;
 
-	/*
+	/**
 	 * @author joeyy 2014/12/18 function delete promotionvoterecord when
 	 * promotion is end
 	 * 

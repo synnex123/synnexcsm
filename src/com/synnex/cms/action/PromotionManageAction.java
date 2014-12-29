@@ -63,7 +63,7 @@ public class PromotionManageAction extends ActionSupport implements ModelDriven<
 	public Promotion getModel() {
 		return promotion;
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/16
 	 * function initPromotion if someone don't want to be a director 
@@ -100,7 +100,7 @@ public class PromotionManageAction extends ActionSupport implements ModelDriven<
 		return "";
 
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/16
 	 * function producePromotion
@@ -169,7 +169,7 @@ public class PromotionManageAction extends ActionSupport implements ModelDriven<
 		}
 
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/22
 	 * function doPromotion and judegePromotion

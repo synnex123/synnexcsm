@@ -49,7 +49,7 @@ public class GetPromotionAction extends ActionSupport implements ModelDriven<Pro
 	public Promotion getModel() {
 		return promotion;
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/18
 	 * fucntion getPromotionByUserId
@@ -80,7 +80,7 @@ public class GetPromotionAction extends ActionSupport implements ModelDriven<Pro
 		return "";
 
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/18
 	 * function getPromotionVoteUserByPromotionId

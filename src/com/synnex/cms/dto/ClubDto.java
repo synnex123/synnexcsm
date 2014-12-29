@@ -1,10 +1,17 @@
 package com.synnex.cms.dto;
-
+/**
+ * 
+ * 
+ * function for data transfer Club,User
+ *
+ */
 public class ClubDto {
 	private Integer clubId;
 	private String clubName;
 	private String clubLocation;
+	//reflect userName
 	private String managerName;
+	//reflect userPhone
 	private String managerPhone;
 	private String clubDescription;
 	private Integer managerId;

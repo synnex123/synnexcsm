@@ -16,7 +16,7 @@ import com.synnex.cms.entity.User;
  */
 
 public interface PromotionService {
-	/*
+	/**
 	 * function producepromotion 2014/12/11
 	 * 
 	 * @return true if save is succeed,else return false
@@ -25,7 +25,7 @@ public interface PromotionService {
 	 */
 	public boolean producePromotion(Promotion promotion) throws HibernateException;
 
-	/*
+	/**
 	 * function GetOnGoingPromotionById and update promotion 2014/12/11
 	 * 
 	 * @return promotion infomation
@@ -35,7 +35,7 @@ public interface PromotionService {
 	public List<PromotionDto> getOnGoingPromotionByClubId(Integer clubId)
 			throws HibernateException;
 
-	/*
+	/**
 	 * function GetPromotionUserByPromotionId 2014/12/09
 	 * 
 	 * @return userlist except club's manager
@@ -45,7 +45,7 @@ public interface PromotionService {
 	public List<User> getPromotionUserByPromotionId(Integer promotionId)
 			throws HibernateException;
 
-	/*
+	/**
 	 * function SavePromotion 2014/12/09
 	 * 
 	 * @return true if save is succeed,else return false
@@ -56,7 +56,7 @@ public interface PromotionService {
 	public boolean savePromotionRecord(PromotionVoteRecord pvr)
 			throws HibernateException;
 
-	/*
+	/**
 	 * function judge if promotion is exist 2014/12/08
 	 * 
 	 * @return true if it is exist,else return false
@@ -65,7 +65,7 @@ public interface PromotionService {
 	 */
 	public boolean isExist(PromotionVoteRecord pvr) throws HibernateException;
 
-	/*
+	/**
 	 * function judge promotion's result and update information by this result
 	 * 2014/12/12
 	 * 

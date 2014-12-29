@@ -49,7 +49,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 	public void setPageIndex(Integer pageIndex) {
 		this.pageIndex = pageIndex;
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/18
 	 * function getMyApplyByUserId
@@ -86,7 +86,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 		return SUCCESS;
 
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/18
 	 * function getApplyDetail
@@ -113,7 +113,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 
 
 	}
-	/*
+	/**
 	 * @author joeyy
 	 * 2014/12/18
 	 * function getApplyByManagerId for checkapply.jsp

@@ -1,5 +1,9 @@
 package com.synnex.cms.utils;
-
+/**
+ * @author joeyy
+ * function for getPromotionName 
+ * 
+ */
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

@@ -16,7 +16,7 @@ import com.synnex.cms.entity.UserClub;
 public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 	Session session = null;
 
-	/*
+	/**
 	 * 
 	 * @Author Joeyy 2014/11/28 function getApplyByUserId for myapply.jsp
 	 */
@@ -60,7 +60,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 
 	}
 
-	/*
+	/**
 	 * @Author Walker Cheng function save apply 2014/11/28
 	 */
 	public boolean saveApply(Apply apply) throws HibernateException {
@@ -74,7 +74,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 		return true;
 	}
 
-	/*
+	/**
 	 * 
 	 * @Author Joeyy 2014/11/28 function getApplyDetails
 	 */
@@ -113,7 +113,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 		return applyList;
 	}
 
-	/*
+	/**
 	 * 
 	 * @Author Joeyy 2014/12/01 function CancelApply
 	 */
@@ -131,7 +131,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 		return true;
 	}
 
-	/*
+	/**
 	 * @Author Joeyy 2014/12/03 function getApplyByManagerId for checkapply.jsp
 	 */
 	public List<ApplyDto> getApplyByManagerId(Integer managerId,
@@ -179,7 +179,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 		return applyList;
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/22 function processApply update Apply
 	 * 
 	 * @param applyId,checkTime
@@ -201,7 +201,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 		return true;
 	}
 
-	/*
+	/**
 	 * @Author Joeyy 2014/12/03 function RejectApplyBy applyId
 	 */
 	public boolean rejectApply(Integer applyId, String checkRes,
@@ -222,7 +222,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 		return true;
 	}
 
-	/*
+	/**
 	 * @author WalkerCheng function search whether have applied 2014/11/28
 	 */
 	public Boolean searchWhetherApply(Integer userId, Integer applyStatus,
@@ -248,7 +248,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/20 function PassApplyInserUserClub
 	 * 
 	 * @param Entity UserClub
@@ -263,7 +263,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/22 function getApplyByClubId
 	 * 
 	 * @return List<Apply>
@@ -285,7 +285,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 		return applylist;
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/22 function getSubmittedApplyByClubId
 	 * 
 	 * @return List<Apply> which is submitted

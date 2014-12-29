@@ -15,7 +15,7 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 		PromotionVoteRecordDao {
 	Session session = null;
 
-	/*
+	/**
 	 * @author joeyy 2014/12/18 function savepromtionvoterecord
 	 */
 	public boolean savePromotion(PromotionVoteRecord pvr) throws HibernateException {
@@ -28,7 +28,7 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 		return true;
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/18 function judege if someone have voted
 	 * 
 	 * @return List<PromotionVoteRecord>
@@ -53,7 +53,7 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 		return result;
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/18 function JudgeVoteCount for one person
 	 * 
 	 * @return List<JudgePromotionDto> contains voted person and vote
@@ -85,7 +85,7 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 		return judgeresult;
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/18 function delete promotionvoterecord when
 	 * promotion is end
 	 * 

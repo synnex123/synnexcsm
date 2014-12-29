@@ -37,7 +37,7 @@ public class InitApplyAction extends ActionSupport implements ModelDriven<Club>{
 	public Club getModel() {
 		return club;
 	}
-	/*
+	/**
 	 * @author walkerc
 	 * 2014/12/04
 	 * @modified by joeyy

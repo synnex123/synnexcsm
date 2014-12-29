@@ -15,7 +15,7 @@ import com.synnex.cms.service.ClubService;
 /**
  * @author petep 2014/11/25
  */
-/*
+/**
  * function getClubByLocation for main view 2014/11/25
  */
 public class ClubServiceImpl implements ClubService {
@@ -30,7 +30,7 @@ public class ClubServiceImpl implements ClubService {
 		this.clubDao = clubDao;
 	}
 
-	/*
+	/**
 	 * @Author Pete Peng function getClub 2014/12/17
 	 */
 	public List<ClubDto> getClubByLocation(String location) throws HibernateException {
@@ -42,14 +42,14 @@ public class ClubServiceImpl implements ClubService {
 		return clubDao.getAllClub();
 	}
 
-	/*
+	/**
 	 * @Author Walker Cheng function getClub 2014/11/28
 	 */
 	public Club getClubByClubId(Integer clubId) throws HibernateException {
 		return clubDao.getClubByClubId(clubId);
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/16 function getClubIdByUserId
 	 * 
 	 * @return List<Integer> clubId
@@ -62,7 +62,7 @@ public class ClubServiceImpl implements ClubService {
 		return clubDao.getClubByUserId(userId);
 	}
 
-	/*
+	/**
 	 * @Author Walker Cheng function search club by clubName and clubLocation
 	 * 2014/12/11
 	 */
@@ -71,7 +71,7 @@ public class ClubServiceImpl implements ClubService {
 		return clubDao.searchClubByClubNameAndClubLocation(clubDto);
 	}
 
-	/*
+	/**
 	 * @Author Walker Cheng function add the new club and return the success or
 	 * fail; 2014/12/11
 	 */
@@ -124,7 +124,7 @@ public class ClubServiceImpl implements ClubService {
 		return clubDao.getAllCLubByUserId(userId);
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/24 fucntion getClubByPromotionId
 	 * 
 	 * @return Entity Club

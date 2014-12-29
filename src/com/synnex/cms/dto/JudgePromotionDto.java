@@ -1,5 +1,10 @@
 package com.synnex.cms.dto;
-
+/**
+ * 
+ * 
+ * @author joeyy
+ *function for data transfer judgePromotion
+ */
 public class JudgePromotionDto {
 	private Integer countPromotion;
 	private Integer voteduserId;

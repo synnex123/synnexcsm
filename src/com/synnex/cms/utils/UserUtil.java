@@ -13,7 +13,7 @@ import com.synnex.cms.entity.User;
  */
 
 public class UserUtil {
-	/*
+	/**
 	 * function getUser
 	 * 2014/11/24
 	 */

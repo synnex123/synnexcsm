@@ -15,7 +15,7 @@ import com.synnex.cms.service.ApplyService;
  * 
  * @author joeyy 2014/11/26
  */
-/*
+/**
  * @Author Joeyy 2014/11/26 function getApplyByUserId for myapply.jsp
  */
 public class ApplyServiceImpl implements ApplyService {
@@ -30,21 +30,21 @@ public class ApplyServiceImpl implements ApplyService {
 		return applyDao.getApplyByUserId(userId, pageIndex, applyStatus);
 	}
 
-	/*
+	/**
 	 * @author WalkerCheng function saveApply 2014/11/28
 	 */
 	public boolean saveApply(Apply apply) throws HibernateException {
 		return applyDao.saveApply(apply);
 	}
 
-	/*
+	/**
 	 * @Author Joeyy function getApplyDetails 2014/12/01
 	 */
 	public List<ApplyDto> getApplyDetails(Integer applyId) throws HibernateException {
 		return applyDao.getApplyDetails(applyId);
 	}
 
-	/*
+	/**
 	 * @Author Joeyy function CancelApply 2014/12/01
 	 * 
 	 * @return true if canceled succeed,else return false
@@ -56,7 +56,7 @@ public class ApplyServiceImpl implements ApplyService {
 
 	}
 
-	/*
+	/**
 	 * @Author Joeyy function getApplyByManagerId for checkapply 2014/12/01
 	 */
 	public List<ApplyDto> getApplyByManagerId(Integer managerId,
@@ -65,7 +65,7 @@ public class ApplyServiceImpl implements ApplyService {
 
 	}
 
-	/*
+	/**
 	 * @author Joeyy function PassApply modified by joeyy 2014/12/18 2014/12/03
 	 * 
 	 * @params applyId,checkTime,userId,clubId
@@ -78,7 +78,7 @@ public class ApplyServiceImpl implements ApplyService {
 
 	}
 
-	/*
+	/**
 	 * @Author Joeyy function rejectApply 2014/12/03
 	 * 
 	 * @return true if reject succeed,else return false
@@ -90,7 +90,7 @@ public class ApplyServiceImpl implements ApplyService {
 		return applyDao.rejectApply(applyId, checkRes, checkTime);
 	}
 
-	/*
+	/**
 	 * @author WalkerCheng function search whether have applied 2014/11/28
 	 */
 
@@ -99,7 +99,7 @@ public class ApplyServiceImpl implements ApplyService {
 		return applyDao.searchWhetherApply(userId, applyStatus, clubId);
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/22 function getApplyByClubId
 	 * 
 	 * @return List<Apply>
@@ -111,7 +111,7 @@ public class ApplyServiceImpl implements ApplyService {
 
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/22 function getSubmittedApplyByClubId
 	 * 
 	 * @return List<Apply> which is submitted

@@ -23,7 +23,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 		PromotionDao {
 	Session session = null;
 
-	/*
+	/**
 	 * 2014/12/11 function SavePromotion
 	 * 
 	 * @return true if save succeed,else return false
@@ -43,7 +43,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 
 	}
 
-	/*
+	/**
 	 * function GetOnGoingPromotionByClubId 2014/12/12
 	 * 
 	 * @return list of onGoingPromotion
@@ -87,7 +87,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 		return resultlist;
 	}
 
-	/*
+	/**
 	 * function GetOnGoingPromotionByClubId 2014/12/12
 	 * 
 	 * @return list of User except ClubManager
@@ -128,7 +128,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 
 	}
 
-	/*
+	/**
 	 * function EndPromotion update PromotionInfoByromotionId 2014/12/12
 	 * 
 	 * @return true if update succeed ,else return false
@@ -150,7 +150,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 		return true;
 	}
 
-	/*
+	/**
 	 * function update PromotionInfo if promotion is end or failed 2014/12/12
 	 */
 	public void updatePromotion(Integer promotionId, Integer promotionState)
@@ -169,7 +169,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 
 	}
 
-	/*
+	/**
 	 * function Check one club only can have one promotion 2014/12/15
 	 */
 	public Promotion checkExist(Promotion promotion) throws HibernateException {

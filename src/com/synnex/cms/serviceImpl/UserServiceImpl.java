@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	 * @author joeyy
 	 * @throws Exception
 	 */
-	/*
+	/**
 	 * 2014/11/19 function register
 	 * 
 	 * @author joeyy
@@ -42,14 +42,14 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/11/24 function login
 	 */
 	public User checklogin(User user) throws HibernateException {
 		return userDao.checklogin(user);
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/11/25 function change userpassword
 	 */
 	public boolean updateUserInfo(User user) throws HibernateException {
@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserByName(userName);
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/10 fucntion changeUserPassword
 	 */
 	public boolean updatepassword(User user) throws HibernateException {
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserByUserId(userId);
 	}
 
-	/*
+	/**
 	 * @author joeyy 2014/12/24 function getAllUserByClubId
 	 * 
 	 * @return List<User> in one club

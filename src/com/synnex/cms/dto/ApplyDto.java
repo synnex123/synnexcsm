@@ -1,6 +1,11 @@
 package com.synnex.cms.dto;
 
 import java.sql.Timestamp;
+/**
+ * 
+ * function for data transfer(Apply,User)
+ *
+ */
 
 public class ApplyDto {
 	private Integer applyId;

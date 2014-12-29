@@ -16,7 +16,7 @@ import com.synnex.cms.entity.User;
  */
 
 public interface PromotionDao extends BaseDao {
-	/*
+	/**
 	 * 2014/12/11 function SavePromotion
 	 * 
 	 * @return true if save succeed,else return false
@@ -26,7 +26,7 @@ public interface PromotionDao extends BaseDao {
 
 	public boolean savepromotion(Promotion promotion) throws HibernateException;
 
-	/*
+	/**
 	 * function GetOnGoingPromotionByClubId 2014/12/12
 	 * 
 	 * @return list of onGoingPromotion
@@ -35,7 +35,7 @@ public interface PromotionDao extends BaseDao {
 	 */
 	public List<PromotionDto> getOnGoingPromotionByClubId(Integer clubId) throws HibernateException;
 
-	/*
+	/**
 	 * function GetOnGoingPromotionByClubId 2014/12/12
 	 * 
 	 * @return list of User except ClubManager
@@ -44,7 +44,7 @@ public interface PromotionDao extends BaseDao {
 	 */
 	public List<User> getPromotionUserByPromotionId(Integer promotionId) throws HibernateException;
 
-	/*
+	/**
 	 * function EndPromotion update PromotionInfoByromotionId 2014/12/12
 	 * 
 	 * @return true if update succeed ,else return false
@@ -53,12 +53,12 @@ public interface PromotionDao extends BaseDao {
 	 */
 	public boolean endPromotion(Integer promotionId,Timestamp endtime) throws HibernateException;
 
-	/*
+	/**
 	 * function update PromotionInfo if promotion is end or failed 2014/12/12
 	 */
 	public void updatePromotion(Integer promotionId,Integer promotionState) throws HibernateException;
 
-	/*
+	/**
 	 * function Check one club only can have one promotion 2014/12/15
 	 */
 	public Promotion checkExist(Promotion promotion) throws HibernateException;

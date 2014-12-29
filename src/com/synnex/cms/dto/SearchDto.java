@@ -1,4 +1,12 @@
 package com.synnex.cms.dto;
+/**
+ * 
+ * 
+ * 
+ * @author walkerc
+ * function for data transfer (Club,User)
+ *
+ */
 
 public class SearchDto {
 	private Integer clubId;
