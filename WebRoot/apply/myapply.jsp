@@ -116,5 +116,12 @@ function nextpage(p){
 		p=p+1;
 		location.href="<%=request.getContextPath()%>/getMyApply.action?pageIndex="+p;
 }
+
+(function errmsg(){
+	if (${not empty flag}) {
+	alert(${flag});
+	location.href="<%=request.getContextPath()%>/getMyApply.action?pageIndex="+p;
+	}
+});
 </script>
 </html>

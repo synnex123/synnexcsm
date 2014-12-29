@@ -39,8 +39,8 @@ public class SessionFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest req=(HttpServletRequest)request;
-		User user=UserUtil.getUser(req);
-		if (null==user) {
+		
+		if (null==UserUtil.getUser(req)) {
 			request.setAttribute("errmsg", "登录超时，请重新登录");
 			request.getRequestDispatcher("../user/login.jsp").forward(request, response);
 		}else{

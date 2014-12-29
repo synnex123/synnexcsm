@@ -27,7 +27,8 @@ public class ApplyServiceImpl implements ApplyService {
 
 	public List<ApplyDto> getApplyByUserId(Integer userId, Integer pageIndex,
 			Integer applyStatus) throws HibernateException {
-		return applyDao.getApplyByUserId(userId, pageIndex, applyStatus);
+		List<ApplyDto> applyList=applyDao.getApplyByUserId(userId, pageIndex, applyStatus);
+		return applyList;
 	}
 
 	/**
