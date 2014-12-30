@@ -22,6 +22,11 @@
 
 	}
 </style>
+<script type="text/javascript">
+if(window != top){
+	top.location.href = window.location.href;
+	}
+</script>
 </head>
 <body class="simple_body">
 

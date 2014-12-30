@@ -5,96 +5,114 @@
 
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.devMode" value="false" />
-    <constant name="struts.objectFactory" value="spring" /> 
-	<package name="ajaxAction" namespace="/" extends="struts-default">
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.objectFactory" value="spring" />
+
+
+	<!-- 定义struts2拦截器 -->
+	<package name="default" namespace="/" extends="struts-default" >
+		<interceptors>
+			<interceptor name="login"
+				class="com.synnex.cms.interceptor.CheckLoginInterceptor" />
+			<interceptor-stack name="teamwareStack">
+				<interceptor-ref name="login" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- （这句是设置所有Action自动调用的拦截器堆栈） -->
+		<default-interceptor-ref name="teamwareStack" />
+
+		<global-results>
+			<result name="login_page">/user/login.jsp</result>
+		</global-results>
+
+
+
+
 		<action name="UserLogin" class="ajaxAction" method="UserLogin">
 		</action>
 		<action name="CheckPassword" class="ajaxAction" method="CheckPassword">
 		</action>
-	</package>
-	
-    <package name="userManage" namespace="/" extends="struts-default">
-    <action name="UserRegist" class="userManage" method="UserRegist">
-    	<result name="success" >/user/login.jsp</result>
-    	<result name="error">/user/user_add.jsp</result>
-    </action>
-    <action name="UserChangePassword" class="userManage" method="UserChangePassword">
-    </action>
-    <action name="InitUpdateUserInfo" class="userManage" method="initUpdateUserInfo">
-    	<result name="success">/user/updatemyinfo.jsp</result>
-    </action>
-     <action name="UpdateUserInfo" class="userManage" method="updateUserInfo">
-    </action>
-     <action name="Logout" class="userManage" method="logout">
-     	<result name="success">/user/login.jsp</result>
-    </action>
-    </package>
-    
-    <package name="UserSearch" namespace="/*" extends="struts-default">
-    <action name="UserSearch" class="userSearch" method="searchUser">
-    	<result name="success" >/user/searchlist.jsp</result>
-    	<result name="success1" >/user/searchresult.jsp</result>
-    	<result name="error">/user/search.jsp</result>
-    </action>
-    </package>
-    
-    <package name="apply" namespace="/*" extends="struts-default" >
-    	<action name="initApply" class="applyInit" method="initApply">
-			<result name="success" type="dispatcher">/apply/applydetails.jsp</result> 
-			<result name="error" >/apply/applydetails.jsp</result>
-    	</action>
-    	<action name="*Apply" class="applyManage" method="{1}Apply">
-    	</action>
-    	<action name="getMyApply" class="applyGet" method="getMyApply">
-    		<result name="success">/apply/myapply.jsp</result>
-    	</action>
-    	<action name="getApplyDetail" class="applyGet" method="getApplyDetail">
-    		<result name="userdetail">/apply/userapplydetails.jsp</result>
-    		<result name="managerdetail">/apply/checkapplydetails.jsp</result>
-    	</action>
-    	<action name="getApplyByManagerId" class="applyGet" method="getApplyByManagerId">
-    		<result name="success">/apply/checkapply.jsp</result>
-    	</action>
 
-    </package>
-    <package name="clubManage" namespace="/*" extends="struts-default" >
-    	<action name="AddClub" class="clubManage" method="addClub">
-    	</action>
-    	<action name="InitDeleteClub" class="clubManage" method="initDeleteClub">
-    		<result name="success">/club/deleteclub.jsp</result>
-    	</action>
-    	<action name="DeleteClub" class="clubManage" method="deleteClub">
-    	</action>
-    	<action name="searchMyClub" class="clubManage" method="searchMyClub">
-    		<result name="success">/club/exitclub.jsp</result>
-    	</action>
-    </package>
-    <package name="init" extends="struts-default" namespace="/*">
-		<action name="init" class="init">	
+
+
+		<action name="UserRegist" class="userManage" method="UserRegist">
+			<result name="success">/user/login.jsp</result>
+			<result name="error">/user/user_add.jsp</result>
+		</action>
+		<action name="UserChangePassword" class="userManage" method="UserChangePassword">
+		</action>
+		<action name="InitUpdateUserInfo" class="userManage" method="initUpdateUserInfo">
+			<result name="success">/user/updatemyinfo.jsp</result>
+		</action>
+		<action name="UpdateUserInfo" class="userManage" method="updateUserInfo">
+		</action>
+		<action name="Logout" class="userManage" method="logout">
+			<result name="success">/user/login.jsp</result>
+		</action>
+
+
+
+		<action name="UserSearch" class="userSearch" method="searchUser">
+			<result name="success">/user/searchlist.jsp</result>
+			<result name="success1">/user/searchresult.jsp</result>
+			<result name="error">/user/search.jsp</result>
+		</action>
+
+
+
+		<action name="initApply" class="applyInit" method="initApply">
+			<result name="success" type="dispatcher">/apply/applydetails.jsp</result>
+			<result name="error">/apply/applydetails.jsp</result>
+		</action>
+		<action name="*Apply" class="applyManage" method="{1}Apply">
+		</action>
+		<action name="getMyApply" class="applyGet" method="getMyApply">
+			<result name="success">/apply/myapply.jsp</result>
+		</action>
+		<action name="getApplyDetail" class="applyGet" method="getApplyDetail">
+			<result name="userdetail">/apply/userapplydetails.jsp</result>
+			<result name="managerdetail">/apply/checkapplydetails.jsp</result>
+		</action>
+		<action name="getApplyByManagerId" class="applyGet" method="getApplyByManagerId">
+			<result name="success">/apply/checkapply.jsp</result>
+		</action>
+
+
+
+		<action name="AddClub" class="clubManage" method="addClub">
+		</action>
+		<action name="InitDeleteClub" class="clubManage" method="initDeleteClub">
+			<result name="success">/club/deleteclub.jsp</result>
+		</action>
+		<action name="DeleteClub" class="clubManage" method="deleteClub">
+		</action>
+		<action name="searchMyClub" class="clubManage" method="searchMyClub">
+			<result name="success">/club/exitclub.jsp</result>
+		</action>
+
+		<action name="init" class="init">
 			<result name="success">/main.jsp</result>
 			<result name="welcome">/index.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
-    </package>
-      <package name="exitClub" namespace="/" extends="struts-default" >
-    	<action name="exitClub" class="clubExit" method="exitClub">
-    	</action>
-    </package>
-    <package name="Promotion" namespace="/*" extends="struts-default">
-    	<action name="producePromotion" class="promotionManage" method="producePromotion">
-    	</action>
-    	<action name="initPromotion" class="promotionManage" method="initPromotion">
-    		<result name="success">/promotion/changeadmin.jsp</result>
-    	</action>
-    	<action name="getPromotion" class="promotionGet" method="getPromotion">
-    		<result name="success">/promotion/promotionvote.jsp</result>
-    	</action>
-    	<action name="getPromotionVote" class="promotionGet" method="getPromotionVote">
-    		<result name="success">/promotion/promotion.jsp</result>
-    	</action>
-    	<action name="doPromotion" class="promotionManage" method="doPromotion">
-    	</action>
-    </package>
+
+		<action name="exitClub" class="clubExit" method="exitClub">
+		</action>
+
+		<action name="producePromotion" class="promotionManage" method="producePromotion">
+		</action>
+		<action name="initPromotion" class="promotionManage" method="initPromotion">
+			<result name="success">/promotion/changeadmin.jsp</result>
+		</action>
+		<action name="getPromotion" class="promotionGet" method="getPromotion">
+			<result name="success">/promotion/promotionvote.jsp</result>
+		</action>
+		<action name="getPromotionVote" class="promotionGet" method="getPromotionVote">
+			<result name="success">/promotion/promotion.jsp</result>
+		</action>
+		<action name="doPromotion" class="promotionManage" method="doPromotion">
+		</action>
+	</package>
 </struts>
