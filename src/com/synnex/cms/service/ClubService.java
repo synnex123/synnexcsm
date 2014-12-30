@@ -22,7 +22,11 @@ public interface ClubService {
 	public List<Club> getAllClub() throws HibernateException;
 
 	/**
-	 * @Author Walker Cheng function getClub 2014/11/28
+	 * @Author Walker Cheng function get Club Information  
+	 * 2014/11/28
+	 * @return Club
+	 * @param clubId
+	 * @throws Exception
 	 */
 	public Club getClubByClubId(Integer clubId) throws HibernateException;
 
@@ -39,6 +43,9 @@ public interface ClubService {
 	/**
 	 * @Author Walker Cheng function search club by clubName and clubLocation
 	 * 2014/12/11
+	 * @return List<ClubDto>
+	 * @param ClubDto
+	 * @throws Exception
 	 */
 	public List<ClubDto> searchClubByClubNameAndClubLocation(ClubDto clubDto)
 			throws Exception;
@@ -54,9 +61,11 @@ public interface ClubService {
 	 * @throws Exception
 	 */
 	public Integer queryMemberNumber(ClubDto clubDto) throws HibernateException,NumberFormatException;
-
 	/**
-	 * @author walker cheng function delete the club 2014/12/12
+	 * @Author Walker Cheng function delete club
+	 * 2014/12/12
+	 * @return Boolean
+	 * @param ClubDto
 	 * @throws Exception
 	 */
 	public Boolean deleteClub(ClubDto clubDto) throws HibernateException;

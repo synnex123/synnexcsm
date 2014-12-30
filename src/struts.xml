@@ -28,8 +28,6 @@
 		</global-results>
 
 
-
-
 		<action name="UserLogin" class="ajaxAction" method="UserLogin">
 		</action>
 		<action name="CheckPassword" class="ajaxAction" method="CheckPassword">

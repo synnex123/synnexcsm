@@ -97,6 +97,12 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 		}
 		return ERROR;
 	}
+	/**
+	 * @author walker cheng 
+	 * function get the user information by user Id
+	 * 2014/12/16
+	 * 
+	 */
 	public String initUpdateUserInfo(){
 		HttpServletRequest request=ServletActionContext.getRequest();
 		try{
@@ -109,6 +115,13 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 		}
 		return SUCCESS;
 	}
+	
+	/**
+	 * @author walker cheng 
+	 * function update the user information
+	 * 2014/12/16
+	 * @ajax
+	 */
 	public void updateUserInfo(){
 		try{
 			HttpServletResponse response=ServletActionContext.getResponse();
@@ -134,6 +147,12 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 		}
 		
 	}
+	/**
+	 * @author walker cheng 
+	 * function logout the system
+	 * 2014/12/17
+	 * @ajax
+	 */
 	public String logout(){
 		HttpServletRequest request=ServletActionContext.getRequest();
 		HttpSession session=request.getSession();

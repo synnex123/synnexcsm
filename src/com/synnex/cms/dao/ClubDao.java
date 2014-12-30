@@ -19,9 +19,12 @@ public interface ClubDao extends BaseDao {
 	 * @Author Pete Peng function getClub 2014/12/17
 	 */
 	public List<ClubDto> getClubByLocation(String location) throws HibernateException;
-
 	/**
-	 * @Author Walker Cheng function getclub 2014/11/28
+	 * @Author Walker Cheng function get Club Information  
+	 * 2014/11/28
+	 * @return Club
+	 * @param clubId
+	 * @throws Exception
 	 */
 	public Club getClubByClubId(Integer clubId) throws HibernateException;
 
@@ -81,9 +84,11 @@ public interface ClubDao extends BaseDao {
 	 * 2014/12/19
 	 */
 	public void addUserClubInfo(UserClub userClub) throws HibernateException;
-
 	/**
-	 * @Author Walker Cheng function delete the club 2014/12/12
+	 * @Author Walker Cheng function delete club
+	 * 2014/12/12
+	 * @param entity club
+	 * @throws Exception
 	 */
 	public void deleteClub(Club club) throws HibernateException;
 

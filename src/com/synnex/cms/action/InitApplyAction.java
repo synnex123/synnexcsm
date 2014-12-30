@@ -38,7 +38,8 @@ public class InitApplyAction extends ActionSupport implements ModelDriven<Club>{
 		return club;
 	}
 	/**
-	 * @author walkerc
+	 * @author walkerc get the user information for apply 
+	 * return Entity Club
 	 * 2014/12/04
 	 * @modified by joeyy
 	 * 2014/12/22

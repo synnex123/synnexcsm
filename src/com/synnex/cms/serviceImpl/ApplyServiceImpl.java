@@ -92,7 +92,11 @@ public class ApplyServiceImpl implements ApplyService {
 	}
 
 	/**
-	 * @author WalkerCheng function search whether have applied 2014/11/28
+	 * @author WalkerCheng function search whether have applied 
+	 * 2014/11/28
+	 * @return Boolean 
+	 * @param userId applyStatus clubId 
+	 * @throws Exception
 	 */
 
 	public boolean searchWhetherApply(Integer userId, Integer applyStatus,

@@ -43,7 +43,11 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	/**
-	 * @Author Walker Cheng function getClub 2014/11/28
+	 * @Author Walker Cheng function get Club Information  
+	 * 2014/11/28
+	 * @return Club
+	 * @param clubId
+	 * @throws Exception
 	 */
 	public Club getClubByClubId(Integer clubId) throws HibernateException {
 		return clubDao.getClubByClubId(clubId);
@@ -97,7 +101,10 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	/**
-	 * @author walker cheng function delete the club 2014/12/12
+	 * @Author Walker Cheng function delete club
+	 * 2014/12/12
+	 * @return Boolean
+	 * @param ClubDto
 	 * @throws Exception
 	 */
 	public Boolean deleteClub(ClubDto clubDto) throws HibernateException {

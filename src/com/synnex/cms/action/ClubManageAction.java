@@ -42,6 +42,12 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 	public ClubDto getModel() {
 		return clubDto;
 	}
+	/**
+	 * @Author Walker Cheng 2014/12/11 function add the new club 
+	 * @ajax
+	 * @param clubDto
+	 * 
+	 */
 	public void addClub(){
 		try{
 			HttpServletResponse response=ServletActionContext.getResponse();
@@ -85,6 +91,13 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 			logger.warn("exception at"+this.getClass().getName(), e);
 		}
 	}
+	
+	/**
+	 * @Author Walker Cheng 2014/12/12 function get the club information 
+	 * @param clubLocation
+	 * @return list<ClubDto>clubList clubLocation
+	 * 
+	 */
 	public String initDeleteClub(){
 		HttpServletRequest request=ServletActionContext.getRequest();
 		List<ClubDto> clubList=new ArrayList<ClubDto>();
@@ -100,6 +113,15 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 		}
 		return SUCCESS;
 	}
+	
+	/**
+	 * @Author Walker Cheng 
+	 * 2014/12/25 
+	 * function search  my club information that I have joined in 
+	 * @param userId pageIndex
+	 * @return List<SearchUserClubDto> clubList  ListNumber pageIndex
+	 * 
+	 */
 	public String searchMyClub(){
 		HttpServletRequest request=ServletActionContext.getRequest();
 		Integer pageIndex;
@@ -125,6 +147,12 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 		return SUCCESS;
 	}
 	
+	/**
+	 * @Author Walker Cheng function delete club
+	 * 2014/12/12
+	 * @ajax
+	 * @param ClubDto
+	 */
 	public void deleteClub(){
 		try{
 			HttpServletResponse response=ServletActionContext.getResponse();

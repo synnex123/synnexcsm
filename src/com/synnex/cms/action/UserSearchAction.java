@@ -33,6 +33,12 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 		return searchDto;
 	}
 	@SuppressWarnings("unchecked")
+	/**
+	 * @author walkerc 2014/12/02 function search User
+	 * 
+	 * @ajax
+	 * @params Entity Apply
+	 */
 	public String searchUser(){
 		HttpServletRequest request=ServletActionContext.getRequest();
 		Integer pageIndex;

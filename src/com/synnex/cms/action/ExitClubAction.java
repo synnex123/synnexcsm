@@ -30,6 +30,12 @@ public class ExitClubAction extends ActionSupport implements ModelDriven<SearchU
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+	/**
+	 * @author walker cheng
+	 * 2014/12/26
+	 * function delete the information of UserClub data base due to exit the club
+	 * @param entity UserClub
+	 */
 	public void exitClub(){
 		HttpServletResponse response=ServletActionContext.getResponse();
 		response.setCharacterEncoding("UTF-8");

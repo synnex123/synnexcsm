@@ -223,7 +223,11 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 	}
 
 	/**
-	 * @author WalkerCheng function search whether have applied 2014/11/28
+	 * @author WalkerCheng function search whether have applied 
+	 * 2014/11/28
+	 * @return Boolean 
+	 * @param userId applyStatus clubId 
+	 * @throws Exception
 	 */
 	public Boolean searchWhetherApply(Integer userId, Integer applyStatus,
 			Integer clubId) throws HibernateException {
