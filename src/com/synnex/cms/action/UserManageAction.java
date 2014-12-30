@@ -12,7 +12,6 @@ import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.synnex.cms.entity.User;
@@ -24,7 +23,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory.getLogger(UserManageAction.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(UserManageAction.class);
 	private UserService userService;
 	private User user = new User();
 	private String password1;
@@ -73,30 +72,12 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 				out.println("{\"status\":0,\"msg\":\"the old password is wrong\"}");
 			}
 		}catch(HibernateException e){
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 	}
-	/**
-	 * @author joeyy
-	 * 2014/12/10
-	 * function UserRegist
-	 */
-	public String UserRegist(){
-		try {
-			user.setUserType(1);
-			if (userService.save(user)) {
-				return SUCCESS;				
-			}else{
-				ActionContext.getContext().put("errmsg", "你注册的用户名已存在，请重设");	
-				return ERROR;	
-			}
-		} catch (Exception e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
-		}
-		return ERROR;
-	}
+
 	/**
 	 * @author walker cheng 
 	 * function get the user information by user Id
@@ -110,7 +91,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 			user1=userService.getUserByUserId(user.getUserId());
 			request.setAttribute("user", user1);
 		}catch(HibernateException e){
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 			return ERROR;
 		}
 		return SUCCESS;
@@ -141,9 +122,9 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 				out.println("{\"status\":0,\"msg\":\"信息更改失败！\"}");
 			}
 		}catch(HibernateException e){
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		
 	}
@@ -153,12 +134,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 	 * 2014/12/17
 	 * @ajax
 	 */
-	public String logout(){
-		HttpServletRequest request=ServletActionContext.getRequest();
-		HttpSession session=request.getSession();
-		session.invalidate();
-		return SUCCESS;
-	}
+
 		
 	}
 

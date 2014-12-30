@@ -1,4 +1,4 @@
-package com.synnex.cms.daoImpl;
+package com.synnex.cms.daoimpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -220,11 +220,10 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
 		return true;
 	}
+
 	/**
-	 * @author walker cheng 2014/12/02 get the club director information
-	 * @param pageIndex
-	 * @return List<SearchDto>
-	 * @throws Exception
+	 * @author walker cheng 2014/12/01 function get the club director
+	 *         information
 	 */
 	public List<SearchDto> searchClubDirector(Integer pageIndex)
 			throws HibernateException {
@@ -261,9 +260,6 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
 	/**
 	 * @author walker cheng 2014/12/01 function search uesr by userName
-	 * @param userName
-	 * @return List<SearchDto>
-	 * @throws Exception
 	 */
 	public List<SearchDto> searchUserByUserName(String userName)
 			throws HibernateException {
@@ -297,9 +293,6 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 	/**
 	 * @author walker cheng 2014/12/01 function search the club information of
 	 *         user by userId
-	 * @param userId
-	 * @return List<SearchUserClubDto>
-	 * @throws Exception
 	 */
 	public List<SearchUserClubDto> searchUserClubInfoByUserId(Integer userId)
 			throws HibernateException {
@@ -329,12 +322,8 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return resultList;
 	}
 
-
 	/**
 	 * @author walker cheng 2014/12/10 function search uesr by userType
-	 * @param userType pageIndex
-	 * @return List<SearchDto>
-	 * @throws Exception
 	 */
 	public List<SearchDto> searchUserByUserType(Integer userType,
 			Integer pageIndex) throws HibernateException {
@@ -471,12 +460,10 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		}
 		return userlist;
 	}
+
 	/**
-	 * @author walker cheng
-	 * 2014/12/26
-	 * function delete the information of UserClub data base due to exit the club
-	 * @param entity UserClub
-	 * @throws Exception 
+	 * @Author Walker Cheng delete the information of UserClub data base due to
+	 *         exit the club 2014/12/26
 	 */
 	public void deleteUserClubInfoDuoToExitClub(UserClub userClub)
 			throws HibernateException {
@@ -496,9 +483,6 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 	/**
 	 * @author walker cheng 2014/12/25 function search my club information by
 	 *         userId
-	 * @param userId pageIndex
-	 * @return List<SearchUserClubDto>
-	 * @throws Exception 
 	 */
 	public List<SearchUserClubDto> searchMyClubInfoByUserId(Integer userId,
 			Integer pageIndex) throws HibernateException {

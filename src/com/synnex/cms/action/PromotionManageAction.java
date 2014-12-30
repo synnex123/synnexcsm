@@ -34,7 +34,7 @@ public class PromotionManageAction extends ActionSupport implements
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory
+	private static Logger LOGGER = LoggerFactory
 			.getLogger(PromotionManageAction.class);
 	private Promotion promotion = new Promotion();
 	private PromotionService promotionService;
@@ -104,7 +104,7 @@ public class PromotionManageAction extends ActionSupport implements
 			return SUCCESS;
 
 		} catch (HibernateException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 		return "";
 
@@ -178,9 +178,9 @@ public class PromotionManageAction extends ActionSupport implements
 			}
 
 		} catch (HibernateException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		} catch (IOException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 
 	}
@@ -244,7 +244,7 @@ public class PromotionManageAction extends ActionSupport implements
 				}
 			}
 		} catch (HibernateException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 
 	}

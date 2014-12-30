@@ -1,4 +1,4 @@
-package com.synnex.cms.daoImpl;
+package com.synnex.cms.daoimpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +45,10 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 		}
 		return clubList;
 	}
+
 	/**
-	 * @Author Walker Cheng function get Club Information  
-	 * 2014/11/28
-	 * @return Club
-	 * @param clubId
-	 * @throws Exception
+	 * @Author Walker Cheng function getclub 2014/11/28
+	 * 
 	 */
 	public Club getClubByClubId(Integer clubId) throws HibernateException {
 		Club club = null;
@@ -225,11 +223,10 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 			throw e;
 		}
 	}
+
 	/**
-	 * @Author Walker Cheng function delete club
-	 * 2014/12/12
-	 * @param entity club
-	 * @throws Exception
+	 * @Author Walker Cheng function delete the club 2014/12/12
+	 * 
 	 */
 	public void deleteClub(Club club) throws HibernateException {
 		try {

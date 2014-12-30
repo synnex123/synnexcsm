@@ -30,7 +30,7 @@ public class InitAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory.getLogger(InitAction.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(InitAction.class);
 	private ClubService clubService;
 	private String location;
 	
@@ -76,7 +76,7 @@ public class InitAction extends ActionSupport{
 				return SUCCESS;
 			}
 		}catch(HibernateException e){
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 			return ERROR;
 		}
 	}

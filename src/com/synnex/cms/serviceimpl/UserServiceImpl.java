@@ -1,4 +1,4 @@
-package com.synnex.cms.serviceImpl;
+package com.synnex.cms.serviceimpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +58,6 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * @author walker cheng 2014/12/02 get the user information by userName
-	 * @param userName
-	 * @return List<Object>
 	 * @throws Exception
 	 */
 	public List<Object> search(String userName) throws HibernateException {
@@ -81,8 +79,6 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * @author walker cheng 2014/12/02 get the club director information
-	 * @param pageIndex
-	 * @return List<SearchDto>
 	 * @throws Exception
 	 */
 	public List<SearchDto> searchClubDirector(Integer pageIndex)
@@ -96,9 +92,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * @author walker cheng 2014/12/10 function search uesr by userType
-	 * @param userType pageIndex
-	 * @return List<SearchDto>
+	 * @author walker cheng 2014/12/02 get the club director information
 	 * @throws Exception
 	 */
 	public List<SearchDto> searchUserByUserType(Integer userType,
@@ -120,15 +114,7 @@ public class UserServiceImpl implements UserService {
 	public boolean updatepassword(User user) throws HibernateException {
 		return userDao.updatepassword(user);
 	}
-	
-	/**
-	 * @author walker cheng 
-	 * function get the user information by user Id
-	 * 2014/12/16
-	 * @param userId
-	 * @return enetity User
-	 * @throws Exception
-	 */
+
 	public User getUserByUserId(Integer userId) throws HibernateException {
 		return userDao.getUserByUserId(userId);
 	}
@@ -147,8 +133,7 @@ public class UserServiceImpl implements UserService {
 	/**
 	 * @author walker cheng
 	 * 2014/12/26
-	 * function delete the information of UserClub data base due to exit the club
-	 * @param entity UserClub
+	 * delete the information of UserClub data base due to exit the club
 	 * @throws Exception 
 	 */
 	public void deleteUserClubInfoDuoToExitClub(UserClub userClub) throws HibernateException{
@@ -159,8 +144,6 @@ public class UserServiceImpl implements UserService {
 	 * @author walker cheng
 	 * 2014/12/25
 	 * search my club information by userId
-	 * @param userId pageIndex
-	 * @return List<SearchUserClubDto>
 	 * @throws Exception 
 	 */
 	public List<SearchUserClubDto> searchMyClubInfoByUserId(Integer userId,Integer pageIndex) throws HibernateException{

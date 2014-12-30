@@ -1,4 +1,4 @@
-package com.synnex.cms.serviceImpl;
+package com.synnex.cms.serviceimpl;
 
 import java.util.List;
 
@@ -43,11 +43,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	/**
-	 * @Author Walker Cheng function get Club Information  
-	 * 2014/11/28
-	 * @return Club
-	 * @param clubId
-	 * @throws Exception
+	 * @Author Walker Cheng function getClub 2014/11/28
 	 */
 	public Club getClubByClubId(Integer clubId) throws HibernateException {
 		return clubDao.getClubByClubId(clubId);
@@ -101,10 +97,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	/**
-	 * @Author Walker Cheng function delete club
-	 * 2014/12/12
-	 * @return Boolean
-	 * @param ClubDto
+	 * @author walker cheng function delete the club 2014/12/12
 	 * @throws Exception
 	 */
 	public Boolean deleteClub(ClubDto clubDto) throws HibernateException {

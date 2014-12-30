@@ -35,7 +35,7 @@
 					</a>
 				</li>
 				<li id="fat-menu" class="dropdown">
-					<a href="<%=request.getContextPath()%>/user_add.jsp" class="dropdown-toggle" target="_top">
+					<a href="<%=request.getContextPath()%>/user/user_add.jsp" class="dropdown-toggle" target="_top">
 					注册账号
 					</a>
 				</li>

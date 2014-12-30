@@ -1,4 +1,4 @@
-package com.synnex.cms.daoImpl;
+package com.synnex.cms.daoimpl;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -15,7 +15,6 @@ import com.synnex.cms.entity.UserClub;
 
 public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 	Session session = null;
-
 	/**
 	 * 
 	 * @Author Joeyy 2014/11/28 function getApplyByUserId for myapply.jsp
@@ -223,11 +222,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 	}
 
 	/**
-	 * @author WalkerCheng function search whether have applied 
-	 * 2014/11/28
-	 * @return Boolean 
-	 * @param userId applyStatus clubId 
-	 * @throws Exception
+	 * @author WalkerCheng function search whether have applied 2014/11/28
 	 */
 	public Boolean searchWhetherApply(Integer userId, Integer applyStatus,
 			Integer clubId) throws HibernateException {

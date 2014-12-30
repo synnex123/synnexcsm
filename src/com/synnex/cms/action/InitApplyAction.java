@@ -22,7 +22,7 @@ public class InitApplyAction extends ActionSupport implements ModelDriven<Club>{
 	 * 
 	 */
 	private static final long serialVersionUID = -7316643920452188939L;
-	private static Logger logger = LoggerFactory.getLogger(InitApplyAction.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(InitApplyAction.class);
 	private Club club = new Club();
 	private ClubService clubService;
 	private ApplyService applyService;
@@ -67,7 +67,7 @@ public class InitApplyAction extends ActionSupport implements ModelDriven<Club>{
 			return SUCCESS;
 			
 		} catch (HibernateException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return "";
 

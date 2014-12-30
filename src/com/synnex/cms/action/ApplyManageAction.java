@@ -28,7 +28,7 @@ public class ApplyManageAction extends ActionSupport implements
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory
+	private static Logger LOGGER = LoggerFactory
 			.getLogger(ApplyManageAction.class);
 	private Apply apply = new Apply();
 	private ApplyService applyService;
@@ -72,17 +72,21 @@ public class ApplyManageAction extends ActionSupport implements
 	/**
 	 * @author walkerc 2014/12/18 function saveApply modified by joeyy
 	 *         2014/12/22 function mailsender
+	 * @throws IOException 
 	 * @ajax
 	 * @params Entity Apply
 	 */
-	public void saveApply() {
+	public void saveApply() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		apply.setApplyTime(DateUtils.getSysNow());
 		apply.setApplyStatus(0);
 		applyService.saveApply(apply);
+		PrintWriter out = response.getWriter();
+		out.println("{\"status\":1,\"url\":\"init.action?location=chengdu\"}");
+
 		try {
-			PrintWriter out = response.getWriter();
+
 			if (applyService.getSubmittedApplyByClubId(apply.getClubId())
 					.size() >= 5) {
 				String subject = "请尽快处理俱乐部申请，未处理申请已达"
@@ -98,16 +102,15 @@ public class ApplyManageAction extends ActionSupport implements
 						apply.getClubId()).getManagerId();
 				String to = userService.getUserByUserId(managerId)
 						.getUserEmail();
-				out.println("{\"status\":1,\"url\":\"init.action?location=chengdu\"}");
+
 				EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
 						PASSWORD);
 			}
-			;
+
 		} catch (HibernateException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
-		} catch (IOException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
+
 
 	}
 
@@ -127,7 +130,7 @@ public class ApplyManageAction extends ActionSupport implements
 			}
 
 		} catch (IOException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 	}
 
@@ -169,10 +172,10 @@ public class ApplyManageAction extends ActionSupport implements
 			}
 
 		} catch (HibernateException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 
 		} catch (IOException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 
 	}
@@ -213,9 +216,9 @@ public class ApplyManageAction extends ActionSupport implements
 			}
 
 		} catch (HibernateException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		} catch (IOException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 
 	}

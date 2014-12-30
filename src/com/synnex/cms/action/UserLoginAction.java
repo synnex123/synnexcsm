@@ -3,6 +3,7 @@ package com.synnex.cms.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,7 @@ import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.synnex.cms.entity.User;
@@ -21,7 +23,7 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory.getLogger(UserLoginAction.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(UserLoginAction.class);
 	private User user =new User();
 	private UserService userService;
 	private String password1;
@@ -49,6 +51,32 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 	public User getModel() {
 		return user;
 	}
+	public String logout(){
+		HttpServletRequest request=ServletActionContext.getRequest();
+		HttpSession session=request.getSession();
+		session.invalidate();
+		return SUCCESS;
+	}
+	/**
+	 * @author joeyy
+	 * 2014/12/10
+	 * function UserRegist
+	 */
+	public String UserRegist(){
+		try {
+			user.setUserType(1);
+			if (userService.save(user)) {
+				ActionContext.getContext().put("msg", "注册成功,请登陆");	
+				return SUCCESS;				
+			}else{
+				ActionContext.getContext().put("errmsg", "你注册的用户名已存在，请重设");	
+				return ERROR;	
+			}
+		} catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return ERROR;
+	}
 	/**
 	 * @author joeyy
 	 * 2014/12/06
@@ -71,12 +99,12 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 			}	
 			
 		} catch (IOException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 
 	}
 	/**
-	 * @author
+	 * @author joeyy
 	 * 2014/12/06
 	 * function userLogin
 	 * @ajax
@@ -97,7 +125,7 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 			}
 		} catch (HibernateException e) {
 			out.println("{\"status\":0,\"msg\":\"bad credit\"}");
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 	}
 
