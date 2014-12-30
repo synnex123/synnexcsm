@@ -1,4 +1,4 @@
-package com.synnex.cms.daoImpl;
+package com.synnex.cms.daoimpl;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

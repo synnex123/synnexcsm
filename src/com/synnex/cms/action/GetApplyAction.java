@@ -25,7 +25,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory.getLogger(GetApplyAction.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(GetApplyAction.class);
 	private ApplyDto applyDto =new ApplyDto();
 	private ApplyService applyService;
 	private Integer pageIndex;
@@ -81,7 +81,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 		
 			
 		} catch (HibernateException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return SUCCESS;
 
@@ -107,7 +107,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 			}
 			
 		} catch (HibernateException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return "";
 
@@ -145,7 +145,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 			request.setAttribute("pageIndex", pageIndex);		
 			return SUCCESS;	
 		} catch (HibernateException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return "";
 	}

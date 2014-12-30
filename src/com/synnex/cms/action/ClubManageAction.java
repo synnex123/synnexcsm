@@ -28,7 +28,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory.getLogger(ClubManageAction.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(ClubManageAction.class);
 	private ClubDto clubDto=new ClubDto();
 	private ClubService clubService;
 	private UserService userService;
@@ -78,11 +78,11 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 				}
 			}			
 		}catch(HibernateException e){
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (Exception e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 	}
 	public String initDeleteClub(){
@@ -96,7 +96,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 			request.setAttribute("clubList",clubList);
 			request.setAttribute("clubLocation", clubDto.getClubLocation());
 		} catch (HibernateException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return SUCCESS;
 	}
@@ -115,7 +115,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 		try {
 			clubList=userService.searchMyClubInfoByUserId(user.getUserId(),pageIndex);
 		} catch (HibernateException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		pageIndex=pageIndex/5+1;
 		listNumber=clubList.size();
@@ -151,11 +151,11 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 				out.println("{\"status\":0,\"msg\":\"你选择的俱乐部不满足删除条件！\"}");
 			}
 		}catch(HibernateException e){
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (Exception e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 	}
 

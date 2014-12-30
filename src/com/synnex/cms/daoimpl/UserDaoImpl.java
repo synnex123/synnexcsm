@@ -1,4 +1,4 @@
-package com.synnex.cms.daoImpl;
+package com.synnex.cms.daoimpl;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.synnex.cms.serviceImpl;
+package com.synnex.cms.serviceimpl;
 
 import java.util.List;
 

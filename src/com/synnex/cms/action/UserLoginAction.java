@@ -21,7 +21,7 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory.getLogger(UserLoginAction.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(UserLoginAction.class);
 	private User user =new User();
 	private UserService userService;
 	private String password1;
@@ -71,7 +71,7 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 			}	
 			
 		} catch (IOException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 
 	}
@@ -97,7 +97,7 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 			}
 		} catch (HibernateException e) {
 			out.println("{\"status\":0,\"msg\":\"bad credit\"}");
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 	}
 

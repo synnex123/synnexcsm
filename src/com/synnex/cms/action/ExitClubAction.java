@@ -20,7 +20,7 @@ public class ExitClubAction extends ActionSupport implements ModelDriven<SearchU
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory.getLogger(ExitClubAction.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(ExitClubAction.class);
 	private SearchUserClubDto searchUserClubDto=new SearchUserClubDto();
 	private UserService userService;
 	@Override
@@ -42,9 +42,9 @@ public class ExitClubAction extends ActionSupport implements ModelDriven<SearchU
 			userService.deleteUserClubInfoDuoToExitClub(userClub);
 			out.println("{\"status\":1}");
 		} catch (HibernateException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 	}
 

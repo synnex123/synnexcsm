@@ -21,7 +21,7 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory.getLogger(UserSearchAction.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(UserSearchAction.class);
 	private UserService userService;
 	private SearchDto searchDto=new SearchDto();
 	public void setUserService(UserService userService) {
@@ -83,7 +83,7 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 					return "success1";
 			}
 		}catch (HibernateException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return ERROR;
 	}

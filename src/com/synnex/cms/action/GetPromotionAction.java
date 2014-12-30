@@ -27,7 +27,7 @@ public class GetPromotionAction extends ActionSupport implements ModelDriven<Pro
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory.getLogger(GetPromotionAction.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(GetPromotionAction.class);
 	private Promotion promotion = new Promotion();
 	private PromotionService promotionService;
 	private ClubService clubService;
@@ -75,7 +75,7 @@ public class GetPromotionAction extends ActionSupport implements ModelDriven<Pro
 			return SUCCESS;
 			
 		} catch (HibernateException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return "";
 
@@ -99,9 +99,9 @@ public class GetPromotionAction extends ActionSupport implements ModelDriven<Pro
 			return SUCCESS;
 			
 		} catch (HibernateException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (UnsupportedEncodingException e) {
-			logger.warn("exception at"+this.getClass().getName(), e);
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return "";
 	}

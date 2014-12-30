@@ -28,7 +28,7 @@ public class ApplyManageAction extends ActionSupport implements
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger logger = LoggerFactory
+	private static Logger LOGGER = LoggerFactory
 			.getLogger(ApplyManageAction.class);
 	private Apply apply = new Apply();
 	private ApplyService applyService;
@@ -104,9 +104,9 @@ public class ApplyManageAction extends ActionSupport implements
 			}
 			;
 		} catch (HibernateException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		} catch (IOException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 
 	}
@@ -127,7 +127,7 @@ public class ApplyManageAction extends ActionSupport implements
 			}
 
 		} catch (IOException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 	}
 
@@ -169,10 +169,10 @@ public class ApplyManageAction extends ActionSupport implements
 			}
 
 		} catch (HibernateException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 
 		} catch (IOException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 
 	}
@@ -213,9 +213,9 @@ public class ApplyManageAction extends ActionSupport implements
 			}
 
 		} catch (HibernateException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		} catch (IOException e) {
-			logger.warn("exception at" + this.getClass().getName(), e);
+			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 
 	}

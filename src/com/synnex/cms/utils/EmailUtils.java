@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EmailUtils {
-	private static Logger logger = LoggerFactory.getLogger(EmailUtils.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(EmailUtils.class);
 
 	private MimeMessage mimeMsg; // MIME邮件对象
 	private Session session; // 邮件会话对象
@@ -51,7 +51,7 @@ public class EmailUtils {
 	 *            String
 	 */
 	public void setSmtpHost(String hostName) {
-		logger.info("设置系统属性：mail.smtp.host = " + hostName);
+		LOGGER.info("设置系统属性：mail.smtp.host = " + hostName);
 		if (props == null) {
 			props = System.getProperties(); // 获得系统属性对象
 			props.put("mail.smtp.host", hostName); // 设置SMTP主机
@@ -65,21 +65,21 @@ public class EmailUtils {
 	 */
 	public boolean createMimeMessage() {
 		try {
-			logger.info("准备获取邮件会话对象！");
+			LOGGER.info("准备获取邮件会话对象！");
 			session = Session.getDefaultInstance(props, null); // 获得邮件会话对象
 		} catch (Exception e) {
-			logger.warn("获取邮件会话对象时发生错误！" + e);
+			LOGGER.info("获取邮件会话对象时发生错误！" + e);
 			return false;
 		}
 
-		logger.info("准备创建MIME邮件对象！");
+		LOGGER.info("准备创建MIME邮件对象！");
 		try {
 			mimeMsg = new MimeMessage(session); // 创建MIME邮件对象
 			mp = new MimeMultipart();
 
 			return true;
 		} catch (Exception e) {
-			logger.warn("创建MIME邮件对象失败！" + e);
+			LOGGER.info("创建MIME邮件对象失败！" + e);
 			return false;
 		}
 	}
@@ -90,7 +90,7 @@ public class EmailUtils {
 	 * @param need
 	 */
 	public void setNeedAuth(boolean need) {
-		logger.info("设置smtp身份认证：mail.smtp.auth = " + need);
+		LOGGER.info("设置smtp身份认证：mail.smtp.auth = " + need);
 		if (props == null) {
 			props = System.getProperties();
 		}
@@ -119,12 +119,12 @@ public class EmailUtils {
 	 * @return
 	 */
 	public boolean setSubject(String mailSubject) {
-		logger.info("设置邮件主题！");
+		LOGGER.info("设置邮件主题！");
 		try {
 			mimeMsg.setSubject(mailSubject);
 			return true;
 		} catch (MessagingException e) {
-			logger.warn("设置邮件主题发生错误！");
+			LOGGER.info("设置邮件主题发生错误！");
 			return false;
 		}
 	}
@@ -143,7 +143,7 @@ public class EmailUtils {
 
 			return true;
 		} catch (MessagingException e) {
-			logger.warn("设置邮件正文时发生错误！" + e);
+			LOGGER.info("设置邮件正文时发生错误！" + e);
 			return false;
 		}
 	}
@@ -156,7 +156,7 @@ public class EmailUtils {
 	 */
 	public boolean addFileAffix(String filename) {
 
-		logger.info("增加邮件附件：" + filename);
+		LOGGER.info("增加邮件附件：" + filename);
 		try {
 			BodyPart bp = new MimeBodyPart();
 			FileDataSource fileds = new FileDataSource(filename);
@@ -167,7 +167,7 @@ public class EmailUtils {
 
 			return true;
 		} catch (MessagingException e) {
-			logger.warn("增加邮件附件：" + filename + "发生错误！" + e);
+			LOGGER.info("增加邮件附件：" + filename + "发生错误！" + e);
 			return false;
 		}
 	}
@@ -179,7 +179,7 @@ public class EmailUtils {
 	 *            String
 	 */
 	public boolean setFrom(String from) {
-		logger.info("设置发信人！");
+		LOGGER.info("设置发信人！");
 		try {
 			mimeMsg.setFrom(new InternetAddress(from)); // 设置发信人
 			return true;
@@ -202,7 +202,7 @@ public class EmailUtils {
 					InternetAddress.parse(to));
 			return true;
 		} catch (MessagingException e) {
-			logger.warn("设置发信人时发生错误"+e);
+			LOGGER.info("设置发信人时发生错误" + e);
 			return false;
 		}
 	}
@@ -221,11 +221,11 @@ public class EmailUtils {
 					(Address[]) InternetAddress.parse(copyto));
 			return true;
 		} catch (AddressException e) {
-			logger.warn("设置抄送地址时错误"+e);
+			LOGGER.info("设置抄送地址时错误" + e);
 			return false;
-			
+
 		} catch (MessagingException e) {
-			logger.warn("设置抄送地址时错误"+e);
+			LOGGER.info("设置抄送地址时错误" + e);
 		}
 		return false;
 	}
@@ -237,12 +237,12 @@ public class EmailUtils {
 		try {
 			mimeMsg.setContent(mp);
 			mimeMsg.saveChanges();
-			logger.info("正在发送邮件....");
+			LOGGER.info("正在发送邮件....");
 			Session mailSession = Session.getInstance(props, null);
 			Transport transport = mailSession.getTransport("smtp");
-			logger.info((String) props.get("mail.smtp.host"));
-			logger.info(username);
-			logger.info(password);
+			LOGGER.info((String) props.get("mail.smtp.host"));
+			LOGGER.info(username);
+			LOGGER.info(password);
 
 			transport.connect((String) props.get("mail.smtp.host"), 25,
 					username, password);
@@ -256,12 +256,12 @@ public class EmailUtils {
 			;
 			// transport.send(mimeMsg);
 
-			logger.info("发送邮件成功！");
+			LOGGER.info("发送邮件成功！");
 			transport.close();
 
 			return true;
 		} catch (MessagingException e) {
-			logger.warn("邮件发送失败！" + e);
+			LOGGER.info("邮件发送失败！" + e);
 			return false;
 		}
 	}
@@ -283,18 +283,25 @@ public class EmailUtils {
 		EmailUtils theMail = new EmailUtils(smtp);
 		theMail.setNeedAuth(true); // 需要验证
 
-		if (!theMail.setSubject(subject))
+		if (!theMail.setSubject(subject)) {
 			return false;
-		if (!theMail.setBody(content))
+
+		}
+
+		if (!theMail.setBody(content)) {
 			return false;
-		if (!theMail.setTo(to))
+		}
+		if (!theMail.setTo(to)) {
 			return false;
-		if (!theMail.setFrom(from))
+		}
+		if (!theMail.setFrom(from)) {
 			return false;
+		}
 		theMail.setNamePass(username, password);
 
-		if (!theMail.sendOut())
+		if (!theMail.sendOut()) {
 			return false;
+		}
 		return true;
 	}
 
@@ -317,20 +324,26 @@ public class EmailUtils {
 		EmailUtils theMail = new EmailUtils(smtp);
 		theMail.setNeedAuth(true); // 需要验证
 
-		if (!theMail.setSubject(subject))
+		if (!theMail.setSubject(subject)) {
 			return false;
-		if (!theMail.setBody(content))
+		}
+		if (!theMail.setBody(content)) {
 			return false;
-		if (!theMail.setTo(to))
+		}
+		if (!theMail.setTo(to)) {
 			return false;
-		if (!theMail.setCopyTo(copyto))
+		}
+		if (!theMail.setCopyTo(copyto)) {
 			return false;
-		if (!theMail.setFrom(from))
+		}
+		if (!theMail.setFrom(from)) {
 			return false;
+		}
 		theMail.setNamePass(username, password);
 
-		if (!theMail.sendOut())
+		if (!theMail.sendOut()) {
 			return false;
+		}
 		return true;
 	}
 
@@ -354,20 +367,26 @@ public class EmailUtils {
 		EmailUtils theMail = new EmailUtils(smtp);
 		theMail.setNeedAuth(true); // 需要验证
 
-		if (!theMail.setSubject(subject))
+		if (!theMail.setSubject(subject)) {
 			return false;
-		if (!theMail.setBody(content))
+		}
+		if (!theMail.setBody(content)) {
 			return false;
-		if (!theMail.addFileAffix(filename))
+		}
+		if (!theMail.addFileAffix(filename)) {
 			return false;
-		if (!theMail.setTo(to))
+		}
+		if (!theMail.setTo(to)) {
 			return false;
-		if (!theMail.setFrom(from))
+		}
+		if (!theMail.setFrom(from)) {
 			return false;
+		}
 		theMail.setNamePass(username, password);
 
-		if (!theMail.sendOut())
+		if (!theMail.sendOut()) {
 			return false;
+		}
 		return true;
 	}
 
@@ -391,22 +410,29 @@ public class EmailUtils {
 		EmailUtils theMail = new EmailUtils(smtp);
 		theMail.setNeedAuth(true); // 需要验证
 
-		if (!theMail.setSubject(subject))
+		if (!theMail.setSubject(subject)) {
 			return false;
-		if (!theMail.setBody(content))
+		}
+		if (!theMail.setBody(content)) {
 			return false;
-		if (!theMail.addFileAffix(filename))
+		}
+		if (!theMail.addFileAffix(filename)) {
 			return false;
-		if (!theMail.setTo(to))
+		}
+		if (!theMail.setTo(to)) {
 			return false;
-		if (!theMail.setCopyTo(copyto))
+		}
+		if (!theMail.setCopyTo(copyto)) {
 			return false;
-		if (!theMail.setFrom(from))
+		}
+		if (!theMail.setFrom(from)) {
 			return false;
+		}
 		theMail.setNamePass(username, password);
 
-		if (!theMail.sendOut())
+		if (!theMail.sendOut()) {
 			return false;
+		}
 		return true;
 	}
 

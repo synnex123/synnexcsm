@@ -1,4 +1,4 @@
-package com.synnex.cms.daoImpl;
+package com.synnex.cms.daoimpl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

@@ -1,4 +1,4 @@
-package com.synnex.cms.serviceImpl;
+package com.synnex.cms.serviceimpl;
 
 import java.sql.Timestamp;
 import java.util.List;
