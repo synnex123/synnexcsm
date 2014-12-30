@@ -45,6 +45,7 @@ if(window != top){
 			<div class="dialog">
 				<div class="block">
 				<span style="color:red;" id = "errmsg">${requestScope.errmsg}</span>
+				<span style="color:red;" id = "msg">${requestScope.msg}</span>
 					<p class="block-heading">登陆系统</p><span style="color:red">${securitymsg}</span>
 					<div class="block-body">
 						<form name="loginForm" method="post" >

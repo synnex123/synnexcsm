@@ -3,6 +3,7 @@ package com.synnex.cms.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -50,6 +51,12 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 	public User getModel() {
 		return user;
 	}
+	public String logout(){
+		HttpServletRequest request=ServletActionContext.getRequest();
+		HttpSession session=request.getSession();
+		session.invalidate();
+		return SUCCESS;
+	}
 	/**
 	 * @author joeyy
 	 * 2014/12/10
@@ -59,6 +66,7 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 		try {
 			user.setUserType(1);
 			if (userService.save(user)) {
+				ActionContext.getContext().put("msg", "注册成功,请登陆");	
 				return SUCCESS;				
 			}else{
 				ActionContext.getContext().put("errmsg", "你注册的用户名已存在，请重设");	

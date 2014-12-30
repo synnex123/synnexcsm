@@ -115,12 +115,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 		}
 		
 	}
-	public String logout(){
-		HttpServletRequest request=ServletActionContext.getRequest();
-		HttpSession session=request.getSession();
-		session.invalidate();
-		return SUCCESS;
-	}
+
 		
 	}
 

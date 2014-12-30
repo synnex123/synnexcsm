@@ -23,6 +23,6 @@ $.ajax({
 });
 }
 function doregister(){
-	location.href="../user/user_add.jsp";
+	location.href="./user/user_add.jsp";
 }
 
