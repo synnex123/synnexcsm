@@ -2,6 +2,7 @@ package com.synnex.cms.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
@@ -12,8 +13,11 @@ import org.slf4j.LoggerFactory;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.synnex.cms.dto.SearchUserClubDto;
+import com.synnex.cms.entity.User;
 import com.synnex.cms.entity.UserClub;
 import com.synnex.cms.service.UserService;
+import com.synnex.cms.utils.EmailUtils;
+import com.synnex.cms.utils.UserUtil;
 
 public class ExitClubAction extends ActionSupport implements ModelDriven<SearchUserClubDto>{
 	/**
@@ -23,6 +27,10 @@ public class ExitClubAction extends ActionSupport implements ModelDriven<SearchU
 	private static Logger LOGGER = LoggerFactory.getLogger(ExitClubAction.class);
 	private SearchUserClubDto searchUserClubDto=new SearchUserClubDto();
 	private UserService userService;
+	final String SMTP = "SMTP.163.COM";
+	final String FORM = "synnexcmsupport@163.com";
+	final String USERNAME = "synnexcmsupport@163.com";
+	final String PASSWORD = "synnex";
 	@Override
 	public SearchUserClubDto getModel() {
 		return searchUserClubDto;
@@ -38,14 +46,23 @@ public class ExitClubAction extends ActionSupport implements ModelDriven<SearchU
 	 */
 	public void exitClub(){
 		HttpServletResponse response=ServletActionContext.getResponse();
+		HttpServletRequest request=ServletActionContext.getRequest();
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;UTF-8");
 		UserClub userClub=new UserClub();
 		userClub.setClubId(searchUserClubDto.getClubId());
 		userClub.setUserId(searchUserClubDto.getUserId());
+		User user=UserUtil.getUser(request);
 		try {
 			PrintWriter out = response.getWriter();
 			userService.deleteUserClubInfoDuoToExitClub(userClub);
+				String subject = "俱乐部成员退出提醒！";
+				String content = "您负责的俱乐部:"
+						+ searchUserClubDto.getClubName() +","+"有一名成员："
+						+user.getUserName()+"退出了该俱乐部！";
+				String to =searchUserClubDto.getManagerEmail();
+				EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
+						PASSWORD);
 			out.println("{\"status\":1}");
 		} catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);

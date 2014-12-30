@@ -111,9 +111,6 @@
 							</DIV >
 							<DIV style="clear: left;margin-left: 200px">
 							    <div class="btn-toolbar">
-							        <DIV style="float: left">
-							        <button type="button" class="btn btn-primary" onclick="return doApply();"><strong>发送消息</strong></button>
-							        </DIV>
 									<DIV style="float: left;margin-left: 100px">
 									    <a href="<%=request.getContextPath() %>/user/search.jsp" class="btn btn-primary">返回查询页</a>
 									</DIV>
