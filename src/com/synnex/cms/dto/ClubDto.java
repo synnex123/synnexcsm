@@ -1,11 +1,18 @@
 package com.synnex.cms.dto;
+
+import java.io.Serializable;
+
 /**
  * 
  * 
  * function for data transfer Club,User
  *
  */
-public class ClubDto {
+public class ClubDto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer clubId;
 	private String clubName;
 	private String clubLocation;

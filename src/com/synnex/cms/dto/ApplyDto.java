@@ -1,5 +1,6 @@
 package com.synnex.cms.dto;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 /**
  * 
@@ -7,7 +8,11 @@ import java.sql.Timestamp;
  *
  */
 
-public class ApplyDto {
+public class ApplyDto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6984558941201572821L;
 	private Integer applyId;
 	private String clubName;
 	private Timestamp applyTime;

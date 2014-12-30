@@ -1,4 +1,7 @@
 package com.synnex.cms.dto;
+
+import java.io.Serializable;
+
 /**
  * 
  * 
@@ -8,7 +11,11 @@ package com.synnex.cms.dto;
  *
  */
 
-public class SearchDto {
+public class SearchDto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer clubId;
 	private String clubName;
 	private String clubLocation;
