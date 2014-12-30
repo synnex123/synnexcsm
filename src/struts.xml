@@ -15,8 +15,11 @@
 		<interceptors>
 			<interceptor name="login"
 				class="com.synnex.cms.interceptor.CheckLoginInterceptor" />
+			<interceptor name="authority" 
+				class="com.synnex.cms.interceptor.CheckAuthorityInterceptor" />
 			<interceptor-stack name="teamwareStack">
 				<interceptor-ref name="login" />
+				<interceptor-ref name="authority" />
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
@@ -25,6 +28,7 @@
 
 		<global-results>
 			<result name="login_page">/user/login.jsp</result>
+			<result name="noAuthority">/noAuthority.jsp</result>
 		</global-results>
 
 
