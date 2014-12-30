@@ -66,7 +66,7 @@
 									<td>${clubInfo.clubLocation}</td>
 									<td>${clubInfo.managerName}</td>
 									<td>${clubInfo.managerEmail}</td>
-									<td><button  class="btn btn-primary" style="float:left;" onclick="return exitClub(${clubInfo.clubId},'${clubInfo.managerName}','${clubInfo.managerEmail}',${clubInfo.userId},${clubInfo.managerId});">
+									<td><button  class="btn btn-primary" style="float:left;" onclick="return exitClub(${clubInfo.clubId},'${clubInfo.clubName}','${clubInfo.managerName}','${clubInfo.managerEmail}',${clubInfo.userId},${clubInfo.managerId});">
 										<font color="white">退出</font></button> &nbsp;&nbsp;
 									 </td>
 								</tr>
@@ -95,14 +95,14 @@
 	function searchUser(userName,userType){
 		location.href="searchUser?userName="+clubId+"&userType="+userType;
 	}
-	function exitClub(clubId,managerName,managerEmail,userId,managerId){
+	function exitClub(clubId,clubName,managerName,managerEmail,userId,managerId){
 		if(userId==managerId){
 		alert("你是该俱乐部的负责人，若要退出请先更换负责人");
 		return false;
 		}
 		$.ajax({
 				type:"post",
-				data:{clubId:clubId,managerName:managerName,managerEmail:managerEmail,userId:userId,managerId:managerId},
+				data:{clubId:clubId,clubName:clubName,managerName:managerName,managerEmail:managerEmail,userId:userId,managerId:managerId},
 				dataType:"JSON",
 				url:"<%=request.getContextPath()%>/exitClub.action",
 				success:function(result){
