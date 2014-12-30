@@ -11,7 +11,7 @@
 
 
 	<!-- 定义struts2拦截器 -->
-	<package name="default" namespace="/" extends="struts-default" >
+	<package name="default" namespace="/" extends="struts-default">
 		<interceptors>
 			<interceptor name="login"
 				class="com.synnex.cms.interceptor.CheckLoginInterceptor" />
@@ -30,17 +30,18 @@
 
 
 
-		<action name="UserLogin" class="ajaxAction" method="UserLogin">
+		<action name="UserLogin" class="userLogin" method="UserLogin">
 		</action>
-		<action name="CheckPassword" class="ajaxAction" method="CheckPassword">
+		<action name="CheckPassword" class="userLogin" method="CheckPassword">
 		</action>
-
-
-
-		<action name="UserRegist" class="userManage" method="UserRegist">
+		<action name="UserRegist" class="userLogin" method="UserRegist">
 			<result name="success">/user/login.jsp</result>
 			<result name="error">/user/user_add.jsp</result>
 		</action>
+
+
+
+
 		<action name="UserChangePassword" class="userManage" method="UserChangePassword">
 		</action>
 		<action name="InitUpdateUserInfo" class="userManage" method="initUpdateUserInfo">

@@ -85,7 +85,7 @@
 <bean  name="init" class="com.synnex.cms.action.InitAction" scope="prototype">   
 	<property name="clubService" ref="clubService"></property>
 </bean>
-<bean name="ajaxAction" class="com.synnex.cms.action.UserLoginAction" scope="prototype">
+<bean name="userLogin" class="com.synnex.cms.action.UserLoginAction" scope="prototype">
 	<property name="userService" ref="userService"></property>
 </bean>
 <bean name="applyInit" class="com.synnex.cms.action.InitApplyAction" scope="prototype">

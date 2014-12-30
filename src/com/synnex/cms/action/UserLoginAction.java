@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.synnex.cms.entity.User;
@@ -51,6 +52,25 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 	}
 	/**
 	 * @author joeyy
+	 * 2014/12/10
+	 * function UserRegist
+	 */
+	public String UserRegist(){
+		try {
+			user.setUserType(1);
+			if (userService.save(user)) {
+				return SUCCESS;				
+			}else{
+				ActionContext.getContext().put("errmsg", "你注册的用户名已存在，请重设");	
+				return ERROR;	
+			}
+		} catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return ERROR;
+	}
+	/**
+	 * @author joeyy
 	 * 2014/12/06
 	 * function judge if two inputs are consistent
 	 * @ajax
@@ -76,7 +96,7 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 
 	}
 	/**
-	 * @author
+	 * @author joeyy
 	 * 2014/12/06
 	 * function userLogin
 	 * @ajax
