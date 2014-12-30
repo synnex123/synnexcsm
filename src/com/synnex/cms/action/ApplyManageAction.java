@@ -39,6 +39,8 @@ public class ApplyManageAction extends ActionSupport implements
 	final String FORM = "synnexcmsupport@163.com";
 	final String USERNAME = "synnexcmsupport@163.com";
 	final String PASSWORD = "synnex";
+	
+	
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
@@ -89,22 +91,27 @@ public class ApplyManageAction extends ActionSupport implements
 
 			if (applyService.getSubmittedApplyByClubId(apply.getClubId())
 					.size() >= 5) {
-				String subject = "请尽快处理俱乐部申请，未处理申请已达"
+				final String subject = "请尽快处理俱乐部申请，未处理申请已达"
 						+ "("
 						+ applyService.getSubmittedApplyByClubId(
 								apply.getClubId()).size() + ")" + "条";
-				String content = "您负责的俱乐部的未处理申请已达到"
+				final String content = "您负责的俱乐部的未处理申请已达到"
 						+ applyService.getSubmittedApplyByClubId(
 								apply.getClubId()).size() + "条，请尽快登录系统处理"
 						+ "\n" + "http://" + request.getRemoteHost() + ":8080"
 						+ request.getContextPath() + "/user/login.jsp";
 				Integer managerId = clubService.getClubByClubId(
 						apply.getClubId()).getManagerId();
-				String to = userService.getUserByUserId(managerId)
+				final String to = userService.getUserByUserId(managerId)
 						.getUserEmail();
-
-				EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-						PASSWORD);
+				
+				new Thread(){
+					public void run(){
+						EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
+								PASSWORD);
+					}
+				}.start();
+				
 			}
 
 		} catch (HibernateException e) {
@@ -152,8 +159,8 @@ public class ApplyManageAction extends ActionSupport implements
 				// 获取申请详细信息用于邮件内容
 				ApplyDto apply1 = applyService.getApplyDetails(
 						apply.getApplyId()).get(0);
-				String subject = "您的申请被驳回" + DateUtils.getNowDate();
-				String content = "您于(" + apply1.getApplyTime() + ")发起的" + "\n"
+				final String subject = "您的申请被驳回" + DateUtils.getNowDate();
+				final String content = "您于(" + apply1.getApplyTime() + ")发起的" + "\n"
 						+ "加入" + apply1.getClubName() + "申请被驳回("
 						+ DateUtils.getNowDate() + ")" + "\n"
 						+ "rejected reason:" + apply1.getCheckRes() + "\n"
@@ -162,10 +169,14 @@ public class ApplyManageAction extends ActionSupport implements
 						+ "/user/login.jsp";
 				Integer userId = apply1.getRequesterId();
 				// 获取当前选择的apply获取请求人的email
-				String to = userService.getUserByUserId(userId).getUserEmail();
+				final String to = userService.getUserByUserId(userId).getUserEmail();
 				out.println("{\"status\":1,\"msg\":\"succeed to reject\"}");
-				EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-						PASSWORD);
+				new Thread(){
+					public void run(){
+						EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
+								PASSWORD);
+					}
+				}.start();
 
 			} else {
 				out.println("{\"status\":0,\"msg\":\"failed to reject\"}");
@@ -199,17 +210,21 @@ public class ApplyManageAction extends ActionSupport implements
 					DateUtils.getSysNow(), uc)) {
 				ApplyDto apply1 = applyService.getApplyDetails(
 						apply.getApplyId()).get(0);
-				String subject = "您的申请已被通过" + DateUtils.getNowDate();
-				String content = "您于" + apply1.getApplyTime() + "发起的加入"
+				final String subject = "您的申请已被通过" + DateUtils.getNowDate();
+				final String content = "您于" + apply1.getApplyTime() + "发起的加入"
 						+ apply1.getClubName() + "申请" + "已通过"
 						+ DateUtils.getNowDate() + "\n" + "请登录系统查看" + "http://"
 						+ request.getRemoteHost() + ":8080"
 						+ request.getContextPath() + "/user/login.jsp";
 				Integer userId = apply1.getRequesterId();
-				String to = userService.getUserByUserId(userId).getUserEmail();
+				final String to = userService.getUserByUserId(userId).getUserEmail();
 				out.println("{\"status\":1,\"msg\":\"succeed to process\"}");
-				EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-						PASSWORD);
+				new Thread(){
+					public void run(){
+						EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
+								PASSWORD);
+					}
+				}.start();
 
 			} else {
 				out.println("{\"status\":0,\"msg\":\"failed to process\"}");

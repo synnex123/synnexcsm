@@ -150,11 +150,11 @@ public class PromotionManageAction extends ActionSupport implements
 			// 若成功发起请求则给所有俱乐部成员发邮件通知
 			if (promotionService.producePromotion(promotion)) {
 				out.println("{\"status\":1}");
-				String subject = "您所在的"
+				final String subject = "您所在的"
 						+ clubService.getClubByClubId(adminclubId)
 								.getClubName() + "俱乐部的负责人发起了一次更换负责人请求"
 						+ DateUtils.getNowDate();
-				String content = "您所在的"
+				final String content = "您所在的"
 						+ clubService.getClubByClubId(adminclubId)
 								.getClubName() + "俱乐部的负责人发起了一次更换负责人请求" + "\n"
 						+ "更换原因为:" + promotion.getPromotionReason() + "\n"
@@ -168,9 +168,13 @@ public class PromotionManageAction extends ActionSupport implements
 						.getAllUserByClubId(adminclubId);
 				// 向此俱乐部中所有成员发邮件
 				for (int i = 0; i < userlist.size(); i++) {
-					String to = userlist.get(i).getUserEmail();
-					EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-							PASSWORD);
+					final String to = userlist.get(i).getUserEmail();
+					new Thread(){
+						public void run(){
+							EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
+									PASSWORD);
+						}
+					}.start();
 				}
 
 			} else {
@@ -208,11 +212,11 @@ public class PromotionManageAction extends ActionSupport implements
 				promotionService.savePromotionRecord(pvr);
 				if ("sloved".equals(promotionService.judgePromotion(pvr))) {
 					out.println("{\"msg\":\"succeed to vote and result have sloved \"}");
-					String subject = "您所在的"
+					final String subject = "您所在的"
 							+ clubService.getClubByPromotionId(
 									pvr.getPromotionId()).getClubName()
 							+ "俱乐部的更换管理员投票已结束(" + DateUtils.getNowDate() + ")";
-					String content = "您所在的"
+					final String content = "您所在的"
 							+ clubService.getClubByPromotionId(
 									pvr.getPromotionId()).getClubName()
 							+ "俱乐部的更换管理员投票已结束"
@@ -232,9 +236,13 @@ public class PromotionManageAction extends ActionSupport implements
 									.getClubId());
 					// 向此俱乐部中所有成员发邮件
 					for (int i = 0; i < userlist.size(); i++) {
-						String to = userlist.get(i).getUserEmail();
-						EmailUtils.send(SMTP, FORM, to, subject, content,
-								USERNAME, PASSWORD);
+						final String to = userlist.get(i).getUserEmail();
+						new Thread(){
+							public void run(){
+								EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
+										PASSWORD);
+							}
+						}.start();
 					}
 
 				} else if ("keep".equals(promotionService.judgePromotion(pvr))) {
