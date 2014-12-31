@@ -12,6 +12,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/myjs/dividepage.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/lib/bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/stylesheets_default/theme.css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/lib/font-awesome/css/font-awesome.css" />
@@ -24,26 +25,7 @@
 	function join(clubId){
 		location.href="initApply.action?clubId="+clubId;
 	}
-	function previousPage(location){
-		var currentPage=parseInt(document.getElementById("currentPage").innerHTML);
-		if(currentPage==1){
-			alert("没有前一页了");
-			return ;
-		}
-		currentPage=currentPage-1;
-		document.location.href="init.action?location="+location+"&currentPage="+currentPage;
-	}
-	function nextPage(location){
-		var currentPage=parseInt(document.getElementById("currentPage").innerHTML);
-		var totalPage=parseInt(document.getElementById("totalPage").innerHTML);
-		if (currentPage==totalPage){
-			alert("没有后一页了");
-			return ;
-		}
-		currentPage=currentPage+1;
-		var url="init.action?location="+location+"&currentPage="+currentPage; 
-		document.location.href=url;
-	}
+	
 </SCRIPT>
 </head>
 <body class="simple_body">
@@ -105,9 +87,9 @@
 
 						<div class="pagination">
 							<ul>
-								<li><a href="javascript:void(0);" onclick='previousPage("${location}");'>&lt;&lt;</a></li>
+								<li><a href="javascript:void(0);" onclick='previousPage("${location}","init");'>&lt;&lt;</a></li>
 								<li class="active" ><span id="currentPage">${currentPage }</span></span></li>
-								<li><a href="javascript:void(0);" onclick='nextPage("${location}");'>&gt;&gt;</a></li>
+								<li><a href="javascript:void(0);" onclick='nextPage("${location}","init");'>&gt;&gt;</a></li>
 								<li ><span>共<span id="totalPage">${totalPage }</span>页</span></span></li>
 							</ul>
 						</div>
