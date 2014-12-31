@@ -50,7 +50,7 @@
 							<c:forEach items="${checkapplylist}" var="checkapply">
 								<c:set var="i" value="${i+1 }"/>
 								<tr>
-									<td>${1}</td>
+									<td>${i}</td>
 									<td>${checkapply.userName}</td> 
 									<td>${checkapply.clubName}</td>
 									<td>${checkapply.applyTime}</td>
