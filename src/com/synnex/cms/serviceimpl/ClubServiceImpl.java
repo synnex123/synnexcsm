@@ -37,6 +37,13 @@ public class ClubServiceImpl implements ClubService {
 			return clubDao.getClubByLocation(location);
 	
 	}
+	/**
+	 * @Author Pete Peng function getClub 2014/12/17
+	 */
+	public List<ClubDto>  getAllClubByLocation(String location) throws HibernateException {
+			return clubDao.getClubByLocation(location);
+	
+	}
 
 	public List<Club> getAllClub() throws HibernateException {
 		return clubDao.getAllClub();

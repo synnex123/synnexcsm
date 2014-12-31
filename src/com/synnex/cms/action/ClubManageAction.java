@@ -123,7 +123,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 			clubDto.setClubLocation("chengdu");
 		}
 		try {
-			clubList=clubService.getClubByLocation(clubDto.getClubLocation());
+			clubList=clubService.getAllClubByLocation(clubDto.getClubLocation());
 			request.setAttribute("clubList",clubList);
 			request.setAttribute("clubLocation", clubDto.getClubLocation());
 		} catch (HibernateException e) {

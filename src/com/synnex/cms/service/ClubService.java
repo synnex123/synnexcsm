@@ -18,6 +18,10 @@ public interface ClubService {
 	 * @Author Pete Peng function getClub 2014/12/17
 	 */
 	public List<ClubDto> getClubByLocation(String location) throws HibernateException;
+	/**
+	 * @Author Pete Peng function getClub 2014/12/17
+	 */
+	public List<ClubDto> getAllClubByLocation(String location) throws HibernateException;
 
 	public List<Club> getAllClub() throws HibernateException;
 

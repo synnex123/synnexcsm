@@ -94,9 +94,7 @@ public class InitAction extends ActionSupport{
 			if(0==currentPage){
 				currentPage=1;
 			}
-			if(currentPage==2){
-				System.out.println("hel");
-			}
+			
 			page.setCurrentPage(currentPage);
 			page.setPageRecords(pageRecords);
 			pageInfo.set(page);

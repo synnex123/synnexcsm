@@ -63,6 +63,38 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 		}
 		return clubList;
 	}
+	
+
+	/**
+	 * @Author Pete Peng function getClub 2014/12/17
+	 */
+	public List<ClubDto> getAllClubByLocation(String location)
+			throws HibernateException {
+		List<ClubDto> clubList = new ArrayList<ClubDto>();
+		String hql = "";
+		try {
+			session = getSession();
+			hql = "select c.clubId,c.clubName,u.userName,u.userPhone,c.clubLocation from Club c,User u "
+					+ "where c.clubLocation=:location and c.managerId=u.userId";
+			Query query = session.createQuery(hql);
+			query.setString("location", location);
+			@SuppressWarnings("rawtypes")
+			List result = query.list();
+			for (int i = 0; i < result.size(); i++) {
+				Object[] row = (Object[]) result.get(i);
+				ClubDto clubDto = new ClubDto();
+				clubDto.setClubId((Integer) row[0]);
+				clubDto.setClubName((String) row[1]);
+				clubDto.setManagerName((String) row[2]);
+				clubDto.setManagerPhone((String) row[3]);
+				clubDto.setClubLocation((String) row[4]);
+				clubList.add(clubDto);
+			}
+		} catch (HibernateException e) {
+			throw e;
+		}
+		return clubList;
+	}
 
 	/**
 	 * @Author Walker Cheng function getclub 2014/11/28
