@@ -25,6 +25,9 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 		String hql = "";
 		try {
 			session = getSession();
+//			String countHql = "select count(1) "
+//					+ "where a.requesterId=? and a.clubId=c.clubId "
+//					+ "and c.managerId=u.userId and a.applyStatus between ? and ? order by a.applyTime desc";
 			hql = "select a.applyId,c.clubName,u.userPhone,a.applyTime,a.applyStatus,a.checkTime "
 					+ "from Club c,User u,Apply a "
 					+ "where a.requesterId=? and a.clubId=c.clubId "
@@ -41,6 +44,9 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 			}
 			@SuppressWarnings("rawtypes")
 			List result = query.list();
+			
+			
+			
 			for (int i = 0; i < result.size(); i++) {
 				Object[] row = (Object[]) result.get(i);
 				ApplyDto applyDto = new ApplyDto();
@@ -52,6 +58,15 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 				applyDto.setCheckTime((Timestamp) row[5]);
 				applyList.add(applyDto);
 			}
+			
+//			Page page = AppContext.getContext().get("page");
+//			
+//			PageList<ApplyDto> list = new PageList<ApplyDto>(applyList);
+//			list.setCount(count);
+//			list.setPage(page);
+			
+			
+			
 		} catch (HibernateException e) {
 			throw e;
 		}

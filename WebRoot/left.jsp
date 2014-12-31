@@ -27,7 +27,7 @@
 		<a href="#sidebar_menu_1" class="nav-header collapsed" data-toggle="collapse"><i class="icon-leaf"></i>个人管理 <i class="icon-chevron-up"></i></a>
 		<ul id="sidebar_menu_1" class="nav nav-list collapse in">
 			<li><a href="<%=request.getContextPath()%>/getMyApply.action?pageIndex=0" target="main">我的申请</a></li>
-			<li><a href="<%=request.getContextPath()%>/searchMyClub.action?pageIndex=0" target="main">退出俱乐部</a></li>
+			<li><a href="<%=request.getContextPath()%>/searchMyClub.action?pageIndex=0" target="main">我的俱乐部</a></li>
 			<li><a href="#">我的部门</a></li>
 			<li><a href="<%=request.getContextPath()%>/user/change_psw.jsp" target="main">更改密码</a></li>
 		</ul>

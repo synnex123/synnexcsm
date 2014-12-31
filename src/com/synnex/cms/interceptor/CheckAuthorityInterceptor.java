@@ -62,7 +62,7 @@ public class CheckAuthorityInterceptor extends AbstractInterceptor{
 			}
 			else return "noAuthority";
 		}else {
-			return "login_page";
+			return "noAuthority";
 		}
 	}
 }

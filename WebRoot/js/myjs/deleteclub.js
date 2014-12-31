@@ -1,6 +1,6 @@
 	function doDelete(){
 			var clubName=document.getElementById("clubName").value;
-			var clubLocation="${clubLocation}";
+			var clubLocation=document.getElementById("clubLocation").value;
 			if(clubName==0){
 				alert("请选择俱乐部！");
 				return false;

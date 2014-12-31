@@ -82,8 +82,7 @@
 									<c:if test="${not empty searchDto.clubName}">
 										<td>${searchDto.clubLocation}</td>
 									</c:if>
-									<td><button class="btn btn-primary" style="float:left;" onclick="searchUser(${searchDto.userName},${searchDto.userType});">
-										<font color="white">发送消息</font></button> &nbsp;&nbsp; 
+									<td> 
 										<a class="btn btn-primary" href="<%=request.getContextPath() %>/UserSearch.action?userName=${searchDto.userName}&userType=${searchDto.userType}" title="详细"><font color="white">浏览详细</font></a> &nbsp; 							
 										&nbsp; </td>
 								</tr>
