@@ -41,7 +41,7 @@ public class ClubServiceImpl implements ClubService {
 	 * @Author Pete Peng function getClub 2014/12/17
 	 */
 	public List<ClubDto>  getAllClubByLocation(String location) throws HibernateException {
-			return clubDao.getClubByLocation(location);
+			return clubDao.getAllClubByLocation(location);
 	
 	}
 

@@ -93,8 +93,7 @@ public class InitAction extends ActionSupport{
 			PageInfo page=new PageInfo();
 			if(0==currentPage){
 				currentPage=1;
-			}
-			
+			}	
 			page.setCurrentPage(currentPage);
 			page.setPageRecords(pageRecords);
 			pageInfo.set(page);
@@ -114,9 +113,6 @@ public class InitAction extends ActionSupport{
 			return ERROR;
 		}
 	}
-
-		
-		
 }
 
 	

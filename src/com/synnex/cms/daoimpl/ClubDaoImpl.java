@@ -16,7 +16,6 @@ import com.synnex.cms.utils.PageInfo;
 
 public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 	Session session = null;
-
 	/**
 	 * @Author Pete Peng function getClub 2014/12/17
 	 */
