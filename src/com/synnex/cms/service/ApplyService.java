@@ -47,7 +47,9 @@ public interface ApplyService {
 			Integer pageIndex, Integer applyStatus) throws HibernateException;
 
 	/**
-	 * @author Joeyy function PassApply modified by joeyy 2014/12/18 2014/12/03
+	 * function PassApply modified by joeyy 2014/12/18 2014/12/03
+	 * 
+	 * @author Joeyy 
 	 * 
 	 * @params applyId,checkTime,userId,clubId
 	 */
