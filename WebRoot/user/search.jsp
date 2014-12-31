@@ -47,7 +47,7 @@
 				<div id="search" >
 					<form id="searchForm" class="form_search" action="<%=request.getContextPath() %>/UserSearch.action" method="POST" style="margin-bottom: 0px">
 						<div style="float: left; margin-right: 5px">
-							<label>选择用户类型</label>
+							<label>按用户类型查询</label>
 							<select name="userType" id="userType" class="input-xlarge">
 								<option label="请选择用户类型" value="">请选择用户类型</option>
 								<option label="负责人" value="0">负责人</option>
@@ -55,8 +55,8 @@
 								<option label="系统管理员" value="10">系统管理员</option>
 							</select>
 						</div>
-						<div style="float: left; margin-right: 5px">
-							<label>查询所有人请输入 <font style="color:red">*</font> 号</label>
+						<div style="float: left; margin-left: 20px;margin-right: 20px ">
+							<label>按用户名查询</label>
 							<input type="text" name="userName" id="userName" value="" placeholder="输入用户名"/>
 						</div>
 						<div class="btn-toolbar"

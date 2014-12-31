@@ -53,7 +53,7 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 		List<Object> mixList=new ArrayList<Object>();
 		List<SearchUserClubDto> clubList=new ArrayList<SearchUserClubDto>();
 		try {
-			if(searchDto.getUserName().equals("*")){
+			if(searchDto.getUserName().equals("")){
 				if(searchDto.getUserType()==null){
 					request.setAttribute("errorMsg", "请输入你想查询的用户类型！");
 					return ERROR;
@@ -72,9 +72,6 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 				request.setAttribute("userType",searchDto.getUserType());
 				request.setAttribute("resultList",resultList);
 				return SUCCESS;
-			}else if(searchDto.getUserName().equals("")){
-				request.setAttribute("errorMsg", "请输入用户名后再查询！");
-				return ERROR;
 			}else {
 					mixList=userService.search(searchDto.getUserName());
 					if(mixList.size()==0){

@@ -18,7 +18,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/js/other.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/lib/bootstrap/js/bootstrap.js"></script>
-<title>退出俱乐部</title>
+<title>我的俱乐部</title>
 </head>
 <body class="simple_body">
 	<div class="content">
@@ -29,11 +29,11 @@
 				</p>
 			</div>
 
-			<h1 class="page-title">退出俱乐部</h1>
+			<h1 class="page-title">我的俱乐部</h1>
 		</div>
 		<ul class="breadcrumb">
 			<li><a href="<%=request.getContextPath() %>/init.action?location=chengdu">首页 </a> <span class="divider">/</span></li>
-			<li class="active">所加俱乐部管理</li>
+			<li class="active">我的俱乐部管理</li>
 		</ul>
 		<div class="container-fluid">
 			<div class="row-fluid">
