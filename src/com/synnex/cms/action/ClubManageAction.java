@@ -83,14 +83,18 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 						Boolean result=clubService.addClub(clubDto1,user);
 						if(result){
 							out.println("{\"status\":1,\"url\":\"init.action?location=chengdu\"}");
-							String subject = "俱乐部任命提醒！";
-							String content ="Hi"+user.getUserName()+"，你已被任命为新增俱乐部："
+							final String subject = "俱乐部任命提醒！";
+							final String content ="Hi"+user.getUserName()+"，你已被任命为新增俱乐部："
 									+clubDto.getClubName()+" 的负责人,赶快去看看吧！！"
 									+ "\n" + "http://" + request.getRemoteHost() + ":8080"
 						            + request.getContextPath() + "/user/login.jsp";
-							String to =user.getUserEmail();
-							EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-									PASSWORD);
+							final String to =user.getUserEmail();	
+							new Thread(){
+								public void run(){
+									EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
+											PASSWORD);
+								}
+							}.start();
 						}else{
 							out.println("{\"status\":0,\"msg\":\"俱乐部添加失败！\"}");
 						}
@@ -187,12 +191,16 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 				if(result){
 					out.println("{\"status\":1,\"url\":\"init.action\"}");
 					User user= userService.getUserByUserId(clubDto2.getManagerId());
-					String subject = "俱乐部删除提醒！";
-					String content ="Hi"+user.getUserName()+"，你所负责的俱乐部："
+					final String subject = "俱乐部删除提醒！";
+					final String content ="Hi"+user.getUserName()+"，你所负责的俱乐部："
 							+clubDto.getClubName()+"因为人数原因，已被删除！";
-					String to =user.getUserEmail();
-					EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-							PASSWORD);
+					final String to =user.getUserEmail();
+					new Thread(){
+						public void run(){
+							EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
+									PASSWORD);
+						}
+					}.start();
 				}else{
 					out.println("{\"status\":0,\"msg\":\"俱乐部删除失败！\"}");
 				}

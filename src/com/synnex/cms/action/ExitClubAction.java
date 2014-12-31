@@ -56,14 +56,18 @@ public class ExitClubAction extends ActionSupport implements ModelDriven<SearchU
 		try {
 			PrintWriter out = response.getWriter();
 			userService.deleteUserClubInfoDuoToExitClub(userClub);
-				String subject = "俱乐部成员退出提醒！";
-				String content = "您负责的俱乐部:"
+			out.println("{\"status\":1}");
+			final String subject = "俱乐部成员退出提醒！";
+			final String content = "您负责的俱乐部:"
 						+ searchUserClubDto.getClubName() +","+"有一名成员："
 						+user.getUserName()+"退出了该俱乐部！";
-				String to =searchUserClubDto.getManagerEmail();
-				EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-						PASSWORD);
-			out.println("{\"status\":1}");
+			final String to =searchUserClubDto.getManagerEmail();
+			new Thread(){
+				public void run(){
+					EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
+							PASSWORD);
+				}
+			}.start();
 		} catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
