@@ -23,8 +23,8 @@ public class CheckAuthorityInterceptor extends AbstractInterceptor{
 				"initApply","applyManage","applyManagecancelApply",
 				"processApply","getMyApply","getApplyDetail",
 				"searchMyClub","init","exitClub","getPromotion",
-				"getPromotionVote","doPromotion"};
-		String[] m={"saveApply","rejectApply","getApplyByManagerId",
+				"getPromotionVote","doPromotion","saveApply","cancelApply"};
+		String[] m={"rejectApply","getApplyByManagerId",
 				"producePromotion","initPromotion"};
 		String[] s={"AddClub","InitDeleteClub","DeleteClub"};
 		for(String i : u){
