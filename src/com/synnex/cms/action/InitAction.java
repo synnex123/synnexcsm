@@ -17,6 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.synnex.cms.dto.ClubDto;
 import com.synnex.cms.entity.User;
 import com.synnex.cms.service.ClubService;
+import com.synnex.cms.utils.PageInfo;
 import com.synnex.cms.utils.UserUtil;
 
 /*
@@ -33,7 +34,28 @@ public class InitAction extends ActionSupport{
 	private static Logger LOGGER = LoggerFactory.getLogger(InitAction.class);
 	private ClubService clubService;
 	private String location;
-	
+	private int currentPage;
+	private int totalPage;
+	private int pageRecords=5;
+	public static final ThreadLocal pageInfo=new ThreadLocal();
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public int getPageRecords() {
+		return pageRecords;
+	}
+	public void setPageRecords(int pageRecords) {
+		this.pageRecords = pageRecords;
+	}
 	public void setClubService(ClubService clubService){
 		this.clubService=clubService;
 	}
@@ -68,7 +90,21 @@ public class InitAction extends ActionSupport{
 					response.addCookie(passwdCookie);
 				}
 			}
+			PageInfo page=new PageInfo();
+			if(0==currentPage){
+				currentPage=1;
+			}
+			if(currentPage==2){
+				System.out.println("hel");
+			}
+			page.setCurrentPage(currentPage);
+			page.setPageRecords(pageRecords);
+			pageInfo.set(page);
 			clubList =clubService.getClubByLocation(location);
+			totalPage=page.getTotalPage();
+			currentPage=page.getCurrentPage();
+			session.setAttribute("totalPage", totalPage);
+			session.setAttribute("currentPage", currentPage);
 			session.setAttribute("clubList", clubList);	
 			if (flag==1) {
 				return "welcome";

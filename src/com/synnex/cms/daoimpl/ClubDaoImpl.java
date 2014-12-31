@@ -7,10 +7,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.synnex.cms.action.InitAction;
 import com.synnex.cms.dao.ClubDao;
 import com.synnex.cms.dto.ClubDto;
 import com.synnex.cms.entity.Club;
 import com.synnex.cms.entity.UserClub;
+import com.synnex.cms.utils.PageInfo;
 
 public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 	Session session = null;
@@ -23,11 +25,27 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 		List<ClubDto> clubList = new ArrayList<ClubDto>();
 		String hql = "";
 		try {
+			PageInfo pageInfo=(PageInfo)InitAction.pageInfo.get();
 			session = getSession();
 			hql = "select c.clubId,c.clubName,u.userName,u.userPhone,c.clubLocation from Club c,User u "
 					+ "where c.clubLocation=:location and c.managerId=u.userId";
 			Query query = session.createQuery(hql);
+			String countHql="select count(*) from Club c,User u "
+					+ "where c.clubLocation=:location and c.managerId=u.userId";
+			Query queryCount=session.createQuery(countHql);
+			queryCount.setString("location", location);
+			int totalPage=((Long)queryCount.uniqueResult()).intValue();
+			if(totalPage%pageInfo.getPageRecords()!=0){
+				totalPage=(int)((totalPage-totalPage%pageInfo.getPageRecords())/pageInfo.getPageRecords()+1);
+			}
+			else {
+				totalPage=(int)((totalPage-totalPage%pageInfo.getPageRecords())/pageInfo.getPageRecords());
+			}
+			pageInfo.setTotalPage(totalPage);
+			InitAction.pageInfo.set(pageInfo);
 			query.setString("location", location);
+			query.setFirstResult((pageInfo.getCurrentPage()-1)*pageInfo.getPageRecords());
+			query.setMaxResults(pageInfo.getPageRecords());
 			@SuppressWarnings("rawtypes")
 			List result = query.list();
 			for (int i = 0; i < result.size(); i++) {
