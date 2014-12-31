@@ -77,6 +77,7 @@
 										<option label="${clubInfo.clubName}" value="${clubInfo.clubName}">${clubInfo.clubName}</option>
 								</c:forEach>
 							    </select>
+							     <input type="hidden" name="clubLocation" id="clubLocation" value="${clubLocation}"  class="input-xlarge"/>
 					        </div>
 							</DIV >
 							<DIV style="clear: left;margin-left: 200px">

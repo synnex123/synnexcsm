@@ -58,7 +58,7 @@ public class ExitClubAction extends ActionSupport implements ModelDriven<SearchU
 			userService.deleteUserClubInfoDuoToExitClub(userClub);
 			out.println("{\"status\":1}");
 			final String subject = "俱乐部成员退出提醒！";
-			final String content = "您负责的俱乐部:"
+			final String content ="Hi,"+searchUserClubDto.getManagerName()+"您负责的俱乐部:"
 						+ searchUserClubDto.getClubName() +","+"有一名成员："
 						+user.getUserName()+"退出了该俱乐部！";
 			final String to =searchUserClubDto.getManagerEmail();
