@@ -24,7 +24,7 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 		List<ClubDto> clubList = new ArrayList<ClubDto>();
 		String hql = "";
 		try {
-			PageInfo pageInfo=(PageInfo)InitAction.pageInfo.get();
+			PageInfo pageInfo=(PageInfo)PageInfo.pageInfo.get();
 			session = getSession();
 			hql = "select c.clubId,c.clubName,u.userName,u.userPhone,c.clubLocation from Club c,User u "
 					+ "where c.clubLocation=:location and c.managerId=u.userId";
@@ -41,7 +41,7 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 				totalPage=(int)((totalPage-totalPage%pageInfo.getPageRecords())/pageInfo.getPageRecords());
 			}
 			pageInfo.setTotalPage(totalPage);
-			InitAction.pageInfo.set(pageInfo);
+			PageInfo.pageInfo.set(pageInfo);
 			query.setString("location", location);
 			query.setFirstResult((pageInfo.getCurrentPage()-1)*pageInfo.getPageRecords());
 			query.setMaxResults(pageInfo.getPageRecords());

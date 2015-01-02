@@ -24,7 +24,14 @@ public class SearchDto implements Serializable{
 	private String userEmail;
 	private String userPhone;
 	private String userPart;
+	private String userTypeMsg;
 	private Integer userType;
+	public String getUserTypeMsg() {
+		return userTypeMsg;
+	}
+	public void setUserTypeMsg(String userTypeMsg) {
+		this.userTypeMsg = userTypeMsg;
+	}
 	public Integer getClubId() {
 		return clubId;
 	}

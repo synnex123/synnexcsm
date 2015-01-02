@@ -37,7 +37,6 @@ public class InitAction extends ActionSupport{
 	private int currentPage;
 	private int totalPage;
 	private int pageRecords=5;
-	public static final ThreadLocal pageInfo=new ThreadLocal();
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -59,11 +58,12 @@ public class InitAction extends ActionSupport{
 	public void setClubService(ClubService clubService){
 		this.clubService=clubService;
 	}
+	
 	public String getLocation() {
 		return location;
 	}
-	public void setLocation(String location) {
-		this.location = location;
+	public void setLocation(String arg1) {
+		this.location = arg1;
 	}
 	public String execute(){
 		try{
@@ -96,7 +96,7 @@ public class InitAction extends ActionSupport{
 			}	
 			page.setCurrentPage(currentPage);
 			page.setPageRecords(pageRecords);
-			pageInfo.set(page);
+		 	PageInfo.pageInfo.set(page);
 			clubList =clubService.getClubByLocation(location);
 			totalPage=page.getTotalPage();
 			currentPage=page.getCurrentPage();

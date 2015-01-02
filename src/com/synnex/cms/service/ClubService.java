@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 
 import com.synnex.cms.dto.ClubDto;
+import com.synnex.cms.dto.SearchDto;
 import com.synnex.cms.entity.Club;
 import com.synnex.cms.entity.User;
 
@@ -84,5 +85,6 @@ public interface ClubService {
 	 * @param promotionId
 	 */
 	public Club getClubByPromotionId(Integer promotionId) throws HibernateException;
+	public List<SearchDto> getClubMembers(int clubId) throws HibernateException;
 
 }

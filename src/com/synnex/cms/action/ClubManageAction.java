@@ -16,11 +16,13 @@ import org.slf4j.LoggerFactory;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.synnex.cms.dto.ClubDto;
+import com.synnex.cms.dto.SearchDto;
 import com.synnex.cms.dto.SearchUserClubDto;
 import com.synnex.cms.entity.User;
 import com.synnex.cms.service.ClubService;
 import com.synnex.cms.service.UserService;
 import com.synnex.cms.utils.EmailUtils;
+import com.synnex.cms.utils.PageInfo;
 import com.synnex.cms.utils.UserUtil;
 
 
@@ -33,6 +35,10 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 	private ClubDto clubDto=new ClubDto();
 	private ClubService clubService;
 	private UserService userService;
+	private int currentPage;
+	private int totalPage;
+	private int location;
+	private int pageRecords=5;
 	final String SMTP = "SMTP.163.COM";
 	final String FORM = "synnexcmsupport@163.com";
 	final String USERNAME = "synnexcmsupport@163.com";
@@ -42,6 +48,32 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 	}
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+	
+	
+	public int getLocation() {
+		return location;
+	}
+	public void setLocation(int location) {
+		this.location = location;
+	}
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public int getPageRecords() {
+		return pageRecords;
+	}
+	public void setPageRecords(int pageRecords) {
+		this.pageRecords = pageRecords;
 	}
 	@Override
 	public ClubDto getModel() {
@@ -215,5 +247,24 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 	}
-
+	/**
+	 * @Author Pete Peng function getClubMembers
+	 * 2011/1/2
+	 * 
+	 */
+	public String getClubMembers(){
+		List<SearchDto> userList;
+		PageInfo page=new PageInfo();
+		if(currentPage==0)currentPage=1;
+		page.setCurrentPage(currentPage);
+		page.setPageRecords(pageRecords);
+		PageInfo.pageInfo.set(page);
+		location=Integer.parseInt(ServletActionContext.getRequest().getParameter("location"));
+		userList=clubService.getClubMembers(location);
+		totalPage=page.getTotalPage();
+		ServletActionContext.getRequest().getSession().setAttribute("totalPage", totalPage);
+		ServletActionContext.getRequest().getSession().setAttribute("currentPage", currentPage);
+		ServletActionContext.getRequest().getSession().setAttribute("userList", userList);
+		return "success";
+	}
 }

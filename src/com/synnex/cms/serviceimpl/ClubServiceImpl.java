@@ -1,5 +1,6 @@
 package com.synnex.cms.serviceimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -7,6 +8,7 @@ import org.hibernate.HibernateException;
 import com.synnex.cms.dao.ClubDao;
 import com.synnex.cms.dao.UserDao;
 import com.synnex.cms.dto.ClubDto;
+import com.synnex.cms.dto.SearchDto;
 import com.synnex.cms.entity.Club;
 import com.synnex.cms.entity.User;
 import com.synnex.cms.entity.UserClub;
@@ -141,5 +143,35 @@ public class ClubServiceImpl implements ClubService {
 	public Club getClubByPromotionId(Integer promotionId) throws HibernateException {
 		return clubDao.getClubByPromotionId(promotionId);
 	}
-
+	/**
+	 * @author petep 2015/1/2 fucntion getClubMembers
+	 * 
+	 * @return List<SearchDto>
+	 * 
+	 * @param clubId
+	 */
+	public List<SearchDto> getClubMembers(int clubId) throws HibernateException{
+		List<SearchDto> userList=new ArrayList<SearchDto>();
+		List<User> clubUsers=userDao.getUserByClubId(clubId);
+		Club club=clubDao.getClubByClubId(clubId);
+		for(User user : clubUsers){
+			SearchDto searchDto=new SearchDto();
+			searchDto.setClubId(clubId);
+			searchDto.setClubName(club.getClubName());
+			searchDto.setUserId(user.getUserId());
+			searchDto.setUserName(user.getUserName());
+			searchDto.setUserPart(user.getUserPart());
+			searchDto.setUserPhone(user.getUserPhone());
+			searchDto.setUserType(user.getUserType());
+			searchDto.setUserEmail(user.getUserEmail());
+			if(user.getUserId()==club.getManagerId()){
+				searchDto.setUserTypeMsg("管理员");
+			}
+			else{
+				searchDto.setUserTypeMsg("普通成员");
+			}
+			userList.add(searchDto);
+		}
+		return userList;
+	}
 }
