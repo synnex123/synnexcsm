@@ -4,6 +4,8 @@ public class PageInfo {
 	private int currentPage;
 	private int totalPage;
 	private int pageRecords;
+	
+	public static final ThreadLocal pageInfo=new ThreadLocal();
 	public int getCurrentPage() {
 		return currentPage;
 	}

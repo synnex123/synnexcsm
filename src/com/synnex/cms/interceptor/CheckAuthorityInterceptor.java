@@ -22,7 +22,7 @@ public class CheckAuthorityInterceptor extends AbstractInterceptor{
 				"UpdateUserInfo","Logout","UserSearch",
 				"initApply","applyManage","applyManagecancelApply",
 				"processApply","getMyApply","getApplyDetail",
-				"searchMyClub","init","exitClub","getPromotion",
+				"searchMyClub","init","exitClub","getPromotion","getClubMembers",
 				"getPromotionVote","doPromotion","cancelApply","UserLogin","CheckPassword"};
 		String[] m={"saveApply","rejectApply","getApplyByManagerId",
 				"producePromotion","initPromotion","processApply"};

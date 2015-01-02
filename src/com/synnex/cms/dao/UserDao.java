@@ -176,4 +176,6 @@ public interface UserDao extends BaseDao {
 	public List<SearchUserClubDto> searchMyClubInfoByUserId(Integer userId,
 			Integer pageIndex) throws HibernateException;
 
+	public List<User> getUserByClubId(int clubId) throws HibernateException;
+
 }

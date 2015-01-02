@@ -89,6 +89,9 @@
 
 		<action name="AddClub" class="clubManage" method="addClub">
 		</action>
+		<action name="getClubMembers" class="clubManage" method="getClubMembers">
+			<result name="success">/user/clubusers.jsp</result>
+		</action>
 		<action name="InitDeleteClub" class="clubManage" method="initDeleteClub">
 			<result name="success">/club/deleteclub.jsp</result>
 		</action>

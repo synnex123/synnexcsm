@@ -12,6 +12,7 @@ import com.synnex.cms.dto.SearchDto;
 import com.synnex.cms.dto.SearchUserClubDto;
 import com.synnex.cms.entity.User;
 import com.synnex.cms.entity.UserClub;
+import com.synnex.cms.utils.PageInfo;
 
 /**
  * @author joeyy
@@ -513,6 +514,42 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 			throw e;
 		}
 		return resultList;
+	}
+
+	@Override
+	public List<User> getUserByClubId(int clubId) throws HibernateException {
+		String hql = "";
+		List<User> userlist = new ArrayList<>();
+		
+		session = getSession();
+		
+		String countHql= "select count(*) from User u,UserClub uc where uc.clubId=:clubId and uc.userId=u.userId";
+		Query queryCount = session.createQuery(countHql);
+		queryCount.setInteger("clubId", clubId);
+		PageInfo pageInfo=(PageInfo)PageInfo.pageInfo.get();
+		int totalPage=((Long)queryCount.uniqueResult()).intValue();
+		if(totalPage%pageInfo.getPageRecords()!=0){
+			totalPage=(int)((totalPage-totalPage%pageInfo.getPageRecords())/pageInfo.getPageRecords()+1);
+		}
+		else {
+			totalPage=(int)((totalPage-totalPage%pageInfo.getPageRecords())/pageInfo.getPageRecords());
+		}
+		pageInfo.setTotalPage(totalPage);
+		PageInfo.pageInfo.set(pageInfo);
+		
+		hql = "from User u,UserClub uc where uc.clubId=:clubId and uc.userId=u.userId";
+		Query query = session.createQuery(hql);
+		query.setInteger("clubId", clubId);
+		query.setFirstResult((pageInfo.getCurrentPage()-1)*pageInfo.getPageRecords());
+		query.setMaxResults(pageInfo.getPageRecords());
+		@SuppressWarnings("rawtypes")
+		List userlist1 = query.list();
+		for (int i = 0; i < userlist1.size(); i++) {
+			Object[] row = (Object[]) userlist1.get(i);
+			userlist.add((User) (row[0]));
+		}
+		
+		return userlist;
 	}
 
 }

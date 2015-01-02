@@ -68,7 +68,11 @@
 									<td>${clubInfo.managerEmail}</td>
 									<td><button  class="btn btn-primary" style="float:left;" onclick="return exitClub(${clubInfo.clubId},'${clubInfo.clubName}','${clubInfo.managerName}','${clubInfo.managerEmail}',${clubInfo.userId},${clubInfo.managerId});">
 										<font color="white">退出</font></button> &nbsp;&nbsp;
+										<button  class="btn btn-primary" style="float:left;" onclick="return getClubMembers(${clubInfo.clubId})">
+										<font color="white">查看成员</font></button> &nbsp;&nbsp;
 									 </td>
+									 
+									 
 								</tr>
 							</c:forEach>
 							</tbody>
@@ -125,6 +129,9 @@
 	function nextpage(p){
 			p=p+1;
 			location.href="<%=request.getContextPath() %>/searchMyClub.action?pageIndex="+p;
+	}
+	function getClubMembers(clubId){
+		location.href="<%=request.getContextPath() %>/getClubMembers.action?location="+clubId;
 	}
 </SCRIPT>
 </html>
