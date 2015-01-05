@@ -14,12 +14,12 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/lib/bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/stylesheets_default/theme.css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/lib/font-awesome/css/font-awesome.css" />
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/myjs/dividepage.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/lib/bootstrap/js/bootstrap-modal.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/js/other.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/lib/bootstrap/js/bootstrap.js"></script>
-<title>俱乐部成员</title>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/myjs/addsystemmanager.js"></script>
+<title>添加系统管理员</title>
 </head>
 <body class="simple_body">
 	<div class="content">
@@ -30,12 +30,12 @@
 				</p>
 			</div>
 
-			<h1 class="page-title">俱乐部成员</h1>
+			<h1 class="page-title">添加系统管理员</h1>
 		</div>
 		<ul class="breadcrumb">
 			<li><a href="<%=request.getContextPath() %>/init.action?location=chengdu">首页 </a> <span class="divider">/</span></li>
-			<li><a href="<%=request.getContextPath()%>/searchMyClub.action?pageIndex=0">返回 </a> <span class="divider">/</span></li>
-			<li class="active">${clubName }成员列表</li>
+			<li><a href="<%=request.getContextPath() %>/user/addsystemmanager.jsp">返回 </a> <span class="divider">/</span></li>
+			<li class="active">用户信息查询</li>
 		</ul>
 		<div class="container-fluid">
 			<div class="row-fluid">
@@ -45,7 +45,7 @@
 						<div style="clear: both;"></div>
 				</div>
 				<div class="block">
-					<a href="#page-stats" class="block-heading" data-toggle="collapse">信息列表</a>
+					<a href="#page-stats" class="block-heading" data-toggle="collapse">普通用户列表</a>
 					<div id="page-stats" class="block-body collapse in">
 						<table class="table table-striped">
 							<thead>
@@ -55,15 +55,13 @@
 									<th style="width: 80px">所属部门</th>
 									<th style="width: 120px">邮箱</th>
 									<th style="width: 100px">联系电话</th>
-									<th style="width: 80px">成员类型</th>
 									<th style="width: 120px">操作</th>
 								</tr>
 							</thead>
 							<tbody>
 							<c:set var="i" value="0"/>
-								<c:forEach items="${userList}" var="searchDto">
+								<c:forEach items="${resultList}" var="searchDto">
 								<c:set var="i" value="${i+1 }"/>
-								<c:set var="clubId" value="${searchDto.clubId}" />
 								<tr>
 								   <td name=culbId id="${i}" hidden="hidden">${searchDto["userId"]}</td>
 									<td>${searchDto.userName }</td>
@@ -75,10 +73,11 @@
 									<c:if test="${empty searchDto.userPhone}">
 										<td>无</td>
 									</c:if>
-									<td>${searchDto.userTypeMsg}</td>
 									<td> 
-										<a class="btn btn-primary" href="<%=request.getContextPath() %>/UserSearch.action?userName=${searchDto.userName}&userType=${searchDto.userType}" title="详细"><font color="white">浏览详细</font></a> &nbsp; 							
-										&nbsp; </td>
+										<a class="btn btn-primary" href="<%=request.getContextPath() %>/UserSearch.action?userName=${searchDto.userName}&purpose=addmanager" title="详细"><font color="white">浏览详细</font></a> &nbsp; 							
+										&nbsp;
+							        	<button type="button" class="btn btn-primary" onclick="return addManagerByList(${searchDto.userId});"><font color="white">任命</font></button>
+										</td>
 								</tr>
 							</c:forEach>
 							</tbody>
@@ -86,11 +85,14 @@
 						<!--- START 分页模板 --->
 
 						<div class="pagination">
+						<% 
+						Integer pageIndex=((Integer)request.getAttribute("pageIndex")/5)+1;
+						%>
 							<ul>
-								<li><a href="javascript:void(0);" onclick='previousPage(${clubId},"getClubMembers");'>&lt;&lt;</a></li>
-								<li class="active" ><span id="currentPage">${currentPage }</span></span></li>
-								<li><a href="javascript:void(0);" onclick='nextPage(${clubId},"getClubMembers");'>&gt;&gt;</a></li>
-								<li ><span>共<span id="totalPage">${totalPage }</span>页</span></span></li>
+								<li><a href="javascript:void(0);" onclick="lastpage(<%=pageIndex%>)">&lt;&lt;</a></li>
+							    <li class="active"><span><%=pageIndex%></span></li>
+								<li><a href="javascript:void(0);" onclick="nextpage(<%=pageIndex%>);">&gt;&gt;</a></li>
+								<li><span>共${requestScope.listNumber}条</span></li>
 							</ul>
 						</div>
 					</div>
@@ -98,4 +100,18 @@
 			</div>
 		</div>
 </body>
+<SCRIPT type="text/javascript">
+	function lastpage(p){
+		if (p===1) {
+			alert("there is no previous page");
+		}else{
+			p=p-1;
+			location.href="<%=request.getContextPath() %>/InitAddSystemManager.action?userType=1&pageIndex="+p;
+		}
+	}
+	function nextpage(p){
+			p=p+1;
+			location.href="<%=request.getContextPath() %>/InitAddSystemManager.action?userType=1&pageIndex="+p;
+	}
+</SCRIPT>
 </html>

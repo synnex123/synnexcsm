@@ -47,6 +47,7 @@
 		<ul id="sidebar_menu_7" class="nav nav-list collapse">	
 				<li><a href="<%=request.getContextPath()%>/club/addclub.jsp" target="main">新建俱乐部</a></li>
 				<li><a href="<%=request.getContextPath()%>/InitDeleteClub.action" target="main">删除俱乐部</a></li>
+				<li><a href="<%=request.getContextPath()%>/user/addsystemmanager.jsp" target="main">添加系统管理员</a></li>
 				</ul>
 		</c:if>
 	</div>

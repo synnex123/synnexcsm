@@ -262,5 +262,19 @@ public class UserServiceImpl implements UserService {
 		}
 		return result;
 	}
+	
+	/**
+	 * @author walker cheng
+	 * 2015/01/05
+	 * function add system manager
+	 * @param userId
+	 * @throws Exception 
+	 */
+	public void addSystemManager(Integer userId) throws HibernateException{
+		User user=new User();
+		user=userDao.getUserByUserId(userId);
+		user.setUserType(10);
+		userDao.updateUserInfo(user);
+	}
 
 }

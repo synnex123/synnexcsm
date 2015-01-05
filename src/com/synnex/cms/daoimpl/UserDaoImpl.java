@@ -528,6 +528,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		return resultList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getUserByClubId(int clubId) throws HibernateException {
 		String hql = "";

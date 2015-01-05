@@ -51,7 +51,7 @@
 								<label>登录用户名</label>
 								<input type="text" id="userName" name="userName" value="${user.userName}" class="input-xlarge" data-rule="required;username;" placeholder="请输入3-12位数字、字母、下划线"/>
 								<label>电话</label>
-								<input type="text" id="userPhone" name="userPhone" value="${user.userPhone}" class="input-xlarge" data-rule="required;mobie;" placeholder="手机号由11位数字构成"/>
+								<input type="text" id="userPhone" name="userPhone" value="${user.userPhone}" class="input-xlarge" data-rule="required;mobile;" placeholder="手机号由11位数字构成"/>
 								<label>Email</label>
 								<input type="text" id="userEmail" name="userEmail" value="${user.userEmail}" class="input-xlarge" data-rule="required;email;" placeholder="邮箱是重要的找回密码途径"/>
 								<label>所在部门</label>

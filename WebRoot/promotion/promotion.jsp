@@ -16,7 +16,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/lib/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/myjs/promotion.js"></script>
-<title>${requestScope.clubName}负责人选举</title>
+<title>${requestScope.clubName}负责人更换投票</title>
 </head>
 <body class="simple_body">
 	<div class="content">
@@ -24,7 +24,7 @@
 			<div class="row-fluid">
 
 				<div class="block">
-					<a href="#page-stats" class="block-heading" data-toggle="collapse"><strong><font color="red">${requestScope.clubName}</font></strong>负责人选举</a>
+					<a href="#page-stats" class="block-heading" data-toggle="collapse"><strong><font color="red">${requestScope.clubName}</font></strong>负责人更换投票</a>
 					<div id="page-stats" class="block-body collapse in">
 						<table class="table table-striped">
 							<thead>

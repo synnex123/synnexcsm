@@ -1,6 +1,12 @@
 package com.synnex.cms.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer userId;
 	private String userName;
 	private String userEmail;

@@ -212,7 +212,7 @@ public class ApplyManageAction extends ActionSupport implements
 						apply.getApplyId()).get(0);
 				final String subject = "您的申请已被通过" + DateUtils.getNowDate();
 				final String content = "您于" + apply1.getApplyTime() + "发起的加入"
-						+ apply1.getClubName() + "申请" + "已通过"
+						+ apply1.getClubName() + "申请已通过"
 						+ DateUtils.getNowDate() + "\n" + "请登录系统查看" + "http://"
 						+ request.getRemoteHost() + ":8080"
 						+ request.getContextPath() + "/user/login.jsp";

@@ -101,5 +101,12 @@ public interface UserService {
 	 * @throws Exception 
 	 */
 	public List<SearchUserClubDto> searchMyClubInfoByUserId(Integer userId,Integer pageIndex);
-
+	/**
+	 * @author walker cheng
+	 * 2015/01/05
+	 * function add system manager
+	 * @param userId
+	 * @throws Exception 
+	 */
+	public void addSystemManager(Integer userId) throws HibernateException;
 }
