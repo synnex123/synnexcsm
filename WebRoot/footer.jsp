@@ -26,7 +26,7 @@
 <body class="simple_body">
 	<div class="navbar">
 		<div class="navbar-inner" style="text-align: center;vertical-align: middle;">
-			<span class="first">©copyright 2014Synnex</span>
+			<span class="first">©copyright 2014 SYNNEX corporation</span>
 		</div>
 	</div>
 </body>

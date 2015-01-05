@@ -36,7 +36,6 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 	/**
 	 * @author walkerc 2014/12/02 function search User
 	 * 
-	 * @ajax
 	 * @params Entity Apply
 	 */
 	public String searchUser(){
