@@ -116,12 +116,12 @@
 			alert("there is no previous page");
 		}else{
 			p=p-1;
-			location.href="<%=request.getContextPath() %>/UserSearch.action?userType=${userType}&userName=${userName}&pageIndex="+p;
+			location.href="<%=request.getContextPath() %>/UserSearch.action?userType=${userType}&userName=&pageIndex="+p;
 		}
 	}
 	function nextpage(p){
 			p=p+1;
-			location.href="<%=request.getContextPath() %>/UserSearch.action?userType=${userType}&userName=${userName}&pageIndex="+p;
+			location.href="<%=request.getContextPath() %>/UserSearch.action?userType=${userType}&userName=&pageIndex="+p;
 	}
 </SCRIPT>
 </html>

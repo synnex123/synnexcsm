@@ -35,7 +35,6 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 	@SuppressWarnings("unchecked")
 	/**
 	 * @author walkerc 2014/12/02 function search User
-	 * 
 	 * @ajax
 	 * @params Entity Apply
 	 */
@@ -52,6 +51,10 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 		List<SearchDto> resultList=new ArrayList<SearchDto>();
 		List<Object> mixList=new ArrayList<Object>();
 		List<SearchUserClubDto> clubList=new ArrayList<SearchUserClubDto>();
+		String purpose=null;
+		if(!("".equals(request.getParameter("purpose"))||request.getParameter("purpose")==null)){
+			purpose=request.getParameter("purpose");
+		}
 		try {
 			if(searchDto.getUserName().equals("")){
 				if(searchDto.getUserType()==null){
@@ -68,7 +71,6 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 				listNumber=resultList.size();
 				request.setAttribute("listNumber",listNumber);
 				request.setAttribute("pageIndex",pageIndex);
-				request.setAttribute("userName","*");
 				request.setAttribute("userType",searchDto.getUserType());
 				request.setAttribute("resultList",resultList);
 				return SUCCESS;
@@ -82,6 +84,7 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 						clubList=(ArrayList<SearchUserClubDto>)mixList.get(1);
 						request.setAttribute("searchDto",searchDto1);
 						request.setAttribute("clubList",clubList);
+						request.setAttribute("purpose", purpose);
 					}
 					return "success1";
 			}
@@ -89,5 +92,35 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return ERROR;
+	}
+	
+	/**
+	 * @author walkerc 
+	 * 2015/01/05
+	 *  function get the information of ordinary user  
+	 * @ajax
+	 * @params Entity Apply
+	 */
+	public String initAddSystemManager(){
+		HttpServletRequest request=ServletActionContext.getRequest();
+		Integer pageIndex;
+		Integer listNumber=0;
+		if ("".equals(request.getParameter("pageIndex"))||request.getParameter("pageIndex")==null||"0".equals(request.getParameter("pageIndex"))) {
+			pageIndex=0;
+		}else{
+		    pageIndex=(Integer.parseInt(request.getParameter("pageIndex"))-1)*5;
+		}
+		List<SearchDto> resultList=new ArrayList<SearchDto>();
+		try {
+		    resultList=userService.searchUserByUserType(searchDto.getUserType(),pageIndex);
+			listNumber=resultList.size();
+			request.setAttribute("listNumber",listNumber);
+			request.setAttribute("pageIndex",pageIndex);
+			request.setAttribute("userType",searchDto.getUserType());
+			request.setAttribute("resultList",resultList);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return SUCCESS;
 	}
 }

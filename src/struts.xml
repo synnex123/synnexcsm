@@ -56,10 +56,12 @@
 		</action>
 		<action name="UpdateUserInfo" class="userManage" method="updateUserInfo">
 		</action>
-
-
-
-
+		<action name="AddSystemManager" class="userManage" method="addSystemManager">
+		</action>
+		
+		<action name="InitAddSystemManager" class="userSearch" method="initAddSystemManager">
+			<result name="success">/user/addsystemmanagerbylist.jsp</result>
+		</action>
 		<action name="UserSearch" class="userSearch" method="searchUser">
 			<result name="success">/user/searchlist.jsp</result>
 			<result name="success1">/user/searchresult.jsp</result>

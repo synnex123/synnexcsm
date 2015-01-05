@@ -1,3 +1,9 @@
+
+
+
+
+
+
 package com.synnex.cms.interceptor;
 
 import java.util.ArrayList;
@@ -26,7 +32,7 @@ public class CheckAuthorityInterceptor extends AbstractInterceptor{
 				"getPromotionVote","doPromotion","cancelApply","UserLogin","CheckPassword"};
 		String[] m={"saveApply","rejectApply","getApplyByManagerId",
 				"producePromotion","initPromotion","processApply"};
-		String[] s={"AddClub","InitDeleteClub","DeleteClub"};
+		String[] s={"AddClub","InitDeleteClub","DeleteClub","AddSystemManager","InitAddSystemManager"};
 		for(String i : u){
 			userActionName.add(i);
 		}
