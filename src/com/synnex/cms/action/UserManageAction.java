@@ -16,6 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.synnex.cms.entity.User;
 import com.synnex.cms.service.UserService;
+import com.synnex.cms.utils.EmailUtils;
 import com.synnex.cms.utils.UserUtil;
 
 public class UserManageAction extends ActionSupport implements ModelDriven<User>{
@@ -28,6 +29,10 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 	private User user = new User();
 	private String password1;
 	private String oldpassword;
+	final String SMTP = "SMTP.163.COM";
+	final String FORM = "synnexcmsupport@163.com";
+	final String USERNAME = "synnexcmsupport@163.com";
+	final String PASSWORD = "synnex";
 	public String getPassword1() {
 		return password1;
 	}
@@ -134,7 +139,38 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 	 * 2014/12/17
 	 * @ajax
 	 */
-
+	
+	
+	/**
+	 * @author walker cheng 
+	 * function add the system manager
+	 * 2015/01/05
+	 * @ajax
+	 */
+	public void addSystemManager(){
+		try{
+			HttpServletResponse response=ServletActionContext.getResponse();
+			PrintWriter out = response.getWriter();
+			userService.addSystemManager(user.getUserId());
+			out.println("{\"status\":1}");
+			User user1 =new User();
+			user1=userService.getUserByUserId(user.getUserId());
+			final String subject = "系统负责人任命通知";
+			final String content ="Hi,"+user1.getUserName()+"，你已被认命为系统管理员，快点去看看吧！";
+			final String to =user1.getUserEmail();
+			new Thread(){
+				public void run(){
+					EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
+							PASSWORD);
+				}
+			}.start();
+		}catch(HibernateException e){
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		} catch (IOException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		
+	}
 		
 	}
 

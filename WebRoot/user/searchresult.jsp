@@ -21,7 +21,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/lib/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/lib/datepicker/js/bootstrap-datepicker.js"></script>
-
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/myjs/addsystemmanager.js"></script>
 <title>查询用户</title>
 </head>
 <body class="simple_body">
@@ -29,8 +29,7 @@
 <script type="text/javascript">
 	if(${not empty errorUserType}){
 		alert("${errorUserType}");
-
-		}
+	}
 </script>
 	<div class="content">
 		<div class="header">
@@ -62,7 +61,11 @@
 							<form id="tab" method="post" action="#" autocomplete="off">
 							<DIV>
 							<div style="float:left;margin: 20px">
-							     <label>用户名</label>
+								<!-- 页面为添加系统管理员实现了复用， -->
+								<!-- 下面两个值均为添加系统管理员预留 -->
+							    <input type="hidden" name="userId" id="userId" value="${searchDto.userId}"  class="input-xlarge"/>
+							    <input type="hidden" name="userType" id="userType" value="${searchDto.userType}"  class="input-xlarge"/>
+							    <label>用户名</label>
 								<input type="text" name="userName" id="userName" value="${searchDto.userName}" disabled="disabled"  class="input-xlarge"/>
 								<label>所属部门</label>
 								<input type="text" name="userPart" id="userPart" value="${searchDto.userPart}" disabled="disabled"  class="input-xlarge"/>
@@ -111,14 +114,17 @@
 							</DIV >
 							<DIV style="clear: left;margin-left: 200px">
 							    <div class="btn-toolbar">
+							    	<c:if test="${not empty purpose}">
+										<DIV style="float: left">
+							        		<button type="button" class="btn btn-primary" onclick="return addManager();"><strong>任命为系统管理员</strong></button>
+							            </DIV>
+									</c:if>
 									<DIV style="float: left;margin-left: 100px">
 									    <a href="<%=request.getContextPath() %>/user/search.jsp" class="btn btn-primary">返回查询页</a>
 									</DIV>
-									
 									<div class="btn-group"></div>
 								</div>
 							</DIV>
-								
 							</form>
 						</div>
 					</div>

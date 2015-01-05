@@ -20,7 +20,7 @@ public class CheckAuthorityInterceptor extends AbstractInterceptor{
 			"getPromotionVote","doPromotion","cancelApply","UserLogin","CheckPassword"};
 	static String[] m={"saveApply","rejectApply","getApplyByManagerId",
 			"producePromotion","initPromotion","processApply"};
-	static String[] s={"AddClub","InitDeleteClub","DeleteClub"};
+	static String[] s={"AddClub","InitDeleteClub","DeleteClub","AddSystemManager","InitAddSystemManager"};
 	
 	/**
 	 * 
@@ -28,7 +28,7 @@ public class CheckAuthorityInterceptor extends AbstractInterceptor{
 	private static final long serialVersionUID = 1L;
 
 	public String intercept(ActionInvocation actionInvocation) throws Exception{
-
+		
 		for(String i : u){
 			userActionName.add(i);
 		}
