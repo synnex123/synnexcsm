@@ -9,24 +9,26 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.synnex.cms.entity.User;
 
 public class CheckAuthorityInterceptor extends AbstractInterceptor{
+	List<String> managerActionName=new ArrayList<String>();
+	List<String> superManagerActionName=new ArrayList<String>();
+	List<String> userActionName=new ArrayList<String>();
+	static String[] u={"UserChangePassword","InitUpdateUserInfo",
+			"UpdateUserInfo","Logout","UserSearch",
+			"initApply","applyManage","applyManagecancelApply",
+			"processApply","getMyApply","getApplyDetail",
+			"searchMyClub","init","exitClub","getPromotion","getClubMembers",
+			"getPromotionVote","doPromotion","cancelApply","UserLogin","CheckPassword"};
+	static String[] m={"saveApply","rejectApply","getApplyByManagerId",
+			"producePromotion","initPromotion","processApply"};
+	static String[] s={"AddClub","InitDeleteClub","DeleteClub"};
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	public String intercept(ActionInvocation actionInvocation) throws Exception{
-		List<String> managerActionName=new ArrayList<String>();
-		List<String> superManagerActionName=new ArrayList<String>();
-		List<String> userActionName=new ArrayList<String>();
-		String[] u={"UserChangePassword","InitUpdateUserInfo",
-				"UpdateUserInfo","Logout","UserSearch",
-				"initApply","applyManage","applyManagecancelApply",
-				"processApply","getMyApply","getApplyDetail",
-				"searchMyClub","init","exitClub","getPromotion","getClubMembers",
-				"getPromotionVote","doPromotion","cancelApply","UserLogin","CheckPassword"};
-		String[] m={"saveApply","rejectApply","getApplyByManagerId",
-				"producePromotion","initPromotion","processApply"};
-		String[] s={"AddClub","InitDeleteClub","DeleteClub"};
+
 		for(String i : u){
 			userActionName.add(i);
 		}
@@ -36,6 +38,7 @@ public class CheckAuthorityInterceptor extends AbstractInterceptor{
 		for(String i : s){
 			superManagerActionName.add(i);
 		}
+
 		managerActionName.addAll(userActionName);
 		superManagerActionName.addAll(managerActionName);
 		String actionName=actionInvocation.getProxy().getActionName();

@@ -7,7 +7,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.synnex.cms.action.InitAction;
 import com.synnex.cms.dao.ClubDao;
 import com.synnex.cms.dto.ClubDto;
 import com.synnex.cms.entity.Club;
