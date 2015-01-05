@@ -109,8 +109,7 @@
 					        <div style="float:left;margin: 20px">
 							    <label>申请陈述</label>
 								<textarea rows="8" cols="30" name="statement" id="statement" class="input-xlarge"></textarea>
-							</div>
-							
+							</div>							
 							</DIV >
 							<DIV style="clear: left;margin-left: 200px">
 							    <div class="btn-toolbar">

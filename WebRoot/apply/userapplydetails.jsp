@@ -100,8 +100,7 @@ if(confirm('请确认是否撤销')){
 					        </div>
 					        <div style="float:left;margin: 20px">
 							    <label>申请陈述</label>
-								<textarea rows="8" cols="30" name="applyDes" id="applyDes" disabled="disabled" class="input-xlarge">${apply.applyDes}
-								</textarea>
+								<textarea rows="8" cols="30" name="applyDes" id="applyDes" disabled="disabled" class="input-xlarge">${apply.applyDes}</textarea>
 							</div>
 							<div style="float:left;margin: 20px">
 							<c:choose>

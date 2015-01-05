@@ -1,6 +1,12 @@
 package com.synnex.cms.entity;
 
-public class PromotionVoteRecord {
+import java.io.Serializable;
+
+public class PromotionVoteRecord implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer promotionId;
 	private Integer voteuserId;
 	private Integer voteduserId;

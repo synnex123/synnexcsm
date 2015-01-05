@@ -78,8 +78,7 @@
 					        </div>
 					        <div style="float:left;margin: 20px">
 							    <label>申请陈述</label>
-								<textarea rows="8" cols="30" name="applyDes" id="applyDes" disabled="disabled" class="input-xlarge">${checkapply.applyDes}
-								</textarea>
+								<textarea rows="8" cols="30" name="applyDes" id="applyDes" disabled="disabled" class="input-xlarge">${checkapply.applyDes}</textarea>
 							</div>
 							<div style="float:left;margin: 20px">
 							<c:choose>

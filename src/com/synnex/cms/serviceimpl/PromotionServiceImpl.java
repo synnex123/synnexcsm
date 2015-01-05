@@ -137,7 +137,6 @@ public class PromotionServiceImpl implements PromotionService {
 			throws HibernateException {
 		//
 		if (promotionVoteRecordDao.savePromotion(pvr)) {
-			// 对投票结果进行统计计算
 			return true;
 		} else {
 			return false;
