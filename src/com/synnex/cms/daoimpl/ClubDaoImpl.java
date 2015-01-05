@@ -41,7 +41,6 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 				totalPage=(int)((totalPage-totalPage%pageInfo.getPageRecords())/pageInfo.getPageRecords());
 			}
 			pageInfo.setTotalPage(totalPage);
-			PageInfo.pageInfo.set(pageInfo);
 			query.setString("location", location);
 			query.setFirstResult((pageInfo.getCurrentPage()-1)*pageInfo.getPageRecords());
 			query.setMaxResults(pageInfo.getPageRecords());
