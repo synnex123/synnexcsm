@@ -1,8 +1,13 @@
 package com.synnex.cms.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Apply {
+public class Apply implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer applyId;
 	private Timestamp applyTime;
 	private Integer applyStatus;

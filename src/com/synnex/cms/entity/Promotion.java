@@ -1,8 +1,13 @@
 package com.synnex.cms.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Promotion {
+public class Promotion implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int promotionId;
 	private int clubId;
 	private int userId;

@@ -19,7 +19,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/lib/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/lib/datepicker/js/bootstrap-datepicker.js"></script>
-<title>选举详细</title>
+<title>负责人更换详细</title>
 </head>
 <body class="simple_body">
 	<div class="content">
@@ -29,7 +29,7 @@
 					<!--span class="number"></span-->
 				</p>
 			</div>
-			<h1 class="page-title">选举详细</h1>
+			<h1 class="page-title">负责人更换详细</h1>
 		</div>
 		<ul class="breadcrumb">
 			<li><a href="<%=request.getContextPath() %>/init.action?location=chengdu">首页 </a> <span class="divider">/</span></li>
@@ -43,13 +43,13 @@
 					<span>操作成功</span>
 				</div>
 			<c:if test="${sessionScope.promotionlist.size()==0 }">
-			         <div align="center" font_size="40px">暂时没有选举信息.....</div>
+			         <div align="center" font_size="40px">暂时没有相关信息.....</div>
 			</c:if>
 				<!-- START 以上内容不需更改，保证该TPL页内的标签匹配即可 -->
 				<c:forEach items="${sessionScope.promotionlist}" var="promotion">
 				<div class="well">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#home" data-toggle="tab"><strong>${promotion.clubName}</strong>选举资料</a></li>
+						<li class="active"><a href="#home" data-toggle="tab"><strong>${promotion.clubName}</strong>负责人更换资料</a></li>
 					</ul>
 
 					<div id="myTabContent" class="tab-content">
@@ -61,7 +61,7 @@
 										<tr>
 											<td width="1200" height="23" colspan="5" class="title"
 												align="center">
-												<strong><font color="red">${promotion.clubName}</font></strong>发起了选举</td>
+												<strong><font color="red">${promotion.clubName}</font></strong>发起了投票</td>
 										</tr>
 										<tr>
 											<td width="120">原因：</td>

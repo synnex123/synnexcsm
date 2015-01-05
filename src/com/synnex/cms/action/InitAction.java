@@ -62,8 +62,8 @@ public class InitAction extends ActionSupport{
 	public String getLocation() {
 		return location;
 	}
-	public void setLocation(String arg1) {
-		this.location = arg1;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	public String execute(){
 		try{

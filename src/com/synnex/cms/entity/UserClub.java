@@ -1,6 +1,12 @@
 package com.synnex.cms.entity;
 
-public class UserClub {
+import java.io.Serializable;
+
+public class UserClub implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer userId;
 	private Integer clubId;
 	public Integer getUserId() {
