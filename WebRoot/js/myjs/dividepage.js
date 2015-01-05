@@ -5,7 +5,7 @@ function previousPage(location,action){
 		return ;
 	}
 	currentPage=currentPage-1;
-	document.location.href=action+".action?arg1="+location+"&currentPage="+currentPage;
+	document.location.href=action+".action?location="+location+"&currentPage="+currentPage;
 }
 function nextPage(location,action){
 	var currentPage=parseInt(document.getElementById("currentPage").innerHTML);
@@ -15,6 +15,6 @@ function nextPage(location,action){
 		return ;
 	}
 	currentPage=currentPage+1;
-	var url=action+".action?arg1="+location+"&currentPage="+currentPage; 
+	var url=action+".action?location="+location+"&currentPage="+currentPage; 
 	document.location.href=url;
 }
