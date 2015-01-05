@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.synnex.cms.dao.UserDao;
 import com.synnex.cms.dto.SearchDto;
@@ -14,9 +16,16 @@ import com.synnex.cms.service.UserService;
 
 public class UserServiceImpl implements UserService {
 	private UserDao userDao;
-
+	private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
+		try{
+			this.userDao = userDao;
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
 	}
 
 	/**
@@ -28,52 +37,81 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 * @author joeyy
 	 */
-	public boolean save(User user) throws HibernateException {
+	public boolean save(User user){
+		boolean result=false;
 		try {
 			if (userDao.checkexist(user) != null) {
-				return false;
+				result=false;
 			} else {
 				userDao.save(user);
-				return true;
+				result=true;
 			}
 
-		} catch (HibernateException e) {
-			throw e;
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
+		return result;
 	}
 
 	/**
 	 * @author joeyy 2014/11/24 function login
 	 */
-	public User checklogin(User user) throws HibernateException {
-		return userDao.checklogin(user);
+	public User checklogin(User user){
+		User result=null;
+		try{
+			result=userDao.checklogin(user);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
 	 * @author joeyy 2014/11/25 function change userpassword
 	 */
-	public boolean updateUserInfo(User user) throws HibernateException {
-		return userDao.updateUserInfo(user);
+	public boolean updateUserInfo(User user){	
+		boolean result=false;
+		try{
+			result=userDao.updateUserInfo(user);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
 	 * @author walker cheng 2014/12/02 get the user information by userName
 	 * @throws Exception
 	 */
-	public List<Object> search(String userName) throws HibernateException {
+	public List<Object> search(String userName){
 		List<Object> list = new ArrayList<Object>();
 		List<SearchDto> list1 = new ArrayList<SearchDto>();
 		List<SearchUserClubDto> clubList = new ArrayList<SearchUserClubDto>();
 		SearchDto searchDto = new SearchDto();
-		list1 = userDao.searchUserByUserName(userName);
-		if (list1.size() == 0) {
-			return list;
+		try{
+			list1 = userDao.searchUserByUserName(userName);
+			if (list1.size() == 0) {
+				return list;
+			}
+			searchDto = list1.get(0);
+			Integer userId = searchDto.getUserId();
+			clubList = userDao.searchUserClubInfoByUserId(userId);
+			list.add(searchDto);
+			list.add(clubList);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		searchDto = list1.get(0);
-		Integer userId = searchDto.getUserId();
-		clubList = userDao.searchUserClubInfoByUserId(userId);
-		list.add(searchDto);
-		list.add(clubList);
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
 		return list;
 	}
 
@@ -81,42 +119,93 @@ public class UserServiceImpl implements UserService {
 	 * @author walker cheng 2014/12/02 get the club director information
 	 * @throws Exception
 	 */
-	public List<SearchDto> searchClubDirector(Integer pageIndex)
-			throws HibernateException {
-		return userDao.searchClubDirector(pageIndex);
+	public List<SearchDto> searchClubDirector(Integer pageIndex){
+		List<SearchDto> result=null;
+		try{
+			result=userDao.searchClubDirector(pageIndex);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
-	public List<User> getUserByClubId(int clubId, Integer userId)
-			throws HibernateException {
-		return userDao.getUserByClubId(clubId, userId);
+	public List<User> getUserByClubId(int clubId, Integer userId){
+		List<User> result=null;
+		try{
+			result=userDao.getUserByClubId(clubId, userId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
 	 * @author walker cheng 2014/12/02 get the club director information
 	 * @throws Exception
 	 */
-	public List<SearchDto> searchUserByUserType(Integer userType,
-			Integer pageIndex) throws HibernateException {
-		return userDao.searchUserByUserType(userType, pageIndex);
+	public List<SearchDto> searchUserByUserType(Integer userType,Integer pageIndex){	
+		List<SearchDto> result=null;
+		try{
+			result=userDao.searchUserByUserType(userType, pageIndex);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
 	 * @author walker cheng 2014/12/11 get the user information by userName
 	 * @throws Exception
 	 */
-	public User getUserByName(String userName) throws HibernateException {
-		return userDao.getUserByName(userName);
+	public User getUserByName(String userName){
+		User result=null;
+		try{
+			result=userDao.getUserByName(userName);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
 	 * @author joeyy 2014/12/10 fucntion changeUserPassword
 	 */
-	public boolean updatepassword(User user) throws HibernateException {
-		return userDao.updatepassword(user);
+	public boolean updatepassword(User user) {
+		boolean result=false;
+		try{
+			result=userDao.updatepassword(user);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
-	public User getUserByUserId(Integer userId) throws HibernateException {
-		return userDao.getUserByUserId(userId);
+	public User getUserByUserId(Integer userId){
+		User result=null;
+		try{
+			result=userDao.getUserByUserId(userId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
@@ -126,9 +215,17 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 * @param clubId
 	 */
-	public List<User> getAllUserByClubId(Integer clubId) throws HibernateException{
-
-		return userDao.getAllUserByClubId(clubId);
+	public List<User> getAllUserByClubId(Integer clubId){
+		List<User> result=null;
+		try{
+			result=userDao.getAllUserByClubId(clubId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 	/**
 	 * @author walker cheng
@@ -136,8 +233,15 @@ public class UserServiceImpl implements UserService {
 	 * delete the information of UserClub data base due to exit the club
 	 * @throws Exception 
 	 */
-	public void deleteUserClubInfoDuoToExitClub(UserClub userClub) throws HibernateException{
-		userDao.deleteUserClubInfoDuoToExitClub(userClub);
+	public void deleteUserClubInfoDuoToExitClub(UserClub userClub){
+		try{
+			userDao.deleteUserClubInfoDuoToExitClub(userClub);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
 	}
 
 /**
@@ -146,8 +250,17 @@ public class UserServiceImpl implements UserService {
 	 * search my club information by userId
 	 * @throws Exception 
 	 */
-	public List<SearchUserClubDto> searchMyClubInfoByUserId(Integer userId,Integer pageIndex) throws HibernateException{
-		return userDao.searchMyClubInfoByUserId(userId,pageIndex);
+	public List<SearchUserClubDto> searchMyClubInfoByUserId(Integer userId,Integer pageIndex){
+		List<SearchUserClubDto> result=null;
+		try{
+			result=userDao.searchMyClubInfoByUserId(userId,pageIndex);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 	
 	/**

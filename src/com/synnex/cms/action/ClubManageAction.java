@@ -38,7 +38,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 	private int currentPage;
 	private int totalPage;
 	private int location;
-	private int pageRecords=5;
+	private int pageRecords=1;
 	final String SMTP = "SMTP.163.COM";
 	final String FORM = "synnexcmsupport@163.com";
 	final String USERNAME = "synnexcmsupport@163.com";
@@ -174,25 +174,28 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 	 */
 	public String searchMyClub(){
 		HttpServletRequest request=ServletActionContext.getRequest();
-		Integer pageIndex;
+		Integer pageIndex=0;
 		Integer listNumber=0;
 		User user =new User();
 		List<SearchUserClubDto> clubList=new ArrayList<SearchUserClubDto>();
-		if (request.getParameter("pageIndex").equals("")||request.getParameter("pageIndex")==null||request.getParameter("pageIndex").equals("0")) {
-			pageIndex=0;
-		}else{
-		    pageIndex=(Integer.parseInt(request.getParameter("pageIndex"))-1)*5;
-		}
+		PageInfo page=new PageInfo();
+		if(0==currentPage){
+			currentPage=1;
+		}	
+		page.setCurrentPage(currentPage);
+		page.setPageRecords(pageRecords);
+	 	PageInfo.pageInfo.set(page);
 		user=UserUtil.getUser(request);
 		try {
 			clubList=userService.searchMyClubInfoByUserId(user.getUserId(),pageIndex);
 		} catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		pageIndex=pageIndex/5+1;
-		listNumber=clubList.size();
-		request.setAttribute("listNumber",listNumber);
-		request.setAttribute("pageIndex",pageIndex);
+		totalPage=page.getTotalPage();
+		currentPage=page.getCurrentPage();
+		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("pageIndex",currentPage);
 		request.setAttribute("clubList",clubList);
 		return SUCCESS;
 	}

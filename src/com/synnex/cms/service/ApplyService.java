@@ -19,17 +19,17 @@ import com.synnex.cms.entity.UserClub;
 public interface ApplyService {
 
 	public List<ApplyDto> getApplyByUserId(Integer userId, Integer pageIndex,
-			Integer applyStatus) throws HibernateException;
+			Integer applyStatus);
 
 	/**
 	 * @author WalkerCheng function saveApply 2014/11/28
 	 */
-	public boolean saveApply(Apply apply) throws HibernateException;
+	public boolean saveApply(Apply apply);
 
 	/**
 	 * @Author Joeyy function getApplyDetails 2014/12/01
 	 */
-	public List<ApplyDto> getApplyDetails(Integer applyId) throws HibernateException;
+	public List<ApplyDto> getApplyDetails(Integer applyId);
 
 	/**
 	 * @Author Joeyy function CancelApply 2014/12/01
@@ -38,13 +38,13 @@ public interface ApplyService {
 	 * 
 	 * @param applyId
 	 */
-	public boolean cancelApply(Integer applyId) throws HibernateException;
+	public boolean cancelApply(Integer applyId);
 
 	/**
 	 * @Author Joeyy function getApplyByManagerId for checkapply 2014/12/01
 	 */
 	public List<ApplyDto> getApplyByManagerId(Integer managerId,
-			Integer pageIndex, Integer applyStatus) throws HibernateException;
+			Integer pageIndex, Integer applyStatus);
 
 	/**
 	 * function PassApply modified by joeyy 2014/12/18 2014/12/03
@@ -53,8 +53,7 @@ public interface ApplyService {
 	 * 
 	 * @params applyId,checkTime,userId,clubId
 	 */
-	public boolean passApply(Integer applyId, Timestamp checkTime, UserClub uc)
-			throws HibernateException;
+	public boolean passApply(Integer applyId, Timestamp checkTime, UserClub uc);
 
 	/**
 	 * @Author Joeyy function rejectApply 2014/12/03
@@ -64,7 +63,7 @@ public interface ApplyService {
 	 * @params applyId,checkResponse,checkTime
 	 */
 	public boolean rejectApply(Integer applyId, String checkRes,
-			Timestamp checkTime) throws HibernateException;
+			Timestamp checkTime);
 
 	/**
 	 * @author WalkerCheng function search whether have applied 
@@ -75,7 +74,7 @@ public interface ApplyService {
 	 */
 
 	public boolean searchWhetherApply(Integer userId, Integer applyStatus,
-			Integer clubId) throws HibernateException;
+			Integer clubId);
 
 	/**
 	 * @author joeyy 2014/12/22 function getApplyByClubId
@@ -84,7 +83,7 @@ public interface ApplyService {
 	 * 
 	 * @param clubId
 	 */
-	public List<Apply> getApplyByClubId(Integer clubId) throws HibernateException;
+	public List<Apply> getApplyByClubId(Integer clubId);
 
 	/**
 	 * @author joeyy 2014/12/22 function getSubmittedApplyByClubId
@@ -93,7 +92,6 @@ public interface ApplyService {
 	 * 
 	 * @param clubId
 	 */
-	public List<Apply> getSubmittedApplyByClubId(Integer clubId)
-			throws HibernateException;
+	public List<Apply> getSubmittedApplyByClubId(Integer clubId);
 
 }

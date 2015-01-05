@@ -18,13 +18,13 @@ public interface ClubService {
 	/**
 	 * @Author Pete Peng function getClub 2014/12/17
 	 */
-	public List<ClubDto> getClubByLocation(String location) throws HibernateException;
+	public List<ClubDto> getClubByLocation(String location);
 	/**
 	 * @Author Pete Peng function getClub 2014/12/17
 	 */
-	public List<ClubDto> getAllClubByLocation(String location) throws HibernateException;
+	public List<ClubDto> getAllClubByLocation(String location);
 
-	public List<Club> getAllClub() throws HibernateException;
+	public List<Club> getAllClub();
 
 	/**
 	 * @Author Walker Cheng function get Club Information  
@@ -33,7 +33,7 @@ public interface ClubService {
 	 * @param clubId
 	 * @throws Exception
 	 */
-	public Club getClubByClubId(Integer clubId) throws HibernateException;
+	public Club getClubByClubId(Integer clubId);
 
 	/**
 	 * @author joeyy 2014/12/16 function getClubIdByUserId
@@ -43,7 +43,7 @@ public interface ClubService {
 	 * @param userId
 	 */
 	@SuppressWarnings("rawtypes")
-	public List getClubByUserId(Integer userId) throws HibernateException;
+	public List getClubByUserId(Integer userId);
 
 	/**
 	 * @Author Walker Cheng function search club by clubName and clubLocation
@@ -52,20 +52,19 @@ public interface ClubService {
 	 * @param ClubDto
 	 * @throws Exception
 	 */
-	public List<ClubDto> searchClubByClubNameAndClubLocation(ClubDto clubDto)
-			throws Exception;
+	public List<ClubDto> searchClubByClubNameAndClubLocation(ClubDto clubDto);
 
 	/**
 	 * @Author Walker Cheng function add the new club and return the success or
 	 * fail; 2014/12/11
 	 */
-	public Boolean addClub(ClubDto clubDto, User user) throws Exception;
+	public Boolean addClub(ClubDto clubDto, User user);
 
 	/**
 	 * @author walker cheng function query the number of member 2014/12/15
 	 * @throws Exception
 	 */
-	public Integer queryMemberNumber(ClubDto clubDto) throws HibernateException,NumberFormatException;
+	public Integer queryMemberNumber(ClubDto clubDto);
 	/**
 	 * @Author Walker Cheng function delete club
 	 * 2014/12/12
@@ -73,9 +72,9 @@ public interface ClubService {
 	 * @param ClubDto
 	 * @throws Exception
 	 */
-	public Boolean deleteClub(ClubDto clubDto) throws HibernateException;
+	public Boolean deleteClub(ClubDto clubDto);
 
-	public List<Club> getAllCLubByUserId(Integer userId) throws HibernateException;
+	public List<Club> getAllCLubByUserId(Integer userId);
 
 	/**
 	 * @author joeyy 2014/12/24 fucntion getClubByPromotionId
@@ -84,7 +83,7 @@ public interface ClubService {
 	 * 
 	 * @param promotionId
 	 */
-	public Club getClubByPromotionId(Integer promotionId) throws HibernateException;
-	public List<SearchDto> getClubMembers(int clubId) throws HibernateException;
+	public Club getClubByPromotionId(Integer promotionId) ;
+	public List<SearchDto> getClubMembers(int clubId);
 
 }

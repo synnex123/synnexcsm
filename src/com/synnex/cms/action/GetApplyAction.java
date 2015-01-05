@@ -16,6 +16,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.synnex.cms.dto.ApplyDto;
 import com.synnex.cms.entity.User;
 import com.synnex.cms.service.ApplyService;
+import com.synnex.cms.utils.PageInfo;
 import com.synnex.cms.utils.UserUtil;
 
 
@@ -30,6 +31,27 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 	private ApplyService applyService;
 	private Integer pageIndex;
 	private String mark;
+	private int currentPage;
+	private int totalPage;
+	private int pageRecords=1;
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public int getPageRecords() {
+		return pageRecords;
+	}
+	public void setPageRecords(int pageRecords) {
+		this.pageRecords = pageRecords;
+	}
 	public String getMark() {
 		return mark;
 	}
@@ -60,11 +82,13 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
         HttpServletRequest request=ServletActionContext.getRequest();
 		HttpSession session=request.getSession();
 		try {
-			if (0==pageIndex||null==pageIndex) {
-				pageIndex=0;
-			}else{
-			pageIndex=(pageIndex-1)*10;
-			}
+			PageInfo page=new PageInfo();
+			if(0==currentPage){
+				currentPage=1;
+			}	
+			page.setCurrentPage(currentPage);
+			page.setPageRecords(pageRecords);
+		 	PageInfo.pageInfo.set(page);
 			Integer applyStatus=applyDto.getApplyStatus();
 			if (applyStatus==null) {
 				applyStatus=-1;
@@ -74,10 +98,12 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 			user=UserUtil.getUser(request);
 			Integer userId=user.getUserId();
 			applylist = applyService.getApplyByUserId(userId,pageIndex,applyStatus);
-			Integer applysize = applylist.size();
-			request.setAttribute("applysize", applysize);
+			totalPage=page.getTotalPage();
+			currentPage=page.getCurrentPage();
+			session.setAttribute("totalPage", totalPage);
+			session.setAttribute("currentPage", currentPage);
 			session.setAttribute("applylist", applylist);
-			request.setAttribute("pageIndex", pageIndex);
+			request.setAttribute("pageIndex", currentPage);
 		
 			
 		} catch (HibernateException e) {
@@ -125,11 +151,13 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 		HttpServletRequest request=ServletActionContext.getRequest();
 		HttpSession session=request.getSession();
 		try {
-			if (0==pageIndex||null==pageIndex) {
-				pageIndex=0;
-			}else{
-			pageIndex=(pageIndex-1)*10;
-			}
+			PageInfo page=new PageInfo();
+			if(0==currentPage){
+				currentPage=1;
+			}	
+			page.setCurrentPage(currentPage);
+			page.setPageRecords(pageRecords);
+		 	PageInfo.pageInfo.set(page);
 			Integer applyStatus=applyDto.getApplyStatus();
 			if (applyStatus==null) {
 				applyStatus=-1;
@@ -139,10 +167,12 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 			user=UserUtil.getUser(request);
 			Integer managerId=user.getUserId();
 			checkapplylist = applyService.getApplyByManagerId(managerId, pageIndex,applyStatus);
-			Integer checkapplysize = checkapplylist.size();
-			request.setAttribute("checkapplysize", checkapplysize);
+			totalPage=page.getTotalPage();
+			currentPage=page.getCurrentPage();
+			session.setAttribute("totalPage", totalPage);
+			session.setAttribute("currentPage", currentPage);
 			session.setAttribute("checkapplylist", checkapplylist);
-			request.setAttribute("pageIndex", pageIndex);		
+			request.setAttribute("pageIndex",currentPage);		
 			return SUCCESS;	
 		} catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);

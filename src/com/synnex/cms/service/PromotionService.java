@@ -23,7 +23,7 @@ public interface PromotionService {
 	 * 
 	 * @param Entity promotion
 	 */
-	public boolean producePromotion(Promotion promotion) throws HibernateException;
+	public boolean producePromotion(Promotion promotion);
 
 	/**
 	 * function GetOnGoingPromotionById and update promotion 2014/12/11
@@ -32,8 +32,7 @@ public interface PromotionService {
 	 * 
 	 * @param clubId of loginuser
 	 */
-	public List<PromotionDto> getOnGoingPromotionByClubId(Integer clubId)
-			throws HibernateException;
+	public List<PromotionDto> getOnGoingPromotionByClubId(Integer clubId);
 
 	/**
 	 * function GetPromotionUserByPromotionId 2014/12/09
@@ -42,8 +41,7 @@ public interface PromotionService {
 	 * 
 	 * @param promotionId
 	 */
-	public List<User> getPromotionUserByPromotionId(Integer promotionId)
-			throws HibernateException;
+	public List<User> getPromotionUserByPromotionId(Integer promotionId);
 
 	/**
 	 * function SavePromotion 2014/12/09
@@ -53,8 +51,7 @@ public interface PromotionService {
 	 * @param Entity PromotionVoteRecord used to record voteuserId,voteduserId
 	 * and promotionId
 	 */
-	public boolean savePromotionRecord(PromotionVoteRecord pvr)
-			throws HibernateException;
+	public boolean savePromotionRecord(PromotionVoteRecord pvr);
 
 	/**
 	 * function judge if promotion is exist 2014/12/08
@@ -63,7 +60,7 @@ public interface PromotionService {
 	 * 
 	 * @param Entity PromotionVoteRecord
 	 */
-	public boolean isExist(PromotionVoteRecord pvr) throws HibernateException;
+	public boolean isExist(PromotionVoteRecord pvr);
 
 	/**
 	 * function judge promotion's result and update information by this result
@@ -73,6 +70,6 @@ public interface PromotionService {
 	 * 
 	 * @param Entity PromotionVoteRecord
 	 */
-	public String judgePromotion(PromotionVoteRecord pvr) throws HibernateException;
+	public String judgePromotion(PromotionVoteRecord pvr);
 
 }

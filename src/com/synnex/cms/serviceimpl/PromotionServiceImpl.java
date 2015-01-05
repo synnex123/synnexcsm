@@ -1,3 +1,4 @@
+
 package com.synnex.cms.serviceimpl;
 
 import java.sql.Timestamp;
@@ -6,6 +7,8 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.synnex.cms.dao.ClubDao;
 import com.synnex.cms.dao.PromotionDao;
@@ -31,6 +34,7 @@ public class PromotionServiceImpl implements PromotionService {
 	private PromotionVoteRecordDao promotionVoteRecordDao;
 	private ClubDao clubDao;
 	private UserDao userDao;
+	private static Logger LOGGER = LoggerFactory.getLogger(PromotionServiceImpl.class);
 	public void setPromotionDao(PromotionDao promotionDao) {
 		this.promotionDao = promotionDao;
 	}
@@ -55,12 +59,21 @@ public class PromotionServiceImpl implements PromotionService {
 	 * 
 	 * @param Entity promotion
 	 */
-	public boolean producePromotion(Promotion promotion) throws HibernateException {
-		if (promotionDao.checkExist(promotion) != null) {
-			return false;
-		} else {
-			return promotionDao.savepromotion(promotion);
+	public boolean producePromotion(Promotion promotion){
+		boolean result=false;
+		try{
+			if (promotionDao.checkExist(promotion) != null) {
+				result=false;
+			} else {
+				result=promotionDao.savepromotion(promotion);
+			}
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
@@ -72,39 +85,36 @@ public class PromotionServiceImpl implements PromotionService {
 	 */
 	public List<PromotionDto> getOnGoingPromotionByClubId(Integer clubId)
 			throws HibernateException {
-		List<PromotionDto> resultlist = promotionDao
-				.getOnGoingPromotionByClubId(clubId);
-		// 取出返回的list中的结束时间和过期时间
-		for (int i = 0; i < resultlist.size(); i++) {
-			Timestamp nowtime = DateUtils.getSysNow();
-			Timestamp endtime = resultlist.get(i).getEndTime();
-			Timestamp expiretime = resultlist.get(i).getExpireTime();
-			Integer promotionId = resultlist.get(i).getPromotionId();
-			// 如果存在endtime或者选举已过期则从list中移除这一条并将状态设置为对应的状态
-			if (endtime != null || expiretime.getTime() <= nowtime.getTime()) {
-				if (endtime != null) {
-					try {
+		List<PromotionDto> resultlist=null;
+		try{
+			resultlist = promotionDao.getOnGoingPromotionByClubId(clubId);
+			// 取出返回的list中的结束时间和过期时间
+			for (int i = 0; i < resultlist.size(); i++) {
+				Timestamp nowtime = DateUtils.getSysNow();
+				Timestamp endtime = resultlist.get(i).getEndTime();
+				Timestamp expiretime = resultlist.get(i).getExpireTime();
+				Integer promotionId = resultlist.get(i).getPromotionId();
+				// 如果存在endtime或者选举已过期则从list中移除这一条并将状态设置为对应的状态
+				if (endtime != null || expiretime.getTime() <= nowtime.getTime()) {
+					if (endtime != null) {
 						Integer promotionState = 2;
-						promotionDao.updatePromotion(promotionId,
-								promotionState);
-					} catch (Exception e) {
-						throw e;
+						promotionDao.updatePromotion(promotionId,promotionState);
 					}
-				}
-				if (expiretime.getTime() <= nowtime.getTime()) {
-					try {
+					if (expiretime.getTime() <= nowtime.getTime()) {
 						Integer promotionState = 4;
-						promotionDao.updatePromotion(promotionId,
-								promotionState);
-					} catch (Exception e) {
-						throw e;
+						promotionDao.updatePromotion(promotionId,promotionState);
 					}
-				}
-				// 如果有移除的元素则将i-1，若不这么做那么此for循环无法将所有元素过一遍这个方法
-				if (resultlist.remove(i) != null) {
-					i--;
+					// 如果有移除的元素则将i-1，若不这么做那么此for循环无法将所有元素过一遍这个方法
+					if (resultlist.remove(i) != null) {
+						i--;
+					}
 				}
 			}
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return resultlist;
 	}
@@ -116,11 +126,16 @@ public class PromotionServiceImpl implements PromotionService {
 	 * 
 	 * @param promotionId
 	 */
-	public List<User> getPromotionUserByPromotionId(Integer promotionId)
-			throws HibernateException {
+	public List<User> getPromotionUserByPromotionId(Integer promotionId){
 		List<User> userlist = null;
+		try{
 			userlist = promotionDao.getPromotionUserByPromotionId(promotionId);
-	
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
 		return userlist;
 
 	}
@@ -133,14 +148,22 @@ public class PromotionServiceImpl implements PromotionService {
 	 * @param Entity PromotionVoteRecord used to record voteuserId,voteduserId
 	 * and promotionId
 	 */
-	public boolean savePromotionRecord(PromotionVoteRecord pvr)
-			throws HibernateException {
-		//
-		if (promotionVoteRecordDao.savePromotion(pvr)) {
-			return true;
-		} else {
-			return false;
+	public boolean savePromotionRecord(PromotionVoteRecord pvr){
+		boolean result=false;
+		try{
+			if (promotionVoteRecordDao.savePromotion(pvr)) {
+				// 对投票结果进行统计计算
+				result=true;
+			} else {
+				result=false;
+			}
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
@@ -150,14 +173,23 @@ public class PromotionServiceImpl implements PromotionService {
 	 * 
 	 * @param Entity PromotionVoteRecord
 	 */
-	public boolean isExist(PromotionVoteRecord pvr) throws HibernateException {
+	public boolean isExist(PromotionVoteRecord pvr){
+		boolean result1=false;
 		List<PromotionVoteRecord> result = new ArrayList<PromotionVoteRecord>();
-		result = promotionVoteRecordDao.isExist(pvr);
-		if (result.isEmpty()) {
-			return false;
-		} else {
-			return true;
+		try{
+			result = promotionVoteRecordDao.isExist(pvr);
+			if (result.isEmpty()) {
+				result1=false;
+			} else {
+				result1=true;
+			}
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result1;
 	}
 
 	/**
@@ -168,13 +200,14 @@ public class PromotionServiceImpl implements PromotionService {
 	 * 
 	 * @param Entity PromotionVoteRecord
 	 */
-	public String judgePromotion(PromotionVoteRecord pvr) throws HibernateException {
+	public String judgePromotion(PromotionVoteRecord pvr) {
 		/*
 		 * 每次投票完成后对投票结果进行判断
 		 * 
 		 * 如果得票数第一的人的票数-得票第二的人的票数>没有投票的人 那么前者则当选负责人 如果只有一个人得票,得票数大于总人数的50%则直接当选
 		 * 如果没有满足上诉条件则继续本次投票
 		 */
+		String result=null;
 		Integer countclubmember;
 		// 对（得票数第一的人的票数）和（对应的人）两项数据进行封装
 		JudgePromotionDto judge1 = new JudgePromotionDto();
@@ -194,33 +227,30 @@ public class PromotionServiceImpl implements PromotionService {
 				// 如果得票数第一的人的票数-得票第二的人的票数>没有投票的人那么前者则当选负责人
 				if (judge1.getCountPromotion() - judge2.getCountPromotion() > (countclubmember - (judge1
 						.getCountPromotion() + judge2.getCountPromotion()))) {
-					try {
-						// 将得票第一的人的userType设为0
-						userDao.upUserType(judge1.getVoteduserId());
-						Integer oldmanagerId = userDao
-								.getManagerIdByPromotionId(pvr.getPromotionId());
-						// 将原俱乐部负责人的userType设为1
-						userDao.downUserType(oldmanagerId);
-						// 将promotion的endtime设为当前操作时间
-						promotionDao.endPromotion(pvr.getPromotionId(),
-								DateUtils.getSysNow());
-						// 从promotionvoterecord中删除对应promotionId的所有数据
-						promotionVoteRecordDao.delete(pvr.getPromotionId());
-						Integer clubId = clubDao.getClubIdByPromotionId(pvr
-								.getPromotionId());
-						Club club = new Club();
-						club.setClubId(clubId);
-						club.setManagerId(judge1.getVoteduserId());
-						// 将clubinfo表中的俱乐部负责人修改成新负责人
-						clubDao.updateClubInfoChangeManager(club);
-					} catch (Exception e) {
-						throw e;
-					}
-					return "sloved";
+					
+					// 将得票第一的人的userType设为0
+					userDao.upUserType(judge1.getVoteduserId());
+					Integer oldmanagerId = userDao
+							.getManagerIdByPromotionId(pvr.getPromotionId());
+					// 将原俱乐部负责人的userType设为1
+					userDao.downUserType(oldmanagerId);
+					// 将promotion的endtime设为当前操作时间
+					promotionDao.endPromotion(pvr.getPromotionId(),
+							DateUtils.getSysNow());
+					// 从promotionvoterecord中删除对应promotionId的所有数据
+					promotionVoteRecordDao.delete(pvr.getPromotionId());
+					Integer clubId = clubDao.getClubIdByPromotionId(pvr
+							.getPromotionId());
+					Club club = new Club();
+					club.setClubId(clubId);
+					club.setManagerId(judge1.getVoteduserId());
+					// 将clubinfo表中的俱乐部负责人修改成新负责人
+					clubDao.updateClubInfoChangeManager(club);
+					result="sloved";
 				}
 				// 如果没有满足上诉条件则继续本次投票
 				else {
-					return "keep";
+					result="keep";
 				}
 			}// 如果只有一个人得票
 			else if (judgeresult.size() == 1) {
@@ -228,40 +258,39 @@ public class PromotionServiceImpl implements PromotionService {
 				judge2 = null;
 				// 如果得票数大于总人数的50%则直接当选
 				if (judge1.getCountPromotion() > countclubmember * 0.5) {
-					try {
-						// 将得票第一的人的userType设为0
-						userDao.upUserType(judge1.getVoteduserId());
-						Integer oldmanagerId = userDao
-								.getManagerIdByPromotionId(pvr.getPromotionId());
-						// 将原俱乐部负责人的userType设为1
-						userDao.downUserType(oldmanagerId);
-						// 将promotion的endtime设为当前操作时间
-						promotionDao.endPromotion(pvr.getPromotionId(),
-								DateUtils.getSysNow());
-						// 从promotionvoterecord中删除对应promotionId的所有数据
-						promotionVoteRecordDao.delete(pvr.getPromotionId());
-						Integer clubId = clubDao.getClubIdByPromotionId(pvr
-								.getPromotionId());
-						Club club = new Club();
-						club.setClubId(clubId);
-						club.setManagerId(judge1.getVoteduserId());
-						// 将clubinfo表中的俱乐部负责人修改成新负责人
-						clubDao.updateClubInfoChangeManager(club);
-					} catch (Exception e) {
-						throw e;
-					}
-					return "sloved";
+					// 将得票第一的人的userType设为0
+					userDao.upUserType(judge1.getVoteduserId());
+					Integer oldmanagerId = userDao
+							.getManagerIdByPromotionId(pvr.getPromotionId());
+					// 将原俱乐部负责人的userType设为1
+					userDao.downUserType(oldmanagerId);
+					// 将promotion的endtime设为当前操作时间
+					promotionDao.endPromotion(pvr.getPromotionId(),
+							DateUtils.getSysNow());
+					// 从promotionvoterecord中删除对应promotionId的所有数据
+					promotionVoteRecordDao.delete(pvr.getPromotionId());
+					Integer clubId = clubDao.getClubIdByPromotionId(pvr
+							.getPromotionId());
+					Club club = new Club();
+					club.setClubId(clubId);
+					club.setManagerId(judge1.getVoteduserId());
+					// 将clubinfo表中的俱乐部负责人修改成新负责人
+					clubDao.updateClubInfoChangeManager(club);
+					result= "sloved";
 				}
 				// 如果没有满足上诉条件则继续本次投票
 				else {
-					return "keep";
+					result="keep";
 				}
 			} else {
-				return "keep";
+				result="keep";
 			}
-		} catch (HibernateException e) {
-			throw e;
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
+		return result;
 
 	}
 
