@@ -489,13 +489,25 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 			Integer pageIndex) throws HibernateException {
 		List<SearchUserClubDto> resultList = new ArrayList<SearchUserClubDto>();
 		String hql = null;
-		Query query;
 		try {
+			PageInfo pageInfo=(PageInfo)PageInfo.pageInfo.get();
 			session = getSession();
 			hql = "Select u.userId,c.clubId,c.clubName,c.clubLocation,c.managerId,s.userEmail,s.userName from UserClub u,Club c,User s where u.userId=? and u.clubId=c.clubId and c.managerId=s.userId ";
-			query = session.createQuery(hql).setMaxResults(5)
-					.setFirstResult(pageIndex);
+			String countHql="Select count(*) from UserClub u,Club c,User s where u.userId=? and u.clubId=c.clubId and c.managerId=s.userId ";
+			Query queryCount=session.createQuery(countHql);			
+			Query query = session.createQuery(hql);
+			query.setFirstResult((pageInfo.getCurrentPage()-1)*pageInfo.getPageRecords());
+			query.setMaxResults(pageInfo.getPageRecords());
 			query.setInteger(0, userId);
+			queryCount.setInteger(0, userId);
+			int totalPage=((Long)queryCount.uniqueResult()).intValue();
+			if(totalPage%pageInfo.getPageRecords()!=0){
+				totalPage=(int)((totalPage-totalPage%pageInfo.getPageRecords())/pageInfo.getPageRecords()+1);
+			}
+			else {
+				totalPage=(int)((totalPage-totalPage%pageInfo.getPageRecords())/pageInfo.getPageRecords());
+			}
+			pageInfo.setTotalPage(totalPage);
 			@SuppressWarnings("rawtypes")
 			List list = query.list();
 			for (int i = 0; i < list.size(); i++) {

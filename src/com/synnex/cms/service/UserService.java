@@ -15,17 +15,17 @@ public interface UserService {
 	 * 
 	 * @author joeyy
 	 */
-	public boolean save(User user) throws HibernateException;
+	public boolean save(User user) ;
 
 	/**
 	 * @author joeyy 2014/11/24 function login
 	 */
-	public User checklogin(User user) throws HibernateException;
+	public User checklogin(User user) ;
 
 	/**
 	 * @author joeyy 2014/11/25 function change userpassword
 	 */
-	public boolean updateUserInfo(User user) throws HibernateException;
+	public boolean updateUserInfo(User user) ;
 
 	/**
 	 * @author walker cheng 2014/12/02 get the user information by userName
@@ -33,7 +33,7 @@ public interface UserService {
 	 * @return List<Object>
 	 * @throws Exception
 	 */
-	public List<Object> search(String userName) throws HibernateException;
+	public List<Object> search(String userName);
 
 	/**
 	 * @author walker cheng 2014/12/02 get the club director information
@@ -41,11 +41,9 @@ public interface UserService {
 	 * @return List<SearchDto>
 	 * @throws Exception
 	 */
-	public List<SearchDto> searchClubDirector(Integer pageIndex)
-			throws HibernateException;
+	public List<SearchDto> searchClubDirector(Integer pageIndex);
 
-	public List<User> getUserByClubId(int clubId, Integer userId)
-			throws HibernateException;
+	public List<User> getUserByClubId(int clubId, Integer userId);
 
 	/**
 	 * @author walker cheng 2014/12/10 function search uesr by userType
@@ -54,18 +52,18 @@ public interface UserService {
 	 * @throws Exception
 	 */
 	public List<SearchDto> searchUserByUserType(Integer userType,
-			Integer pageIndex) throws HibernateException;
+			Integer pageIndex);
 
 	/**
 	 * @author walker cheng 2014/12/11 get the user information by userName
 	 * @throws Exception
 	 */
-	public User getUserByName(String userName) throws HibernateException;
+	public User getUserByName(String userName);
 
 	/**
 	 * @author joeyy 2014/12/10 fucntion changeUserPassword
 	 */
-	public boolean updatepassword(User user) throws HibernateException;
+	public boolean updatepassword(User user);
 	
 	/**
 	 * @author walker cheng 
@@ -75,7 +73,7 @@ public interface UserService {
 	 * @return enetity User
 	 * @throws Exception
 	 */
-	public User getUserByUserId(Integer userId) throws HibernateException;
+	public User getUserByUserId(Integer userId);
 
 	/**
 	 * @author joeyy 2014/12/24 function getAllUserByClubId
@@ -84,7 +82,7 @@ public interface UserService {
 	 * 
 	 * @param clubId
 	 */
-	public List<User> getAllUserByClubId(Integer clubId) throws HibernateException;
+	public List<User> getAllUserByClubId(Integer clubId);
 	/**
 	 * @author walker cheng
 	 * 2014/12/26
@@ -92,7 +90,7 @@ public interface UserService {
 	 * @param entity UserClub
 	 * @throws Exception 
 	 */
-	public void deleteUserClubInfoDuoToExitClub(UserClub userClub) throws HibernateException;
+	public void deleteUserClubInfoDuoToExitClub(UserClub userClub);
 
 /**
 	 * @author walker cheng
@@ -102,6 +100,6 @@ public interface UserService {
 	 * @return List<SearchUserClubDto>
 	 * @throws Exception 
 	 */
-	public List<SearchUserClubDto> searchMyClubInfoByUserId(Integer userId,Integer pageIndex) throws HibernateException;
+	public List<SearchUserClubDto> searchMyClubInfoByUserId(Integer userId,Integer pageIndex);
 
 }

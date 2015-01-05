@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.synnex.cms.dao.ClubDao;
 import com.synnex.cms.dao.UserDao;
@@ -23,7 +25,7 @@ import com.synnex.cms.service.ClubService;
 public class ClubServiceImpl implements ClubService {
 	private ClubDao clubDao;
 	private UserDao userDao;
-
+	private static Logger LOGGER = LoggerFactory.getLogger(ClubServiceImpl.class);
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
@@ -35,27 +37,61 @@ public class ClubServiceImpl implements ClubService {
 	/**
 	 * @Author Pete Peng function getClub 2014/12/17
 	 */
-	public List<ClubDto> getClubByLocation(String location) throws HibernateException {
-			return clubDao.getClubByLocation(location);
-	
+	public List<ClubDto> getClubByLocation(String location){
+		List<ClubDto> result=null;
+		try{
+			result=clubDao.getClubByLocation(location);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 	/**
 	 * @Author Pete Peng function getClub 2014/12/17
 	 */
-	public List<ClubDto>  getAllClubByLocation(String location) throws HibernateException {
-			return clubDao.getAllClubByLocation(location);
-	
+	public List<ClubDto>  getAllClubByLocation(String location){
+		List<ClubDto> result=null;
+		try{
+			result=clubDao.getAllClubByLocation(location);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
-	public List<Club> getAllClub() throws HibernateException {
-		return clubDao.getAllClub();
+	public List<Club> getAllClub() {
+		List<Club> result=null;
+		try{
+			result=clubDao.getAllClub();
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
 	 * @Author Walker Cheng function getClub 2014/11/28
 	 */
-	public Club getClubByClubId(Integer clubId) throws HibernateException {
-		return clubDao.getClubByClubId(clubId);
+	public Club getClubByClubId(Integer clubId){	
+		Club result=null;
+		try{
+			result=clubDao.getClubByClubId(clubId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
@@ -66,31 +102,54 @@ public class ClubServiceImpl implements ClubService {
 	 * @param userId
 	 */
 	@SuppressWarnings("rawtypes")
-	public List getClubByUserId(Integer userId) throws HibernateException {
-
-		return clubDao.getClubByUserId(userId);
+	public List getClubByUserId(Integer userId){
+		List result=null;
+		try{
+			result=clubDao.getClubByUserId(userId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
 	 * @Author Walker Cheng function search club by clubName and clubLocation
 	 * 2014/12/11
 	 */
-	public List<ClubDto> searchClubByClubNameAndClubLocation(ClubDto clubDto)
-			throws HibernateException {
-		return clubDao.searchClubByClubNameAndClubLocation(clubDto);
+	public List<ClubDto> searchClubByClubNameAndClubLocation(ClubDto clubDto){
+		List<ClubDto> result=null;
+		try{
+			result=clubDao.searchClubByClubNameAndClubLocation(clubDto);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
 	 * @Author Walker Cheng function add the new club and return the success or
 	 * fail; 2014/12/11
 	 */
-	public Boolean addClub(ClubDto clubDto, User user) throws HibernateException {
-		UserClub userClub = new UserClub();
-		Integer clubId = clubDao.addClub(clubDto);
-		userDao.updateUserInfo(user);
-		userClub.setClubId(clubId);
-		userClub.setUserId(clubDto.getManagerId());
-		clubDao.addUserClubInfo(userClub);
+	public Boolean addClub(ClubDto clubDto, User user){
+		try{
+			UserClub userClub = new UserClub();
+			Integer clubId = clubDao.addClub(clubDto);
+			userDao.updateUserInfo(user);
+			userClub.setClubId(clubId);
+			userClub.setUserId(clubDto.getManagerId());
+			clubDao.addUserClubInfo(userClub);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
 		return true;
 	}
 
@@ -98,10 +157,19 @@ public class ClubServiceImpl implements ClubService {
 	 * @author walker cheng function query the number of member 2014/12/15
 	 * @throws Exception
 	 */
-	public Integer queryMemberNumber(ClubDto clubDto) throws HibernateException,NumberFormatException {
+	public Integer queryMemberNumber(ClubDto clubDto) {
 		Integer clubId = clubDto.getClubId();
 		Integer memberNumber = 0;
-		memberNumber = userDao.queryMemberNumber(clubId);
+		try{
+			memberNumber = userDao.queryMemberNumber(clubId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}catch (NumberFormatException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
 		return memberNumber;
 	}
 
@@ -109,28 +177,43 @@ public class ClubServiceImpl implements ClubService {
 	 * @author walker cheng function delete the club 2014/12/12
 	 * @throws Exception
 	 */
-	public Boolean deleteClub(ClubDto clubDto) throws HibernateException {
-		Club club = new Club();
-		UserClub userClub = new UserClub();
-		User user = new User();
-		club.setClubName(clubDto.getClubName());
-		club.setClubId(clubDto.getClubId());
-		club.setClubLocation(clubDto.getClubLocation());
-		club.setClubDescription(clubDto.getClubDescription());
-		club.setManagerId(clubDto.getManagerId());
-		clubDao.deleteClub(club);
-		userClub.setClubId(clubDto.getClubId());
-		userClub.setUserId(clubDto.getManagerId());
-		clubDao.deleteUserClubInfo(userClub);
-		user = userDao.getUserByUserId(clubDto.getManagerId());
-		user.setUserType(1);
-		userDao.updateUserInfo(user);
+	public Boolean deleteClub(ClubDto clubDto){
+		try{
+			Club club = new Club();
+			UserClub userClub = new UserClub();
+			User user = new User();
+			club.setClubName(clubDto.getClubName());
+			club.setClubId(clubDto.getClubId());
+			club.setClubLocation(clubDto.getClubLocation());
+			club.setClubDescription(clubDto.getClubDescription());
+			club.setManagerId(clubDto.getManagerId());
+			clubDao.deleteClub(club);
+			userClub.setClubId(clubDto.getClubId());
+			userClub.setUserId(clubDto.getManagerId());
+			clubDao.deleteUserClubInfo(userClub);
+			user = userDao.getUserByUserId(clubDto.getManagerId());
+			user.setUserType(1);
+			userDao.updateUserInfo(user);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
 		return true;
 	}
 
-	public List<Club> getAllCLubByUserId(Integer userId) throws HibernateException {
-
-		return clubDao.getAllCLubByUserId(userId);
+	public List<Club> getAllCLubByUserId(Integer userId){
+		List<Club> result=null;
+		try{
+			result=clubDao.getAllCLubByUserId(userId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;	
 	}
 
 	/**
@@ -140,8 +223,17 @@ public class ClubServiceImpl implements ClubService {
 	 * 
 	 * @param promotionId
 	 */
-	public Club getClubByPromotionId(Integer promotionId) throws HibernateException {
-		return clubDao.getClubByPromotionId(promotionId);
+	public Club getClubByPromotionId(Integer promotionId){
+		Club result=null;
+		try{
+			result=clubDao.getClubByPromotionId(promotionId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;	
 	}
 	/**
 	 * @author petep 2015/1/2 fucntion getClubMembers
@@ -150,27 +242,34 @@ public class ClubServiceImpl implements ClubService {
 	 * 
 	 * @param clubId
 	 */
-	public List<SearchDto> getClubMembers(int clubId) throws HibernateException{
+	public List<SearchDto> getClubMembers(int clubId){
 		List<SearchDto> userList=new ArrayList<SearchDto>();
-		List<User> clubUsers=userDao.getUserByClubId(clubId);
-		Club club=clubDao.getClubByClubId(clubId);
-		for(User user : clubUsers){
-			SearchDto searchDto=new SearchDto();
-			searchDto.setClubId(clubId);
-			searchDto.setClubName(club.getClubName());
-			searchDto.setUserId(user.getUserId());
-			searchDto.setUserName(user.getUserName());
-			searchDto.setUserPart(user.getUserPart());
-			searchDto.setUserPhone(user.getUserPhone());
-			searchDto.setUserType(user.getUserType());
-			searchDto.setUserEmail(user.getUserEmail());
-			if(user.getUserId()==club.getManagerId()){
-				searchDto.setUserTypeMsg("管理员");
+		try{
+			List<User> clubUsers=userDao.getUserByClubId(clubId);
+			Club club=clubDao.getClubByClubId(clubId);
+			for(User user : clubUsers){
+				SearchDto searchDto=new SearchDto();
+				searchDto.setClubId(clubId);
+				searchDto.setClubName(club.getClubName());
+				searchDto.setUserId(user.getUserId());
+				searchDto.setUserName(user.getUserName());
+				searchDto.setUserPart(user.getUserPart());
+				searchDto.setUserPhone(user.getUserPhone());
+				searchDto.setUserType(user.getUserType());
+				searchDto.setUserEmail(user.getUserEmail());
+				if(user.getUserId()==club.getManagerId()){
+					searchDto.setUserTypeMsg("管理员");
+				}
+				else{
+					searchDto.setUserTypeMsg("普通成员");
+				}
+				userList.add(searchDto);
 			}
-			else{
-				searchDto.setUserTypeMsg("普通成员");
-			}
-			userList.add(searchDto);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return userList;
 	}

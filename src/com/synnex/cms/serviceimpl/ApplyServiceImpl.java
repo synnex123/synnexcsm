@@ -4,7 +4,10 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.synnex.cms.action.InitApplyAction;
 import com.synnex.cms.dao.ApplyDao;
 import com.synnex.cms.dto.ApplyDto;
 import com.synnex.cms.entity.Apply;
@@ -20,29 +23,56 @@ import com.synnex.cms.service.ApplyService;
  */
 public class ApplyServiceImpl implements ApplyService {
 	private ApplyDao applyDao;
-
+	private static Logger LOGGER = LoggerFactory.getLogger(ApplyServiceImpl.class);
 	public void setApplyDao(ApplyDao applyDao) {
 		this.applyDao = applyDao;
 	}
 
 	public List<ApplyDto> getApplyByUserId(Integer userId, Integer pageIndex,
-			Integer applyStatus) throws HibernateException {
-		List<ApplyDto> applyList=applyDao.getApplyByUserId(userId, pageIndex, applyStatus);
+			Integer applyStatus){
+		List<ApplyDto> applyList=null;
+		try{
+			applyList=applyDao.getApplyByUserId(userId, pageIndex, applyStatus);
+			
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
 		return applyList;
 	}
 
 	/**
 	 * @author WalkerCheng function saveApply 2014/11/28
 	 */
-	public boolean saveApply(Apply apply) throws HibernateException {
-		return applyDao.saveApply(apply);
+	public boolean saveApply(Apply apply){
+		boolean result=false;
+		try{
+			result=applyDao.saveApply(apply);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
 	 * @Author Joeyy function getApplyDetails 2014/12/01
 	 */
-	public List<ApplyDto> getApplyDetails(Integer applyId) throws HibernateException {
-		return applyDao.getApplyDetails(applyId);
+	public List<ApplyDto> getApplyDetails(Integer applyId){
+		List<ApplyDto> result=null;
+		try{
+			result=applyDao.getApplyDetails(applyId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
@@ -52,18 +82,34 @@ public class ApplyServiceImpl implements ApplyService {
 	 * 
 	 * @param applyId
 	 */
-	public boolean cancelApply(Integer applyId) throws HibernateException {
-		return applyDao.cancelApply(applyId);
-
+	public boolean cancelApply(Integer applyId){
+		boolean result=false;
+		try{
+			result=applyDao.cancelApply(applyId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
 	 * @Author Joeyy function getApplyByManagerId for checkapply 2014/12/01
 	 */
 	public List<ApplyDto> getApplyByManagerId(Integer managerId,
-			Integer pageIndex, Integer applyStatus) throws HibernateException {
-		return applyDao.getApplyByManagerId(managerId, pageIndex, applyStatus);
-
+			Integer pageIndex, Integer applyStatus){
+		List<ApplyDto> result=null;
+		try{
+			result=applyDao.getApplyByManagerId(managerId, pageIndex, applyStatus);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
@@ -71,12 +117,17 @@ public class ApplyServiceImpl implements ApplyService {
 	 * 
 	 * @params applyId,checkTime,userId,clubId
 	 */
-	public boolean passApply(Integer applyId, Timestamp checkTime, UserClub uc)
-			throws HibernateException {
-		applyDao.passApplyInserUser(uc);
-		applyDao.passApply(applyId, checkTime);
+	public boolean passApply(Integer applyId, Timestamp checkTime, UserClub uc){
+		try{
+			applyDao.passApplyInserUser(uc);
+			applyDao.passApply(applyId, checkTime);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
 		return true;
-
 	}
 
 	/**
@@ -87,8 +138,17 @@ public class ApplyServiceImpl implements ApplyService {
 	 * @params applyId,checkResponse,checkTime
 	 */
 	public boolean rejectApply(Integer applyId, String checkRes,
-			Timestamp checkTime) throws HibernateException {
-		return applyDao.rejectApply(applyId, checkRes, checkTime);
+			Timestamp checkTime){
+		boolean result=false;
+		try{
+			result=applyDao.rejectApply(applyId, checkRes, checkTime);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
@@ -96,8 +156,17 @@ public class ApplyServiceImpl implements ApplyService {
 	 */
 
 	public boolean searchWhetherApply(Integer userId, Integer applyStatus,
-			Integer clubId) throws HibernateException {
-		return applyDao.searchWhetherApply(userId, applyStatus, clubId);
+			Integer clubId){
+		boolean result=false;
+		try{
+			result=applyDao.searchWhetherApply(userId, applyStatus, clubId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
@@ -107,9 +176,17 @@ public class ApplyServiceImpl implements ApplyService {
 	 * 
 	 * @param clubId
 	 */
-	public List<Apply> getApplyByClubId(Integer clubId) throws HibernateException {
-		return applyDao.getApplyByClubId(clubId);
-
+	public List<Apply> getApplyByClubId(Integer clubId){
+		List<Apply> result=null;
+		try{
+			result=applyDao.getApplyByClubId(clubId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 	/**
@@ -119,10 +196,17 @@ public class ApplyServiceImpl implements ApplyService {
 	 * 
 	 * @param clubId
 	 */
-	public List<Apply> getSubmittedApplyByClubId(Integer clubId)
-			throws HibernateException {
-		return applyDao.getSubmittedApplyByClubId(clubId);
-
+	public List<Apply> getSubmittedApplyByClubId(Integer clubId){
+		List<Apply> result=null;
+		try{
+			result=applyDao.getSubmittedApplyByClubId(clubId);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		return result;
 	}
 
 }
