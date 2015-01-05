@@ -174,10 +174,10 @@ public class PromotionDaoImpl extends BaseDaoImpl implements
 	 */
 	public Promotion checkExist(Promotion promotion) throws HibernateException {
 		String hql = "";
-		Promotion p = new Promotion();
+		Promotion p;
 		try {
 			session = getSession();
-			hql = "from Promotion p where p.clubId=:clubId and p.endTime is null and p.expireTime < CURRENT_TIMESTAMP";
+			hql = "from Promotion p where p.clubId=:clubId and p.endTime is null and p.expireTime > CURRENT_TIMESTAMP";
 			Query query = session.createQuery(hql);
 			query.setInteger("clubId", promotion.getClubId());
 			p = (Promotion) query.uniqueResult();
