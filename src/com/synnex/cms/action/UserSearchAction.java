@@ -34,9 +34,10 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 	}
 	@SuppressWarnings("unchecked")
 	/**
-	 * @author walkerc 2014/12/02 function search User
-	 * 
-	 * @params Entity Apply
+	 * @author walkerc 
+	 * 2014/12/02 
+	 * function search User
+	 * @params userName userType
 	 */
 	public String searchUser(){
 		HttpServletRequest request=ServletActionContext.getRequest();
@@ -80,6 +81,10 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 						request.setAttribute("errorMsg", "你查询的用户不存在，请核对后在输入！");
 						return ERROR;
 					}else{
+						if(request.getParameter("viewNeed")!=null){
+							request.setAttribute("userType", searchDto.getUserType());
+							request.setAttribute("viewNeed",request.getParameter("viewNeed"));
+						}
 						searchDto1=(SearchDto)mixList.get(0);
 						clubList=(ArrayList<SearchUserClubDto>)mixList.get(1);
 						request.setAttribute("searchDto",searchDto1);
@@ -98,8 +103,7 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 	 * @author walkerc 
 	 * 2015/01/05
 	 *  function get the information of ordinary user  
-	 * @ajax
-	 * @params Entity Apply
+	 * @params userType
 	 */
 	public String initAddSystemManager(){
 		HttpServletRequest request=ServletActionContext.getRequest();
