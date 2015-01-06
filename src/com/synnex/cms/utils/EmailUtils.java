@@ -1,5 +1,7 @@
 package com.synnex.cms.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -19,6 +21,8 @@ import javax.mail.internet.MimeMultipart;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.synnex.cms.entity.User;
 
 public class EmailUtils {
 	private static Logger LOGGER = LoggerFactory.getLogger(EmailUtils.class);
@@ -389,6 +393,20 @@ public class EmailUtils {
 		}
 		return true;
 	}
+	/**@return String emailAdress
+	 * function getEmailAdressByUserList
+	 * @author joeyy
+	 * @param List<User>
+	 */
+
+	public static String getEmailsByUserList(List<User> userlist){
+		List<String> emaillist1 = new ArrayList<>();
+		for (int i = 0; i < userlist.size(); i++) {
+			emaillist1.add(userlist.get(i).getUserEmail());
+		}
+		String emails=emaillist1.toString().substring(1, emaillist1.toString().length()-1);
+		return emails;	
+	}
 
 	/**
 	 * 调用sendOut方法完成邮件发送,带附件和抄送
@@ -435,5 +453,6 @@ public class EmailUtils {
 		}
 		return true;
 	}
+
 
 }

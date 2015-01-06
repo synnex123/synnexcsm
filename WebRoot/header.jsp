@@ -35,17 +35,17 @@
 					</a>
 				</li>
 				<li id="fat-menu" class="dropdown">
-					<a href="<%=request.getContextPath()%>/user/user_add.jsp" class="dropdown-toggle" target="_top">
+					<a href="<%=request.getContextPath()%>/user/user_add.jsp" class="dropdown-toggle" target="_top"><i class="icon-plus"></i>
 					注册账号
 					</a>
 				</li>
 				<li id="fat-menu" class="dropdown">
-					<a href="<%=request.getContextPath()%>/Logout.action" class="dropdown-toggle" target="_top">
+					<a href="<%=request.getContextPath()%>/Logout.action" class="dropdown-toggle" target="_top"><i class=" icon-signout"></i>
 						退出系统
 					</a>
 				</li>
 			</ul>
-			<a class="brand" href="#"><span class="first">公司俱乐部管理</span></a>
+			<a class="brand" href="#"><span class="first"><i class="icon-cogs"></i>公司俱乐部管理</span></a>
 		</div>
 	</div>
 </body>
