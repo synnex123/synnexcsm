@@ -74,7 +74,7 @@
 										<td>无</td>
 									</c:if>
 									<td> 
-										<a class="btn btn-primary" href="<%=request.getContextPath() %>/UserSearch.action?userName=${searchDto.userName}&purpose=addmanager" title="详细"><font color="white">浏览详细</font></a> &nbsp; 							
+										<a class="btn btn-primary" href="<%=request.getContextPath() %>/UserSearch.action?userName=${searchDto.userName}&purpose=addmanagerlist" title="详细"><font color="white">浏览详细</font></a> &nbsp; 							
 										&nbsp;
 							        	<button type="button" class="btn btn-primary" onclick="return addManagerByList(${searchDto.userId});"><font color="white">任命</font></button>
 										</td>

@@ -26,7 +26,7 @@ function addManagerByList(userId){
  *2015/01/05
  *function Determine whether qualified and add system manager
  */
-function addManager(){
+function addManager(purpose){
 	var userId=document.getElementById("userId").value;
 	var userType=document.getElementById("userType").value;
 	if(userType==0){
@@ -48,7 +48,11 @@ function addManager(){
 				return false;
 			}else{
 				alert("任命成功！");
-				location.href="UserSearch.action?userType=10&userName=";
+				if(purpose=="addmanagerlist"){
+					location.href="InitAddSystemManager.action?userType=1";
+				}else{
+					location.href="user/addsystemmanager.jsp";
+				}
 			}	
 		}
 	});

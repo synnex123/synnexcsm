@@ -116,12 +116,35 @@
 							    <div class="btn-toolbar">
 							    	<c:if test="${not empty purpose}">
 										<DIV style="float: left">
-							        		<button type="button" class="btn btn-primary" onclick="return addManager();"><strong>任命为系统管理员</strong></button>
+							        		<button type="button" class="btn btn-primary" onclick="return addManager('${purpose}');"><strong>任命为系统管理员</strong></button>
 							            </DIV>
 									</c:if>
-									<DIV style="float: left;margin-left: 100px">
-									    <a href="<%=request.getContextPath() %>/user/search.jsp" class="btn btn-primary">返回查询页</a>
-									</DIV>
+									<c:choose >
+										<c:when test="${not empty purpose}">
+											<c:choose>
+												<c:when test="${purpose eq 'addmanagerlist'}">
+													<DIV style="float: left;margin-left: 100px">
+													<a href="<%=request.getContextPath() %>/InitAddSystemManager.action?userType=1" class="btn btn-primary">返回</a>
+													</DIV>
+												</c:when>
+												<c:otherwise>
+													<DIV style="float: left;margin-left: 100px">
+													<a href="<%=request.getContextPath() %>/user/addsystemmanager.jsp" class="btn btn-primary">返回</a>
+													</DIV>
+												</c:otherwise>
+											</c:choose>
+										</c:when>
+										<c:otherwise>
+												<c:if test="${not empty viewNeed}">
+													<DIV style="float: left;margin-left: 100px">
+									    				<a href="<%=request.getContextPath() %>/UserSearch.action?userType=${userType}&userName=" class="btn btn-primary">返回</a>
+													</DIV>
+												</c:if>
+												<DIV style="float: left;margin-left: 100px">
+								    				<a href="<%=request.getContextPath() %>/user/search.jsp" class="btn btn-primary">返回查询页</a>
+												</DIV>
+										</c:otherwise>
+									</c:choose>
 									<div class="btn-group"></div>
 								</div>
 							</DIV>
