@@ -178,15 +178,13 @@ public class PromotionManageAction extends ActionSupport implements
 				List<User> userlist = userService
 						.getAllUserByClubId(adminclubId);
 				// 向此俱乐部中所有成员发邮件
-				for (int i = 0; i < userlist.size(); i++) {
-					final String to = userlist.get(i).getUserEmail();
+					final String to = EmailUtils.getEmailsByUserList(userlist);
 					new Thread(){
 						public void run(){
 							EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
 									PASSWORD);
 						}
 					}.start();
-				}
 
 			} else {
 				out.println("{\"status\":0,\"msg\":\"failed to initiate\"}");
@@ -246,15 +244,13 @@ public class PromotionManageAction extends ActionSupport implements
 									.getClubByPromotionId(pvr.getPromotionId())
 									.getClubId());
 					// 向此俱乐部中所有成员发邮件
-					for (int i = 0; i < userlist.size(); i++) {
-						final String to = userlist.get(i).getUserEmail();
+						final String to = EmailUtils.getEmailsByUserList(userlist);
 						new Thread(){
 							public void run(){
 								EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
 										PASSWORD);
 							}
 						}.start();
-					}
 
 				} else if ("keep".equals(promotionService.judgePromotion(pvr))) {
 					out.println("{\"msg\":\"succeed to vote and keep going \"}");
