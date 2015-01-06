@@ -102,7 +102,7 @@ public class PromotionDaoImpl extends BaseDaoImpl implements PromotionDao {
 		Query query3 = session.createQuery(hql);
 		query3.setInteger("promotionId", promotionId);
 		clubId = (Integer) query3.uniqueResult();
-		hql = "from User u,UserClub uc where uc.userId = u.userId and u.userId <> :userId and uc.clubId = :clubId and u.userType <> 0";
+		hql = "from User u,UserClub uc where uc.userId = u.userId and u.userId <> :userId and uc.clubId = :clubId and u.userType =1";
 		Query query2 = session.createQuery(hql);
 		query2.setInteger("userId", managerId);
 		query2.setInteger("clubId", clubId);
