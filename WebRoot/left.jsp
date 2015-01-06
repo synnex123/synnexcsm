@@ -40,6 +40,7 @@
 		<ul id="sidebar_menu_7" class="nav nav-list collapse">
 			<li><a href="<%=request.getContextPath()%>/getApplyByManagerId.action?pageIndex=0" target="main">受理申请</a></li>
 			<li><a href="<%=request.getContextPath()%>/initPromotion.action" target="main">更换管理员</a></li>
+			<li><a href="<%=request.getContextPath()%>/initEditClub.action" target="main">编辑俱乐部</a></li>
 		</ul>
 		</c:if>
 	   <c:if test="${sessionScope.usertype==10 }">	

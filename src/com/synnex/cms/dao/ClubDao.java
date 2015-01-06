@@ -125,5 +125,13 @@ public interface ClubDao extends BaseDao {
 	 * @param promotionId
 	 */
 	public Club getClubByPromotionId(Integer promotionId) throws HibernateException;
+	
+	/**
+	 * @Author Walker Cheng 
+	 * function update the club information due to  Modify the Program by principal
+	 * 2015/01/06
+	 * @param Club
+	 */
+	public void updateClub(Club club)throws HibernateException;
 
 }

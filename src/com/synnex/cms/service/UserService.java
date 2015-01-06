@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 
 import com.synnex.cms.dto.SearchDto;
 import com.synnex.cms.dto.SearchUserClubDto;
+import com.synnex.cms.entity.Club;
 import com.synnex.cms.entity.User;
 import com.synnex.cms.entity.UserClub;
 
@@ -109,4 +110,12 @@ public interface UserService {
 	 * @throws Exception 
 	 */
 	public void addSystemManager(Integer userId) throws HibernateException;
+	
+	/**
+	 * @Author Walker Cheng 
+	 * function get the club information that I am responsible for
+	 * 2015/01/06
+	 * @param Club
+	 */
+	public Club searchMyResponsibleClubById(Integer userId);
 }

@@ -7,6 +7,7 @@ import org.hibernate.Session;
 
 import com.synnex.cms.dto.SearchDto;
 import com.synnex.cms.dto.SearchUserClubDto;
+import com.synnex.cms.entity.Club;
 import com.synnex.cms.entity.User;
 import com.synnex.cms.entity.UserClub;
 
@@ -177,5 +178,14 @@ public interface UserDao extends BaseDao {
 			Integer pageIndex) throws HibernateException;
 
 	public List<User> getUserByClubId(int clubId) throws HibernateException;
+	
+	/**
+	 * @Author Walker Cheng 
+	 * function get the club information that I am responsible for
+	 * 2015/01/06
+	 * @param userId
+	 * @return Club
+	 */
+	public Club searchMyResponsibleClubById(Integer userId) throws HibernateException;
 
 }

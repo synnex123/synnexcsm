@@ -273,4 +273,22 @@ public class ClubServiceImpl implements ClubService {
 		}
 		return userList;
 	}
+	
+	
+	/**
+	 * @Author Walker Cheng 
+	 * function update the club information due to  Modify the Program by principal
+	 * 2015/01/06
+	 * @param Club
+	 */
+	public void updateClub(Club club){
+		try {
+			clubDao.updateClub(club);
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+		catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+	}
 }
