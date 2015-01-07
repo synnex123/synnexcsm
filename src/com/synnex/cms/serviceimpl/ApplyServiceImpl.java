@@ -37,9 +37,7 @@ public class ApplyServiceImpl implements ApplyService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return applyList;
 	}
 
@@ -53,9 +51,7 @@ public class ApplyServiceImpl implements ApplyService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -69,9 +65,7 @@ public class ApplyServiceImpl implements ApplyService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -89,9 +83,7 @@ public class ApplyServiceImpl implements ApplyService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -106,9 +98,7 @@ public class ApplyServiceImpl implements ApplyService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -124,9 +114,7 @@ public class ApplyServiceImpl implements ApplyService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return true;
 	}
 
@@ -145,9 +133,7 @@ public class ApplyServiceImpl implements ApplyService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -163,9 +149,7 @@ public class ApplyServiceImpl implements ApplyService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -183,9 +167,7 @@ public class ApplyServiceImpl implements ApplyService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -203,9 +185,7 @@ public class ApplyServiceImpl implements ApplyService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 

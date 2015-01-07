@@ -42,9 +42,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 	}
 
 	/**
@@ -68,8 +66,6 @@ public class UserServiceImpl implements UserService {
 
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return result;
 	}
@@ -84,9 +80,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -100,9 +94,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -128,9 +120,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return list;
 	}
 
@@ -145,9 +135,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -158,9 +146,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -175,9 +161,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -192,9 +176,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -208,9 +190,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -221,9 +201,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -241,9 +219,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 	/**
@@ -258,9 +234,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 	}
 
 /**
@@ -276,9 +250,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 	
@@ -310,9 +282,7 @@ public class UserServiceImpl implements UserService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 	/**function deleteUserByUserId
@@ -322,25 +292,31 @@ public class UserServiceImpl implements UserService {
 	 * @return "principal" if this user is principal in club;"votedUser" if this user is in promotion and is votedUser;else return succeed
 	 */
 	public String deleteUser(Integer userId){
-		//若此人是俱乐部负责人则不能注销
-		if (userDao.getUserByUserId(userId).getUserType()==0) {
-			return "principal";
-		}//若此人正在一个选举中并且已被投票则不能注销
-		else if(promotionVoteRecordDao.getPromotionVoteRecordByVotedUser(userId).size()!=0){
-			return "votedUser";
-		}else{
-			//删除此人的所有申请
-			applyDao.deleteApplyByUserId(userId);
-			//删除此人的所有投票信息
-			promotionVoteRecordDao.deleteByVoteUserId(userId);
-			//删除此人的所有俱乐部关联信息
-			UserClub uc=new UserClub();
-			uc.setUserId(userId);
-			clubDao.deleteUserClubInfo(uc);
-			//删除此人对应的userinfo
-			userDao.deleteUserByUserId(userId);
-			return "success";
+		String result=null;
+		try{
+			//若此人是俱乐部负责人则不能注销
+			if (userDao.getUserByUserId(userId).getUserType()==0) {
+				result="principal";
+			}//若此人正在一个选举中并且已被投票则不能注销
+			else if(promotionVoteRecordDao.getPromotionVoteRecordByVotedUser(userId).size()!=0){
+				result="votedUser";
+			}else{
+				//删除此人的所有申请
+				applyDao.deleteApplyByUserId(userId);
+				//删除此人的所有投票信息
+				promotionVoteRecordDao.deleteByVoteUserId(userId);
+				//删除此人的所有俱乐部关联信息
+				UserClub uc=new UserClub();
+				uc.setUserId(userId);
+				clubDao.deleteUserClubInfo(uc);
+				//删除此人对应的userinfo
+				userDao.deleteUserByUserId(userId);
+				result="success";
+			}
+		}catch (HibernateException e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
+		return result;
 	}
 
 }
