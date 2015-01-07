@@ -12,6 +12,7 @@ public class Club implements Serializable{
 	private Integer managerId;
 	private String clubDescription;
 	private String clubLocation;
+	private String clubUrl;
 	public Integer getClubId() {
 		return clubId;
 	}
@@ -41,6 +42,12 @@ public class Club implements Serializable{
 	}
 	public void setClubLocation(String clubLocation) {
 		this.clubLocation = clubLocation;
+	}
+	public String getClubUrl() {
+		return clubUrl;
+	}
+	public void setClubUrl(String clubUrl) {
+		this.clubUrl = clubUrl;
 	}
 	
 	

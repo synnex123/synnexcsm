@@ -1,9 +1,11 @@
 package com.synnex.cms.action;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,10 +43,19 @@ public class PromotionManageAction extends ActionSupport implements
 	private ClubService clubService;
 	private UserService userService;
 	private Integer promotionUser;
-	final String SMTP = "SMTP.163.COM";
-	final String FORM = "synnexcmsupport@163.com";
-	final String USERNAME = "synnexcmsupport@163.com";
-	final String PASSWORD = "synnex";
+	private static Properties properties = new Properties();
+	private static InputStream in =PromotionManageAction.class.getClassLoader().getResourceAsStream("mail.properties");
+	static{
+		try {
+			properties.load(in);
+		} catch (IOException e) {
+			LOGGER.warn("exception at",e);
+		}
+	}
+	final String SMTP = properties.getProperty("SMTP");
+	final String FORM = properties.getProperty("FORM");
+	final String USERNAME = properties.getProperty("USERNAME");
+	final String PASSWORD = properties.getProperty("PASSWORD");
 
 	public Integer getPromotionUser() {
 		return promotionUser;
@@ -167,15 +178,13 @@ public class PromotionManageAction extends ActionSupport implements
 				List<User> userlist = userService
 						.getAllUserByClubId(adminclubId);
 				// 向此俱乐部中所有成员发邮件
-				for (int i = 0; i < userlist.size(); i++) {
-					final String to = userlist.get(i).getUserEmail();
+					final String to = EmailUtils.getEmailsByUserList(userlist);
 					new Thread(){
 						public void run(){
 							EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
 									PASSWORD);
 						}
 					}.start();
-				}
 
 			} else {
 				out.println("{\"status\":0,\"msg\":\"failed to initiate\"}");
@@ -235,15 +244,13 @@ public class PromotionManageAction extends ActionSupport implements
 									.getClubByPromotionId(pvr.getPromotionId())
 									.getClubId());
 					// 向此俱乐部中所有成员发邮件
-					for (int i = 0; i < userlist.size(); i++) {
-						final String to = userlist.get(i).getUserEmail();
+						final String to = EmailUtils.getEmailsByUserList(userlist);
 						new Thread(){
 							public void run(){
 								EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
 										PASSWORD);
 							}
 						}.start();
-					}
 
 				} else if ("keep".equals(promotionService.judgePromotion(pvr))) {
 					out.println("{\"msg\":\"succeed to vote and keep going \"}");

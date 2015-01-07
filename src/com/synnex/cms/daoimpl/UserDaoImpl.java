@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import com.synnex.cms.dao.UserDao;
 import com.synnex.cms.dto.SearchDto;
 import com.synnex.cms.dto.SearchUserClubDto;
+import com.synnex.cms.entity.Club;
 import com.synnex.cms.entity.User;
 import com.synnex.cms.entity.UserClub;
 import com.synnex.cms.utils.PageInfo;
@@ -470,6 +471,26 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		}
 
 		return userlist;
+	}
+	
+	/**
+	 * @Author Walker Cheng 
+	 * function get the club information that I am responsible for
+	 * 2015/01/06
+	 * @param userId
+	 * @return Club
+	 */
+	public Club searchMyResponsibleClubById(Integer userId) throws HibernateException{
+		String hql=null;
+		try {
+			session = getSession();
+			hql = "select c from Club c where c.managerId=:managerId";
+			Query query = session.createQuery(hql);
+			query.setInteger("managerId", userId);
+			return (Club) query.uniqueResult();
+		} catch (HibernateException e) {
+			throw e;
+		}
 	}
 
 }

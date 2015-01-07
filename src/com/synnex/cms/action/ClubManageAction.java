@@ -15,9 +15,11 @@ import org.slf4j.LoggerFactory;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.sun.mail.iap.Response;
 import com.synnex.cms.dto.ClubDto;
 import com.synnex.cms.dto.SearchDto;
 import com.synnex.cms.dto.SearchUserClubDto;
+import com.synnex.cms.entity.Club;
 import com.synnex.cms.entity.User;
 import com.synnex.cms.service.ClubService;
 import com.synnex.cms.service.UserService;
@@ -270,4 +272,43 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 		ServletActionContext.getRequest().getSession().setAttribute("userList", userList);
 		return "success";
 	}
+	
+	/**
+	 * @Author Walker Cheng 
+	 * function get the club information that I am responsible for
+	 * 2015/01/06
+	 */
+	public String initEditClub(){
+		HttpServletRequest request=ServletActionContext.getRequest();
+		Club club=new Club();
+		User user=new User();
+		user=UserUtil.getUser(request);
+		club=userService.searchMyResponsibleClubById(user.getUserId());
+		request.setAttribute("club", club);
+		return SUCCESS;
+	}
+	
+	/**
+	 * @Author Walker Cheng 
+	 * function update the club information due to  Modify the Program by principal
+	 * 2015/01/06
+	 */
+	public void editClub(){
+		HttpServletResponse response=ServletActionContext.getResponse();
+		try{
+			PrintWriter out=response.getWriter();
+			Club club=new Club();
+			club.setClubId(clubDto.getClubId());
+			club.setClubDescription(clubDto.getClubDescription());
+			club.setClubLocation(clubDto.getClubLocation());
+			club.setClubName(clubDto.getClubName());
+			club.setClubUrl(clubDto.getClubUrl());
+			club.setManagerId(clubDto.getManagerId());
+			clubService.updateClub(club);
+			out.println("{\"status\":1}");
+		} catch (Exception e) {
+			LOGGER.warn("exception at"+this.getClass().getName(), e);
+		}
+	}
+	
 }

@@ -83,8 +83,15 @@
 										<td>${searchDto.clubLocation}</td>
 									</c:if>
 									<td> 
-										<a class="btn btn-primary" href="<%=request.getContextPath() %>/UserSearch.action?userName=${searchDto.userName}&userType=${searchDto.userType}" title="详细"><font color="white">浏览详细</font></a> &nbsp; 							
-										&nbsp; </td>
+										<a class="btn btn-primary" href="<%=request.getContextPath() %>/UserSearch.action?userName=${searchDto.userName}&userType=${searchDto.userType}&viewNeed='list'" title="详细"><font color="white">浏览详细</font></a> &nbsp; 							
+										&nbsp; 
+										 <c:if test="${sessionScope.usertype==10 }">	
+											<button class="btn btn-primary" type="button" >
+											<strong><font color="red">
+													注销此用户
+													</font></strong>
+											</button>
+										</c:if></td>
 								</tr>
 							</c:forEach>
 							</tbody>

@@ -22,6 +22,7 @@ public class ClubDto implements Serializable{
 	private String managerPhone;
 	private String clubDescription;
 	private Integer managerId;
+	private String clubUrl;
 	public String getClubDescription() {
 		return clubDescription;
 	}
@@ -63,6 +64,12 @@ public class ClubDto implements Serializable{
 	}
 	public void setManagerPhone(String managerPhone) {
 		this.managerPhone = managerPhone;
+	}
+	public String getClubUrl() {
+		return clubUrl;
+	}
+	public void setClubUrl(String clubUrl) {
+		this.clubUrl = clubUrl;
 	}
 	
 	

@@ -308,5 +308,16 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 		}
 		return club;
 	}
+	
+	/**
+	 * @Author Walker Cheng 
+	 * function update the club information due to  Modify the Program by principal
+	 * 2015/01/06
+	 * @param Club
+	 */
+	public void updateClub(Club club)throws HibernateException{
+		session = getSession();
+		session.update(club);
+	}
 
 }

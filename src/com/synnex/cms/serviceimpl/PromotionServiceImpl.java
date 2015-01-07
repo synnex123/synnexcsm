@@ -3,6 +3,7 @@ package com.synnex.cms.serviceimpl;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -89,11 +90,13 @@ public class PromotionServiceImpl implements PromotionService {
 		try{
 			resultlist = promotionDao.getOnGoingPromotionByClubId(clubId);
 			// 取出返回的list中的结束时间和过期时间
-			for (int i = 0; i < resultlist.size(); i++) {
+			Iterator<PromotionDto> it = resultlist.iterator();
+			while (it.hasNext()) {
+				PromotionDto promotion = it.next();
 				Timestamp nowtime = DateUtils.getSysNow();
-				Timestamp endtime = resultlist.get(i).getEndTime();
-				Timestamp expiretime = resultlist.get(i).getExpireTime();
-				Integer promotionId = resultlist.get(i).getPromotionId();
+				Timestamp endtime = promotion.getEndTime();
+				Timestamp expiretime = promotion.getExpireTime();
+				Integer promotionId = promotion.getPromotionId();
 				// 如果存在endtime或者选举已过期则从list中移除这一条并将状态设置为对应的状态
 				if (endtime != null || expiretime.getTime() <= nowtime.getTime()) {
 					if (endtime != null) {
@@ -104,10 +107,7 @@ public class PromotionServiceImpl implements PromotionService {
 						Integer promotionState = 4;
 						promotionDao.updatePromotion(promotionId,promotionState);
 					}
-					// 如果有移除的元素则将i-1，若不这么做那么此for循环无法将所有元素过一遍这个方法
-					if (resultlist.remove(i) != null) {
-						i--;
-					}
+					it.remove();
 				}
 			}
 		}catch (HibernateException e) {
@@ -152,7 +152,6 @@ public class PromotionServiceImpl implements PromotionService {
 		boolean result=false;
 		try{
 			if (promotionVoteRecordDao.savePromotion(pvr)) {
-				// 对投票结果进行统计计算
 				result=true;
 			} else {
 				result=false;
@@ -257,7 +256,7 @@ public class PromotionServiceImpl implements PromotionService {
 				judge1 = judgeresult.get(0);
 				judge2 = null;
 				// 如果得票数大于总人数的50%则直接当选
-				if (judge1.getCountPromotion() > countclubmember * 0.5) {
+				if (judge1.getCountPromotion() >= countclubmember * 0.5) {
 					// 将得票第一的人的userType设为0
 					userDao.upUserType(judge1.getVoteduserId());
 					Integer oldmanagerId = userDao
@@ -282,7 +281,7 @@ public class PromotionServiceImpl implements PromotionService {
 				else {
 					result="keep";
 				}
-			} else {
+			} else{
 				result="keep";
 			}
 		}catch (HibernateException e) {

@@ -1,7 +1,9 @@
 package com.synnex.cms.action;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,10 +37,19 @@ public class ApplyManageAction extends ActionSupport implements
 	private Integer userId;
 	private ClubService clubService;
 	private UserService userService;
-	final String SMTP = "SMTP.163.COM";
-	final String FORM = "synnexcmsupport@163.com";
-	final String USERNAME = "synnexcmsupport@163.com";
-	final String PASSWORD = "synnex";
+	private static Properties properties = new Properties();
+	private static InputStream in =ApplyManageAction.class.getClassLoader().getResourceAsStream("mail.properties");
+	static{
+		try {
+			properties.load(in);
+		} catch (IOException e) {
+			LOGGER.warn("exception at",e);
+		}
+	}
+	final String SMTP = properties.getProperty("SMTP");
+	final String FORM = properties.getProperty("FORM");
+	final String USERNAME = properties.getProperty("USERNAME");
+	final String PASSWORD = properties.getProperty("PASSWORD");
 	
 	
 
@@ -88,10 +99,9 @@ public class ApplyManageAction extends ActionSupport implements
 		out.println("{\"status\":1,\"url\":\"init.action?location=chengdu\"}");
 
 		try {
-
 			if (applyService.getSubmittedApplyByClubId(apply.getClubId())
 					.size() >= 5) {
-				final String subject = "请尽快处理俱乐部申请，未处理申请已达"
+				final String subject = "请尽快处理俱乐部申请 ，未处理申请已达"
 						+ "("
 						+ applyService.getSubmittedApplyByClubId(
 								apply.getClubId()).size() + ")" + "条";
