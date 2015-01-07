@@ -19,7 +19,7 @@ import com.synnex.cms.entity.UserClub;
  * function register 2014/11/19
  */
 public interface UserDao extends BaseDao {
-	public void save(User user)throws HibernateException ;
+	public void save(User user) throws HibernateException;
 
 	/**
 	 * @author Pete
@@ -170,7 +170,6 @@ public interface UserDao extends BaseDao {
 
 
 	public List<User> getUserByClubId(int clubId) throws HibernateException;
-	
 	/**
 	 * @Author Walker Cheng 
 	 * function get the club information that I am responsible for
@@ -178,7 +177,14 @@ public interface UserDao extends BaseDao {
 	 * @param userId
 	 * @return Club
 	 */
-	public Club searchMyResponsibleClubById(Integer userId) throws HibernateException;
+public Club searchMyResponsibleClubById(Integer userId) throws HibernateException;
+/**function deleteUserByUserId 2015/01/06
+ * @author joeyy
+ * 
+ * @param userId
+ */
+public void deleteUserByUserId(Integer userId) throws HibernateException;
 
+	
 
 }

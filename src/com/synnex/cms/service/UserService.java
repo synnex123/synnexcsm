@@ -110,7 +110,7 @@ public interface UserService {
 	 * @throws Exception 
 	 */
 	public void addSystemManager(Integer userId) throws HibernateException;
-	
+		
 	/**
 	 * @Author Walker Cheng 
 	 * function get the club information that I am responsible for
@@ -118,4 +118,13 @@ public interface UserService {
 	 * @param Club
 	 */
 	public Club searchMyResponsibleClubById(Integer userId);
+	/**
+	 * function deleteUser
+	 * @author joeyy
+	 * 2015/01/06
+	 * 
+	 * @param userId
+	 * @return 
+	 */
+	public String deleteUser(Integer userId);
 }

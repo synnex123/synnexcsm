@@ -18,6 +18,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/js/other.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/lib/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/myjs/deleteUser.js"></script>
 <title>菜单页面</title>
 </head>
 <body class="simple_body">
@@ -41,6 +42,7 @@
 				<div class="bb-alert alert alert-info" style="display: none;">
 					<span>操作成功</span>
 				</div>
+				<div style="color:red">${requestScope.msg}</div>
 						<div style="clear: both;"></div>
 				</div>
 				<div class="block">
@@ -86,11 +88,11 @@
 										<a class="btn btn-primary" href="<%=request.getContextPath() %>/UserSearch.action?userName=${searchDto.userName}&userType=${searchDto.userType}&viewNeed='list'" title="详细"><font color="white">浏览详细</font></a> &nbsp; 							
 										&nbsp; 
 										 <c:if test="${sessionScope.usertype==10 }">	
-											<button class="btn btn-primary" type="button" >
-											<strong><font color="red">
+												<button class="btn btn-primary" type="button" onclick="return doDeleteUser(${searchDto.userId});">
+													<span><strong><font color="red">
 													注销此用户
-													</font></strong>
-											</button>
+													</font></strong></span>
+												</button>
 										</c:if></td>
 								</tr>
 							</c:forEach>

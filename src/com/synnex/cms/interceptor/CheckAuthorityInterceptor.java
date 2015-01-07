@@ -20,7 +20,7 @@ public class CheckAuthorityInterceptor extends AbstractInterceptor{
 			"getPromotionVote","doPromotion","cancelApply","UserLogin","CheckPassword"};
 	static String[] m={"saveApply","rejectApply","getApplyByManagerId",
 			"producePromotion","initPromotion","processApply","initEditClub","editClub"};
-	static String[] s={"AddClub","InitDeleteClub","DeleteClub","AddSystemManager","InitAddSystemManager"};
+	static String[] s={"AddClub","InitDeleteClub","DeleteClub","AddSystemManager","InitAddSystemManager","deleteUser"};
 	
 	/**
 	 * 

@@ -243,19 +243,20 @@ public class EmailUtils {
 			mimeMsg.saveChanges();
 			LOGGER.info("正在发送邮件....");
 			Session mailSession = Session.getInstance(props, null);
+			LOGGER.info("1111111111111");
 			Transport transport = mailSession.getTransport("smtp");
-			LOGGER.info((String) props.get("mail.smtp.host"));
-			LOGGER.info(username);
-			LOGGER.info(password);
-
+			LOGGER.info("2222222222222222");
 			transport.connect((String) props.get("mail.smtp.host"), 25,
 					username, password);
+			LOGGER.info("3333333333333333333");
 			if (mimeMsg.getRecipients(Message.RecipientType.CC) != null) {
 				transport.sendMessage(mimeMsg,
 						mimeMsg.getRecipients(Message.RecipientType.CC));
+				LOGGER.info("444444444444444444");
 			} else {
 				transport.sendMessage(mimeMsg,
 						mimeMsg.getRecipients(Message.RecipientType.TO));
+				LOGGER.info("555555555555555555");
 			}
 			;
 			// transport.send(mimeMsg);
@@ -267,7 +268,10 @@ public class EmailUtils {
 		} catch (MessagingException e) {
 			LOGGER.info("邮件发送失败！" + e);
 			return false;
-		}
+		} catch (Throwable th) {
+			LOGGER.info("邮件发送失败！" + th);
+			return false;
+		} 
 	}
 
 	/**

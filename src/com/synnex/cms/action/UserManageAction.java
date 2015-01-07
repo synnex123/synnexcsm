@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -129,13 +128,6 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 		}
 		
 	}
-	/**
-	 * @author walker cheng 
-	 * function logout the system
-	 * 2014/12/17
-	 * @ajax
-	 */
-	
 	
 	/**
 	 * @author walker cheng 
@@ -168,8 +160,39 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 		}
 		
 	}
-		
+	/**function deleteUserByUserId
+	 * 2015/01/06
+	 * @author joeyy
+	 */
+public void deleteUser(){
+	final String to=userService.getUserByUserId(user.getUserId()).getUserEmail();
+	String result = userService.deleteUser(user.getUserId());
+	try {
+		HttpServletResponse response=ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if ("principal".equals(result)) {
+			out.println("{\"status\":0,\"msg\":\"此用户为俱乐部负责人，暂无法注销！\"}");	
+		}else if("votedUser".equals(result)){
+			out.println("{\"status\":0,\"msg\":\"此用户正处于一次投票中且已具有选票，暂无法注销！\"}");	
+		}else if("success".equals(result)){
+			out.println("{\"status\":1,\"msg\":\"注销成功，用户将会收到提示邮件！\"}");
+			
+			final String subject="公司俱乐部管理系统:你的账户已被系统管理员注销";
+			final String content="因为长期未登录系统或离职你的账户已被系统管理员注销,如有疑问请联系管理员";
+			new Thread(){
+				public void run(){
+					EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
+							PASSWORD);
+				}
+			}.start();
+		}
+	} catch (IOException e) {
+		LOGGER.warn("exception at"+this.getClass().getName(),e);
+	}
+
 }
+	}
 
 	
 	

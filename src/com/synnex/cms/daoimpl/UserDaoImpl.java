@@ -229,7 +229,8 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 	/**
 	 * @author walker cheng 2014/12/01 function search uesr by userName
 	 */
-	public List<SearchDto> searchUserByUserName(String userName) throws HibernateException {
+	public List<SearchDto> searchUserByUserName(String userName)
+			throws HibernateException {
 		List<SearchDto> resultList = new ArrayList<SearchDto>();
 		String hql = null;
 		Query query;
@@ -503,7 +504,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
 		return userlist;
 	}
-	
+		
 	/**
 	 * @Author Walker Cheng 
 	 * function get the club information that I am responsible for
@@ -523,5 +524,18 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 			throw e;
 		}
 	}
+	/**function deleteUserByUserId 2015/01/06
+	 * @author joeyy
+	 * 
+	 * @param userId
+	 */
+		public void deleteUserByUserId(Integer userId) throws HibernateException{
+			String hql="";
+			session = getSession();
+			hql="delete from User u where u.userId=:userId";
+			Query query = session.createQuery(hql);
+			query.setInteger("userId", userId);
+			query.executeUpdate();
+		}
 
 }
