@@ -143,6 +143,7 @@
 <bean name="clubService" class="com.synnex.cms.serviceimpl.ClubServiceImpl">
 	<property name="clubDao" ref="clubDao"></property>
 	<property name="userDao" ref="userDao"></property>
+	<property name="applyDao" ref="applyDao"></property>
 </bean>
 <bean name="applyService" class="com.synnex.cms.serviceimpl.ApplyServiceImpl" >
 	<property name="applyDao" ref="applyDao"></property>
