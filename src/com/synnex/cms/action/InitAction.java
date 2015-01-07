@@ -108,7 +108,7 @@ public class InitAction extends ActionSupport{
 			}else{
 				return SUCCESS;
 			}
-		}catch(HibernateException e){
+		}catch(Exception e){
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 			return ERROR;
 		}

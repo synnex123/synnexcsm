@@ -135,8 +135,6 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 					}
 				}
 			}			
-		}catch(HibernateException e){
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (Exception e) {
@@ -160,7 +158,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 			clubList=clubService.getAllClubByLocation(clubDto.getClubLocation());
 			request.setAttribute("clubList",clubList);
 			request.setAttribute("clubLocation", clubDto.getClubLocation());
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return SUCCESS;
@@ -190,7 +188,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 		user=UserUtil.getUser(request);
 		try {
 			clubList=userService.searchMyClubInfoByUserId(user.getUserId(),pageIndex);
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		totalPage=page.getTotalPage();
@@ -244,8 +242,6 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 			}else {
 				out.println("{\"status\":0,\"msg\":\"你选择的俱乐部不满足删除条件！\"}");
 			}
-		}catch(HibernateException e){
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (Exception e) {

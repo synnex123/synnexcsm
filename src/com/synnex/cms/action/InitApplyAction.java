@@ -66,7 +66,7 @@ public class InitApplyAction extends ActionSupport implements ModelDriven<Club>{
 			}	
 			return SUCCESS;
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return "";

@@ -93,7 +93,7 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 					}
 					return "success1";
 			}
-		}catch (HibernateException e) {
+		}catch (Exception e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return ERROR;
@@ -122,7 +122,7 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 			request.setAttribute("pageIndex",pageIndex);
 			request.setAttribute("userType",searchDto.getUserType());
 			request.setAttribute("resultList",resultList);
-		}catch (HibernateException e) {
+		}catch (Exception e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return SUCCESS;

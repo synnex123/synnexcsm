@@ -124,7 +124,7 @@ public class ApplyManageAction extends ActionSupport implements
 				
 			}
 
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 

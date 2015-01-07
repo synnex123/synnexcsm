@@ -76,8 +76,6 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 			}else{
 				out.println("{\"status\":0,\"msg\":\"the old password is wrong\"}");
 			}
-		}catch(HibernateException e){
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
@@ -95,7 +93,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 			User user1=new User();
 			user1=userService.getUserByUserId(user.getUserId());
 			request.setAttribute("user", user1);
-		}catch(HibernateException e){
+		}catch(Exception e){
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 			return ERROR;
 		}
@@ -126,8 +124,6 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 			}else {
 				out.println("{\"status\":0,\"msg\":\"信息更改失败！\"}");
 			}
-		}catch(HibernateException e){
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
@@ -164,15 +160,13 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 							PASSWORD);
 				}
 			}.start();
-		}catch(HibernateException e){
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		
 	}
 		
-	}
+}
 
 	
 	

@@ -68,8 +68,6 @@ public class ExitClubAction extends ActionSupport implements ModelDriven<SearchU
 							PASSWORD);
 				}
 			}.start();
-		} catch (HibernateException e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (IOException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
