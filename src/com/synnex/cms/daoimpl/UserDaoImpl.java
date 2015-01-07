@@ -189,9 +189,24 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		String hql = null;
 		Query query;
 		session = getSession();
+		PageInfo pageInfo = (PageInfo) PageInfo.pageInfo.get();
+		String countHql= "Select count(*) from User u ,Club c where  u.userId=c.managerId";
 		hql = "Select u.userEmail,u.userPhone,u.userPart,u.userType,c.clubId,c.clubName,c.clubLocation,u.userName,u.userId from User u ,Club c where  u.userId=c.managerId";
-		query = session.createQuery(hql).setMaxResults(5)
-				.setFirstResult(pageIndex);
+		Query queryCount = session.createQuery(countHql);
+		query = session.createQuery(hql);
+		int totalPage = ((Long) queryCount.uniqueResult()).intValue();
+		if (totalPage % pageInfo.getPageRecords() != 0) {
+			totalPage = (int) ((totalPage - totalPage
+					% pageInfo.getPageRecords())
+					/ pageInfo.getPageRecords() + 1);
+		} else {
+			totalPage = (int) ((totalPage - totalPage
+					% pageInfo.getPageRecords()) / pageInfo.getPageRecords());
+		}
+		pageInfo.setTotalPage(totalPage);
+		query.setFirstResult((pageInfo.getCurrentPage() - 1)
+				* pageInfo.getPageRecords());
+		query.setMaxResults(pageInfo.getPageRecords());
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		for (int i = 0; i < list.size(); i++) {
@@ -272,11 +287,27 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 			Integer pageIndex) throws HibernateException {
 		List<SearchDto> resultList = new ArrayList<SearchDto>();
 		String hql = null;
+		PageInfo pageInfo = (PageInfo) PageInfo.pageInfo.get();
 		session = getSession();
 		hql = "Select u.userEmail,u.userPhone,u.userPart,u.userType,u.userName,u.userId from User u where u.userType=? ";
-		Query query = session.createQuery(hql).setMaxResults(5)
-				.setFirstResult(pageIndex);
+		Query query = session.createQuery(hql);
+		String countHql =  "Select count(*) from User u where u.userType=? ";
+		Query queryCount = session.createQuery(countHql);
 		query.setInteger(0, userType);
+		queryCount.setInteger(0, userType);
+		int totalPage = ((Long) queryCount.uniqueResult()).intValue();
+		if (totalPage % pageInfo.getPageRecords() != 0) {
+			totalPage = (int) ((totalPage - totalPage
+					% pageInfo.getPageRecords())
+					/ pageInfo.getPageRecords() + 1);
+		} else {
+			totalPage = (int) ((totalPage - totalPage
+					% pageInfo.getPageRecords()) / pageInfo.getPageRecords());
+		}
+		pageInfo.setTotalPage(totalPage);
+		query.setFirstResult((pageInfo.getCurrentPage() - 1)
+				* pageInfo.getPageRecords());
+		query.setMaxResults(pageInfo.getPageRecords());
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		for (int i = 0; i < list.size(); i++) {

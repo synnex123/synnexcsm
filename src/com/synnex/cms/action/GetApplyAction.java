@@ -33,7 +33,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 	private String mark;
 	private int currentPage;
 	private int totalPage;
-	private int pageRecords=1;
+	private int pageRecords=5;
 	public int getCurrentPage() {
 		return currentPage;
 	}
