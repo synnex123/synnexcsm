@@ -40,7 +40,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 	private int currentPage;
 	private int totalPage;
 	private int location;
-	private int pageRecords=1;
+	private int pageRecords=5;
 	final String SMTP = "SMTP.163.COM";
 	final String FORM = "synnexcmsupport@163.com";
 	final String USERNAME = "synnexcmsupport@163.com";

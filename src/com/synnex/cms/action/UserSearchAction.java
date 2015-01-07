@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.synnex.cms.dto.SearchDto;
 import com.synnex.cms.dto.SearchUserClubDto;
 import com.synnex.cms.service.UserService;
+import com.synnex.cms.utils.PageInfo;
 
 public class UserSearchAction extends ActionSupport implements ModelDriven<SearchDto> {
 	/**
@@ -24,6 +25,35 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 	private static Logger LOGGER = LoggerFactory.getLogger(UserSearchAction.class);
 	private UserService userService;
 	private SearchDto searchDto=new SearchDto();
+	private int currentPage;
+	private int totalPage;
+	private int pageRecords=5;
+	private int location;
+	
+	public int getLocation() {
+		return location;
+	}
+	public void setLocation(int location) {
+		this.location = location;
+	}
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public int getPageRecords() {
+		return pageRecords;
+	}
+	public void setPageRecords(int pageRecords) {
+		this.pageRecords = pageRecords;
+	}
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
@@ -41,13 +71,15 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 	 */
 	public String searchUser(){
 		HttpServletRequest request=ServletActionContext.getRequest();
-		Integer pageIndex;
+		Integer pageIndex=1;
 		Integer listNumber=0;
-		if ("".equals(request.getParameter("pageIndex"))||request.getParameter("pageIndex")==null||"0".equals(request.getParameter("pageIndex"))) {
-			pageIndex=0;
-		}else{
-		    pageIndex=(Integer.parseInt(request.getParameter("pageIndex"))-1)*5;
-		}
+		PageInfo page=new PageInfo();
+		if(0==currentPage){
+			currentPage=1;
+		}	
+		page.setCurrentPage(currentPage);
+		page.setPageRecords(pageRecords);
+	 	PageInfo.pageInfo.set(page);
 		SearchDto searchDto1=new SearchDto();
 		List<SearchDto> resultList=new ArrayList<SearchDto>();
 		List<Object> mixList=new ArrayList<Object>();
@@ -69,9 +101,11 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 				}else if(searchDto.getUserType()==10){
 					resultList=userService.searchUserByUserType(10,pageIndex);
 				}
-				listNumber=resultList.size();
-				request.setAttribute("listNumber",listNumber);
-				request.setAttribute("pageIndex",pageIndex);
+				totalPage=page.getTotalPage();
+				currentPage=page.getCurrentPage();
+				request.setAttribute("totalPage", totalPage);
+				request.setAttribute("currentPage", currentPage);
+				request.setAttribute("pageIndex",currentPage);
 				request.setAttribute("userType",searchDto.getUserType());
 				request.setAttribute("resultList",resultList);
 				return SUCCESS;
@@ -107,19 +141,24 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 	 */
 	public String initAddSystemManager(){
 		HttpServletRequest request=ServletActionContext.getRequest();
-		Integer pageIndex;
+		Integer pageIndex=1;
 		Integer listNumber=0;
-		if ("".equals(request.getParameter("pageIndex"))||request.getParameter("pageIndex")==null||"0".equals(request.getParameter("pageIndex"))) {
-			pageIndex=0;
-		}else{
-		    pageIndex=(Integer.parseInt(request.getParameter("pageIndex"))-1)*5;
-		}
 		List<SearchDto> resultList=new ArrayList<SearchDto>();
 		try {
+			if(location==1)searchDto.setUserType(location);
+			PageInfo page=new PageInfo();
+			if(0==currentPage){
+				currentPage=1;
+			}	
+			page.setCurrentPage(currentPage);
+			page.setPageRecords(pageRecords);
+		 	PageInfo.pageInfo.set(page);
 		    resultList=userService.searchUserByUserType(searchDto.getUserType(),pageIndex);
-			listNumber=resultList.size();
-			request.setAttribute("listNumber",listNumber);
-			request.setAttribute("pageIndex",pageIndex);
+		    totalPage=page.getTotalPage();
+			currentPage=page.getCurrentPage();
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("pageIndex",currentPage);
 			request.setAttribute("userType",searchDto.getUserType());
 			request.setAttribute("resultList",resultList);
 		}catch (Exception e) {
