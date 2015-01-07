@@ -50,9 +50,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 	/**
@@ -65,9 +63,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -78,9 +74,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -94,9 +88,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -115,9 +107,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -132,9 +122,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -153,9 +141,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return true;
 	}
 
@@ -173,9 +159,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (NumberFormatException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return memberNumber;
 	}
 
@@ -205,9 +189,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return true;
 	}
 
@@ -218,9 +200,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;	
 	}
 
@@ -238,9 +218,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;	
 	}
 	/**
@@ -276,9 +254,7 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return userList;
 	}
 	
@@ -295,8 +271,6 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 	}
 }
