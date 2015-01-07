@@ -138,13 +138,16 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 	public void addSystemManager(){
 		try{
 			HttpServletResponse response=ServletActionContext.getResponse();
+			HttpServletRequest request=ServletActionContext.getRequest();
 			PrintWriter out = response.getWriter();
 			userService.addSystemManager(user.getUserId());
 			out.println("{\"status\":1}");
 			User user1 =new User();
 			user1=userService.getUserByUserId(user.getUserId());
 			final String subject = "系统负责人任命通知";
-			final String content ="Hi,"+user1.getUserName()+"，你已被认命为系统管理员，快点去看看吧！";
+			final String content ="Hi,"+user1.getUserName()+"，你已被认命为系统管理员，快点去看看吧！"
+					+ "\n" + "http://" + request.getRemoteHost() + ":8080"
+		            + request.getContextPath() + "/user/login.jsp";
 			final String to =user1.getUserEmail();
 			new Thread(){
 				public void run(){

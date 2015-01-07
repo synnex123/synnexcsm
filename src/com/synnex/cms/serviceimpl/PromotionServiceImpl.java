@@ -71,9 +71,7 @@ public class PromotionServiceImpl implements PromotionService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -113,9 +111,7 @@ public class PromotionServiceImpl implements PromotionService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+	
 		return resultlist;
 	}
 
@@ -133,9 +129,7 @@ public class PromotionServiceImpl implements PromotionService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return userlist;
 
 	}
@@ -159,9 +153,7 @@ public class PromotionServiceImpl implements PromotionService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result;
 	}
 
@@ -185,9 +177,7 @@ public class PromotionServiceImpl implements PromotionService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		catch (Exception e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}
+		
 		return result1;
 	}
 
@@ -285,8 +275,6 @@ public class PromotionServiceImpl implements PromotionService {
 				result="keep";
 			}
 		}catch (HibernateException e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
-		}catch (Exception e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return result;

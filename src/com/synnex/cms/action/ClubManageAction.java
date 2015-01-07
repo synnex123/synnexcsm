@@ -119,7 +119,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 							out.println("{\"status\":1,\"url\":\"init.action\"}");
 							final String subject = "俱乐部任命提醒！";
 							final String content ="Hi,"+user.getUserName()+"，你已被任命为新增俱乐部："
-									+clubDto.getClubName()+" 的负责人,赶快去看看吧！！"
+									+clubDto.getClubName()+" 的负责人,请你尽快在编辑俱乐部中添加俱乐部主页信息！！"
 									+ "\n" + "http://" + request.getRemoteHost() + ":8080"
 						            + request.getContextPath() + "/user/login.jsp";
 							final String to =user.getUserEmail();	
