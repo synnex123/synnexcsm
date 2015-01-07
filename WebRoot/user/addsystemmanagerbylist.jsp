@@ -11,6 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/myjs/dividepage.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/lib/bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/stylesheets_default/theme.css" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/lib/font-awesome/css/font-awesome.css" />
@@ -89,10 +90,10 @@
 						Integer pageIndex=((Integer)request.getAttribute("pageIndex")/5)+1;
 						%>
 							<ul>
-								<li><a href="javascript:void(0);" onclick="lastpage(<%=pageIndex%>)">&lt;&lt;</a></li>
-							    <li class="active"><span><%=pageIndex%></span></li>
-								<li><a href="javascript:void(0);" onclick="nextpage(<%=pageIndex%>);">&gt;&gt;</a></li>
-								<li><span>共${requestScope.listNumber}条</span></li>
+								<li><a href="javascript:void(0);" onclick='previousPage("1","InitAddSystemManager");'>&lt;&lt;</a></li>
+								<li class="active" ><span id="currentPage">${currentPage }</span></span></li>
+								<li><a href="javascript:void(0);" onclick='nextPage("1","InitAddSystemManager");'>&gt;&gt;</a></li>
+								<li ><span>共<span id="totalPage">${totalPage }</span>页</span></span></li>
 							</ul>
 						</div>
 					</div>
@@ -100,18 +101,4 @@
 			</div>
 		</div>
 </body>
-<SCRIPT type="text/javascript">
-	function lastpage(p){
-		if (p===1) {
-			alert("there is no previous page");
-		}else{
-			p=p-1;
-			location.href="<%=request.getContextPath() %>/InitAddSystemManager.action?userType=1&pageIndex="+p;
-		}
-	}
-	function nextpage(p){
-			p=p+1;
-			location.href="<%=request.getContextPath() %>/InitAddSystemManager.action?userType=1&pageIndex="+p;
-	}
-</SCRIPT>
 </html>

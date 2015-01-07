@@ -25,7 +25,18 @@
 	function join(clubId){
 		location.href="initApply.action?clubId="+clubId;
 	}
-	
+	function enterClub(clubUrl){
+		if(clubUrl==""){
+			alert("对不起，该俱乐部暂时还没有主页！");
+			return false;
+		}
+		var result=clubUrl.indexOf("http://");
+		if(result==0){
+			window.open(clubUrl);
+		}else{
+			window.open("http://"+clubUrl);
+		}
+	}
 </SCRIPT>
 </head>
 <body class="simple_body">
@@ -76,8 +87,8 @@
 									<td>${clubInfo["clubLocation"] }</td>
 									<td><button class="btn btn-primary" style="float:left;width : 120px; height : 28px;" onclick="join(${clubInfo.clubId});">
 										<font color="white">我要加入</font></button>
-										<button class="btn btn-primary" style="float:left;width : 120px; height : 28px;">
-										<a href="detail.jsp" title="详细"><font color="white">浏览详细</font></a></button> &nbsp; 							
+										 <button class="btn btn-primary" style="float:left;width : 120px; height : 28px;" onclick="return enterClub('${clubInfo.clubUrl}');">
+										<font color="white">浏览主页</font></button>&nbsp; 							
 										&nbsp; </td>
 								</tr>
 							</c:forEach>

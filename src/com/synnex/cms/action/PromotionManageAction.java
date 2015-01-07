@@ -114,7 +114,7 @@ public class PromotionManageAction extends ActionSupport implements
 			session.setAttribute("userList", userList);
 			return SUCCESS;
 
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 		return "";
@@ -189,9 +189,6 @@ public class PromotionManageAction extends ActionSupport implements
 			} else {
 				out.println("{\"status\":0,\"msg\":\"failed to initiate\"}");
 			}
-
-		} catch (HibernateException e) {
-			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		} catch (IOException e) {
 			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
@@ -258,7 +255,7 @@ public class PromotionManageAction extends ActionSupport implements
 					out.println("{\"msg\":\"failed to vote\"}");
 				}
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
 

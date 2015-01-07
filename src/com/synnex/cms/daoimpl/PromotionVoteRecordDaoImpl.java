@@ -1,3 +1,4 @@
+
 package com.synnex.cms.daoimpl;
 
 import java.util.ArrayList;
@@ -19,12 +20,8 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 	 * @author joeyy 2014/12/18 function savepromtionvoterecord
 	 */
 	public boolean savePromotion(PromotionVoteRecord pvr) throws HibernateException {
-		try {
 			session = getSession();
 			session.save(pvr);
-		} catch (HibernateException e) {
-			throw e;
-		}
 		return true;
 	}
 
@@ -40,16 +37,12 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 			throws HibernateException {
 		String hql = "";
 		List<PromotionVoteRecord> result = new ArrayList<PromotionVoteRecord>();
-		try {
 			session = getSession();
 			hql = "from PromotionVoteRecord p where p.promotionId=:promotionId and p.voteuserId=:voteId";
 			Query query = session.createQuery(hql);
 			query.setInteger("promotionId", pvr.getPromotionId());
 			query.setInteger("voteId", pvr.getVoteuserId());
 			result = query.list();
-		} catch (HibernateException e) {
-			throw e;
-		}
 		return result;
 	}
 
@@ -66,7 +59,6 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 		@SuppressWarnings("rawtypes")
 		List result = null;
 		List<JudgePromotionDto> judgeresult = new ArrayList<JudgePromotionDto>();
-		try {
 			session = getSession();
 			hql = "select count(*) as countvote ,voteduserId from PromotionVoteRecord where promotionId=:promotionId group by voteduserId order by countvote DESC";
 			Query query = session.createQuery(hql);
@@ -79,15 +71,12 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 				jpDto.setVoteduserId((Integer) row[1]);
 				judgeresult.add(jpDto);
 			}
-		} catch (HibernateException e) {
-			throw e;
-		}
 		return judgeresult;
 	}
 
 	/**
 	 * @author joeyy 2014/12/18 function delete promotionvoterecord when
-	 * promotion is end
+	 *         promotion is end
 	 * 
 	 * @param promotionId
 	 * 
@@ -95,20 +84,15 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 	 */
 	public boolean delete(Integer promotionId) throws HibernateException {
 		String hql = "";
-		try {
-			session = getSession();
-			hql = "delete from PromotionVoteRecord pvr where pvr.promotionId=:promotionId";
-			Query query = session.createQuery(hql);
-			query.setInteger("promotionId", promotionId);
-			Integer status = query.executeUpdate();
-			if (status == 1) {
-				return true;
-			} else {
-				return false;
-			}
-
-		} catch (HibernateException e) {
-			throw e;
+		session = getSession();
+		hql = "delete from PromotionVoteRecord pvr where pvr.promotionId=:promotionId";
+		Query query = session.createQuery(hql);
+		query.setInteger("promotionId", promotionId);
+		Integer status = query.executeUpdate();
+		if (status == 1) {
+			return true;
+		} else {
+			return false;
 		}
 
 	}

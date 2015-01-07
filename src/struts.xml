@@ -103,6 +103,13 @@
 		<action name="searchMyClub" class="clubManage" method="searchMyClub">
 			<result name="success">/club/exitclub.jsp</result>
 		</action>
+		<action name="initEditClub" class="clubManage" method="initEditClub">
+			<result name="success">/club/editclub.jsp</result>
+		</action>
+		<action name="editClub" class="clubManage" method="editClub">
+		</action>
+		
+
 
 		<action name="init" class="init">
 			<result name="success">/main.jsp</result>

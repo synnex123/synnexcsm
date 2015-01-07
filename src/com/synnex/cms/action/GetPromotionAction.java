@@ -74,7 +74,7 @@ public class GetPromotionAction extends ActionSupport implements ModelDriven<Pro
 			session.setAttribute("promotionlist", promotionlist);
 			return SUCCESS;
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return "";
@@ -97,9 +97,6 @@ public class GetPromotionAction extends ActionSupport implements ModelDriven<Pro
 			request.setAttribute("clubName", clubName);
 			request.setAttribute("promotionId", promotion.getPromotionId());
 			return SUCCESS;
-			
-		} catch (HibernateException e) {
-			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		} catch (UnsupportedEncodingException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}

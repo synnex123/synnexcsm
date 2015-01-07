@@ -85,5 +85,13 @@ public interface ClubService {
 	 */
 	public Club getClubByPromotionId(Integer promotionId) ;
 	public List<SearchDto> getClubMembers(int clubId);
+	
+	/**
+	 * @Author Walker Cheng 
+	 * function update the club information due to  Modify the Program by principal
+	 * 2015/01/06
+	 * @param Club
+	 */
+	public void updateClub(Club club);
 
 }

@@ -141,7 +141,7 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 			}else{
 				out.println("{\"status\":0,\"msg\":\"bad credit\"}");
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			out.println("{\"status\":0,\"msg\":\"bad credit\"}");
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}

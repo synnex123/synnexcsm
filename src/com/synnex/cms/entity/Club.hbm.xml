@@ -20,5 +20,8 @@
         <property name="clubLocation" type="java.lang.String">
             <column name="club_location" />
         </property>
+        <property name="clubUrl" type="java.lang.String">
+            <column name="club_url" />
+        </property>
     </class>
 </hibernate-mapping>

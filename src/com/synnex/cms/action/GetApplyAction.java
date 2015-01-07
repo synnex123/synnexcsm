@@ -33,7 +33,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 	private String mark;
 	private int currentPage;
 	private int totalPage;
-	private int pageRecords=1;
+	private int pageRecords=5;
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -106,7 +106,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 			request.setAttribute("pageIndex", currentPage);
 		
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return SUCCESS;
@@ -132,7 +132,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 				return "managerdetail";
 			}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return "";
@@ -174,7 +174,7 @@ public class GetApplyAction extends ActionSupport implements ModelDriven<ApplyDt
 			session.setAttribute("checkapplylist", checkapplylist);
 			request.setAttribute("pageIndex",currentPage);		
 			return SUCCESS;	
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
 		return "";
