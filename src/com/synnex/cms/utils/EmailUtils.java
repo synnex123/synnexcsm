@@ -72,7 +72,7 @@ public class EmailUtils {
 			LOGGER.info("准备获取邮件会话对象！");
 			session = Session.getDefaultInstance(props, null); // 获得邮件会话对象
 		} catch (Exception e) {
-			LOGGER.info("获取邮件会话对象时发生错误！" + e);
+			LOGGER.warn("获取邮件会话对象时发生错误！" + e);
 			return false;
 		}
 
@@ -83,7 +83,7 @@ public class EmailUtils {
 
 			return true;
 		} catch (Exception e) {
-			LOGGER.info("创建MIME邮件对象失败！" + e);
+			LOGGER.warn("创建MIME邮件对象失败！" + e);
 			return false;
 		}
 	}
@@ -128,7 +128,7 @@ public class EmailUtils {
 			mimeMsg.setSubject(mailSubject);
 			return true;
 		} catch (MessagingException e) {
-			LOGGER.info("设置邮件主题发生错误！");
+			LOGGER.warn("设置邮件主题发生错误！");
 			return false;
 		}
 	}
@@ -147,7 +147,7 @@ public class EmailUtils {
 
 			return true;
 		} catch (MessagingException e) {
-			LOGGER.info("设置邮件正文时发生错误！" + e);
+			LOGGER.warn("设置邮件正文时发生错误！" + e);
 			return false;
 		}
 	}
@@ -171,7 +171,7 @@ public class EmailUtils {
 
 			return true;
 		} catch (MessagingException e) {
-			LOGGER.info("增加邮件附件：" + filename + "发生错误！" + e);
+			LOGGER.warn("增加邮件附件：" + filename + "发生错误！" + e);
 			return false;
 		}
 	}
@@ -188,6 +188,7 @@ public class EmailUtils {
 			mimeMsg.setFrom(new InternetAddress(from)); // 设置发信人
 			return true;
 		} catch (MessagingException e) {
+			LOGGER.warn("设置发信人时发生错误！" + e);
 			return false;
 		}
 	}
@@ -206,7 +207,7 @@ public class EmailUtils {
 					InternetAddress.parse(to));
 			return true;
 		} catch (MessagingException e) {
-			LOGGER.info("设置发信人时发生错误" + e);
+			LOGGER.warn("设置收信人时发生错误" + e);
 			return false;
 		}
 	}
@@ -225,11 +226,11 @@ public class EmailUtils {
 					(Address[]) InternetAddress.parse(copyto));
 			return true;
 		} catch (AddressException e) {
-			LOGGER.info("设置抄送地址时错误" + e);
+			LOGGER.warn("设置抄送地址时错误" + e);
 			return false;
 
 		} catch (MessagingException e) {
-			LOGGER.info("设置抄送地址时错误" + e);
+			LOGGER.warn("设置抄送地址时错误" + e);
 		}
 		return false;
 	}
@@ -266,12 +267,9 @@ public class EmailUtils {
 
 			return true;
 		} catch (MessagingException e) {
-			LOGGER.info("邮件发送失败！" + e);
+			LOGGER.warn("邮件发送失败！" + e);
 			return false;
-		} catch (Throwable th) {
-			LOGGER.info("邮件发送失败！" + th);
-			return false;
-		} 
+		}
 	}
 
 	/**
