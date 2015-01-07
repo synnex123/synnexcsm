@@ -25,7 +25,7 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 		String hql = "";
 		PageInfo pageInfo = (PageInfo) PageInfo.pageInfo.get();
 		session = getSession();
-		hql = "select c.clubId,c.clubName,u.userName,u.userPhone,c.clubLocation from Club c,User u "
+		hql = "select c.clubId,c.clubName,u.userName,u.userPhone,c.clubLocation,c.clubUrl from Club c,User u "
 				+ "where c.clubLocation=:location and c.managerId=u.userId";
 		Query query = session.createQuery(hql);
 		String countHql = "select count(*) from Club c,User u "
@@ -56,6 +56,7 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 			clubDto.setManagerName((String) row[2]);
 			clubDto.setManagerPhone((String) row[3]);
 			clubDto.setClubLocation((String) row[4]);
+			clubDto.setClubUrl((String) row[5]);
 			clubList.add(clubDto);
 		}
 
