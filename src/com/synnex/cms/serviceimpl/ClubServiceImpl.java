@@ -141,7 +141,6 @@ public class ClubServiceImpl implements ClubService {
 		}catch (HibernateException e) {
 			LOGGER.warn("exception at"+this.getClass().getName(), e);
 		}
-		
 		return true;
 	}
 

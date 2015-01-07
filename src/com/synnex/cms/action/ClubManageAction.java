@@ -239,7 +239,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 					User user= userService.getUserByUserId(clubDto2.getManagerId());
 					final String subject = "俱乐部删除提醒！";
 					final String content ="Hi,"+user.getUserName()+"，你所负责的俱乐部："
-							+clubDto.getClubName()+" 因为人数原因，已被删除！";
+							+clubDto.getClubName()+" 因为人数原因，已被删除！如有疑问请联系系统管理员！";
 					final String to =user.getUserEmail();
 					new Thread(){
 						public void run(){
