@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.synnex.cms.dao.ApplyDao;
 import com.synnex.cms.dao.ClubDao;
 import com.synnex.cms.dao.UserDao;
 import com.synnex.cms.dto.ClubDto;
@@ -25,6 +26,7 @@ import com.synnex.cms.service.ClubService;
 public class ClubServiceImpl implements ClubService {
 	private ClubDao clubDao;
 	private UserDao userDao;
+	private ApplyDao applyDao;
 	private static Logger LOGGER = LoggerFactory.getLogger(ClubServiceImpl.class);
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
@@ -32,6 +34,10 @@ public class ClubServiceImpl implements ClubService {
 
 	public void setClubDao(ClubDao clubDao) {
 		this.clubDao = clubDao;
+	}
+	
+	public void setApplyDao(ApplyDao applyDao) {
+		this.applyDao = applyDao;
 	}
 
 	/**
@@ -187,10 +193,12 @@ public class ClubServiceImpl implements ClubService {
 			club.setClubLocation(clubDto.getClubLocation());
 			club.setClubDescription(clubDto.getClubDescription());
 			club.setManagerId(clubDto.getManagerId());
+			club.setClubUrl(clubDto.getClubUrl());
 			clubDao.deleteClub(club);
 			userClub.setClubId(clubDto.getClubId());
 			userClub.setUserId(clubDto.getManagerId());
 			clubDao.deleteUserClubInfo(userClub);
+			applyDao.deleteApplyByClubId(clubDto.getClubId());
 			user = userDao.getUserByUserId(clubDto.getManagerId());
 			user.setUserType(1);
 			userDao.updateUserInfo(user);

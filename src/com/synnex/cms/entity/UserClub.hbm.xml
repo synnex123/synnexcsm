@@ -4,13 +4,16 @@
 <!-- Generated 2014-11-25 10:16:11 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.synnex.cms.entity.UserClub" table="user_club_info">
-        <id name="userId" type="java.lang.Integer">
+    	<composite-id>
+    		<key-property name="userId" column="user_id"></key-property>
+    		<key-property name="clubId" column="club_id"></key-property>
+    	</composite-id>
+        <!-- <property name="userId" insert="false" update="false" type="java.lang.Integer">
             <column name="user_id" />
-            <generator class="assigned" />
-        </id>
-        <property name="clubId" type="java.lang.Integer">
-            <column name="club_id" />
         </property>
+        <property name="clubId" insert="false" update="false" type="java.lang.Integer">
+            <column name="club_id" />
+        </property> -->
 
     </class>
 </hibernate-mapping>

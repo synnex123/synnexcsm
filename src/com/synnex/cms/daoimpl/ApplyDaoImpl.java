@@ -346,4 +346,18 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 		query.setInteger("userId", userId);
 		query.executeUpdate();
 	}
+	
+	/**function deleteApplyByClubId 
+	 * 2014/12/12
+	 * @author walker cheng
+	 * @param clubId
+	 */
+	public void deleteApplyByClubId(Integer clubId) throws HibernateException{
+		String hql = "";
+		session = getSession();
+		hql="delete from Apply a where a.clubId=:clubId";
+		Query query = session.createQuery(hql);
+		query.setInteger("clubId", clubId);
+		query.executeUpdate();
+	}
 }

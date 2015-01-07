@@ -186,7 +186,7 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 		List<ClubDto> clubList = new ArrayList<ClubDto>();
 		String hql = "";
 		session = getSession();
-		hql = "select clubId, clubName,managerId,clubDescription,clubLocation from Club where clubName=? and clubLocation=?";
+		hql = "select clubId, clubName,managerId,clubDescription,clubLocation,clubUrl from Club where clubName=? and clubLocation=?";
 		Query query = session.createQuery(hql);
 		query.setString(0, clubDto.getClubName());
 		query.setString(1, clubDto.getClubLocation());
@@ -200,6 +200,7 @@ public class ClubDaoImpl extends BaseDaoImpl implements ClubDao {
 			clubDto2.setManagerId((Integer) objects[2]);
 			clubDto2.setClubDescription((String) objects[3]);
 			clubDto2.setClubLocation((String) objects[4]);
+			clubDto2.setClubUrl((String) objects[5]);
 			clubList.add(clubDto2);
 		}
 		return clubList;
