@@ -564,5 +564,18 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		
 		return userlist;
 	}
+	/**function deleteUserByUserId 2015/01/06
+	 * @author joeyy
+	 * 
+	 * @param userId
+	 */
+		public void deleteUserByUserId(Integer userId) throws HibernateException{
+			String hql="";
+			session = getSession();
+			hql="delete from User u where u.userId=:userId";
+			Query query = session.createQuery(hql);
+			query.setInteger("userId", userId);
+			query.executeUpdate();
+		}
 
 }

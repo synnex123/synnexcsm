@@ -42,4 +42,19 @@ public interface PromotionVoteRecordDao extends BaseDao {
 	 * @return true if delete succeed ,else return false
 	 */
 	public boolean delete(Integer promotionId) throws HibernateException;
+	/**function getPromotionVoteRecordByVotedUser 2014/01/06
+	 * @author joeyy
+	 * 
+	 * @param userId
+	 * @return Entity PromotionVoteRecord
+	 */
+
+	public List<PromotionVoteRecord> getPromotionVoteRecordByVotedUser(Integer userId) throws HibernateException;
+/** function  deleteByVoteUserId 2015/01/06
+ * @author joeyy
+ * 
+ * @param userId
+ */
+	public void deleteByVoteUserId(Integer userId) throws HibernateException;
+
 }

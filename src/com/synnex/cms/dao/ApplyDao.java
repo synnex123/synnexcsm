@@ -90,4 +90,10 @@ public interface ApplyDao extends BaseDao {
 	 * @param clubId
 	 */
 	public List<Apply> getSubmittedApplyByClubId(Integer clubId) throws HibernateException;
+	/**function deleteApplyByUserId 2014/01/06
+	 * @author joeyy
+	 * @param userId
+	 */
+
+	public void deleteApplyByUserId(Integer userId) throws HibernateException;
 }

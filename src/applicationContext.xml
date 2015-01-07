@@ -136,6 +136,9 @@
 <!-- 配置Service -->
 <bean name="userService" class="com.synnex.cms.serviceimpl.UserServiceImpl">
 	<property name="userDao" ref="userDao"></property>
+	<property name="PromotionVoteRecordDao" ref="PromotionVoteRecordDao"></property>
+	<property name="applyDao" ref="applyDao"></property>
+	<property name="clubDao" ref="clubDao"></property>
 </bean>
 <bean name="clubService" class="com.synnex.cms.serviceimpl.ClubServiceImpl">
 	<property name="clubDao" ref="clubDao"></property>

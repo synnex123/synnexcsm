@@ -58,7 +58,8 @@
 		</action>
 		<action name="AddSystemManager" class="userManage" method="addSystemManager">
 		</action>
-		
+		<action name="deleteUser" class="userManage" method="deleteUser">
+		</action>
 		<action name="InitAddSystemManager" class="userSearch" method="initAddSystemManager">
 			<result name="success">/user/addsystemmanagerbylist.jsp</result>
 		</action>

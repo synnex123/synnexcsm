@@ -51,6 +51,13 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 	public User getModel() {
 		return user;
 	}
+	/**
+	 * @author walker cheng 
+	 * function logout the system
+	 * 2014/12/17
+	 * @ajax
+	 */
+	
 	public String logout(){
 		HttpServletRequest request=ServletActionContext.getRequest();
 		HttpSession session=request.getSession();

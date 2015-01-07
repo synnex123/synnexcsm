@@ -22,6 +22,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/lib/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/assets/lib/datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/myjs/addsystemmanager.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/myjs/deleteUser.js"></script>
 <title>查询用户</title>
 </head>
 <body class="simple_body">
@@ -49,6 +50,7 @@
 				<div class="bb-alert alert alert-info" style="display: none;">
 					<span>操作成功</span>
 				</div>
+				<div style="color:red">${requestScope.msg}</div>
 				<!-- START 以上内容不需更改，保证该TPL页内的标签匹配即可 -->
 				<div class="well">
 					<ul class="nav nav-tabs">
@@ -141,7 +143,7 @@
 													</DIV>
 												</c:if>
 												<c:if test="${sessionScope.usertype==10 }">	
-													<button class="btn btn-primary" type="button" >
+													<button class="btn btn-primary" type="button" onclick="return doDeleteUser(${searchDto.userId});">
 													<span><strong><font color="red">
 													注销此用户
 													</font></strong></span>

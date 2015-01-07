@@ -177,5 +177,11 @@ public interface UserDao extends BaseDao {
 			Integer pageIndex) throws HibernateException;
 
 	public List<User> getUserByClubId(int clubId) throws HibernateException;
+/**function deleteUserByUserId 2015/01/06
+ * @author joeyy
+ * 
+ * @param userId
+ */
+	public void deleteUserByUserId(Integer userId) throws HibernateException;
 
 }

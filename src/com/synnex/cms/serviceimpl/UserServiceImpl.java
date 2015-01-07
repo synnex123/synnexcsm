@@ -7,6 +7,9 @@ import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.synnex.cms.dao.ApplyDao;
+import com.synnex.cms.dao.ClubDao;
+import com.synnex.cms.dao.PromotionVoteRecordDao;
 import com.synnex.cms.dao.UserDao;
 import com.synnex.cms.dto.SearchDto;
 import com.synnex.cms.dto.SearchUserClubDto;
@@ -16,6 +19,21 @@ import com.synnex.cms.service.UserService;
 
 public class UserServiceImpl implements UserService {
 	private UserDao userDao;
+	private PromotionVoteRecordDao promotionVoteRecordDao;
+	public void setPromotionVoteRecordDao(
+			PromotionVoteRecordDao promotionVoteRecordDao) {
+		this.promotionVoteRecordDao = promotionVoteRecordDao;
+	}
+
+	public void setApplyDao(ApplyDao applyDao) {
+		this.applyDao = applyDao;
+	}
+
+	public void setClubDao(ClubDao clubDao) {
+		this.clubDao = clubDao;
+	}
+	private ApplyDao applyDao;
+	private ClubDao clubDao;
 	private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 	public void setUserDao(UserDao userDao) {
 		try{
@@ -275,6 +293,33 @@ public class UserServiceImpl implements UserService {
 		user=userDao.getUserByUserId(userId);
 		user.setUserType(10);
 		userDao.updateUserInfo(user);
+	}
+	/**function deleteUserByUserId
+	 * @author joeyy
+	 * 2015/01/06
+	 * @param userId
+	 * @return "principal" if this user is principal in club;"votedUser" if this user is in promotion and is votedUser;else return succeed
+	 */
+	public String deleteUser(Integer userId){
+		//若此人是俱乐部负责人则不能注销
+		if (userDao.getUserByUserId(userId).getUserType()==0) {
+			return "principal";
+		}//若此人正在一个选举中并且已被投票则不能注销
+		else if(promotionVoteRecordDao.getPromotionVoteRecordByVotedUser(userId).size()!=0){
+			return "votedUser";
+		}else{
+			//删除此人的所有申请
+			applyDao.deleteApplyByUserId(userId);
+			//删除此人的所有投票信息
+			promotionVoteRecordDao.deleteByVoteUserId(userId);
+			//删除此人的所有俱乐部关联信息
+			UserClub uc=new UserClub();
+			uc.setUserId(userId);
+			clubDao.deleteUserClubInfo(uc);
+			//删除此人对应的userinfo
+			userDao.deleteUserByUserId(userId);
+			return "success";
+		}
 	}
 
 }

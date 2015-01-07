@@ -109,4 +109,13 @@ public interface UserService {
 	 * @throws Exception 
 	 */
 	public void addSystemManager(Integer userId) throws HibernateException;
+	/**
+	 * function deleteUser
+	 * @author joeyy
+	 * 2015/01/06
+	 * 
+	 * @param userId
+	 * @return 
+	 */
+	public String deleteUser(Integer userId);
 }

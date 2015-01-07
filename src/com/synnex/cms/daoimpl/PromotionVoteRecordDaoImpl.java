@@ -112,4 +112,36 @@ public class PromotionVoteRecordDaoImpl extends BaseDaoImpl implements
 		}
 
 	}
+	/**function getPromotionVoteRecordByVotedUser 2014/01/06
+	 * @author joeyy
+	 * 
+	 * @param userId
+	 * @return Entity PromotionVoteRecord
+	 */
+
+	@SuppressWarnings("unchecked")
+	public List<PromotionVoteRecord> getPromotionVoteRecordByVotedUser(Integer userId) throws HibernateException{
+		List<PromotionVoteRecord> resultlist= new ArrayList<>();
+		String hql="";
+		session = getSession();
+		hql="from PromotionVoteRecord pvr where pvr.voteduserId=:userId";
+		Query query = session.createQuery(hql);
+		query.setInteger("userId", userId);
+		resultlist = query.list();
+		return resultlist;	
+	}
+	/** function  deleteByVoteUserId 2015/01/06
+	 * @author joeyy
+	 * 
+	 * @param userId
+	 */
+		public void deleteByVoteUserId(Integer userId) throws HibernateException{
+			String hql="";
+			session = getSession();
+			hql="delete from PromotionVoteRecord pvr where pvr.voteduserId=:userId";
+			Query query = session.createQuery(hql);
+			query.setInteger("userId", userId);
+			query.executeUpdate();
+		}
+
 }
