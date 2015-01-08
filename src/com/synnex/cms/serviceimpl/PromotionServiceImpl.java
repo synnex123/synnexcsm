@@ -35,7 +35,7 @@ public class PromotionServiceImpl implements PromotionService {
 	private PromotionVoteRecordDao promotionVoteRecordDao;
 	private ClubDao clubDao;
 	private UserDao userDao;
-	private static Logger LOGGER = LoggerFactory.getLogger(PromotionServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(PromotionServiceImpl.class);
 	public void setPromotionDao(PromotionDao promotionDao) {
 		this.promotionDao = promotionDao;
 	}

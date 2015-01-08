@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 	}
 	private ApplyDao applyDao;
 	private ClubDao clubDao;
-	private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 	public void setUserDao(UserDao userDao) {
 		try{
 			this.userDao = userDao;

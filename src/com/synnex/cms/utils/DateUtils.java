@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * function getcurrentTime and format it
  */
 public class DateUtils {
-	static Logger logger = LoggerFactory.getLogger(DateUtils.class);
+	private static final Logger logger = LoggerFactory.getLogger(DateUtils.class);
 	public static Timestamp getSysNow(){
 		return new Timestamp(System.currentTimeMillis());	
 	}

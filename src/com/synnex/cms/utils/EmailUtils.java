@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import com.synnex.cms.entity.User;
 
 public class EmailUtils {
-	private static Logger LOGGER = LoggerFactory.getLogger(EmailUtils.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(EmailUtils.class);
 	
 	private static Properties properties = new Properties();
 	private static InputStream in =EmailUtils.class.getClassLoader().getResourceAsStream("mail.properties");

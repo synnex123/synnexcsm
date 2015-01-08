@@ -22,7 +22,7 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger LOGGER = LoggerFactory.getLogger(UserLoginAction.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserLoginAction.class);
 	private User user =new User();
 	private UserService userService;
 	private String password1;

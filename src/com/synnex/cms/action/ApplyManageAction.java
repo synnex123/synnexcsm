@@ -28,7 +28,7 @@ public class ApplyManageAction extends ActionSupport implements
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger LOGGER = LoggerFactory
+	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ApplyManageAction.class);
 	private Apply apply = new Apply();
 	private ApplyService applyService;

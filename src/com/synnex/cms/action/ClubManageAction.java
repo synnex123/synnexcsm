@@ -33,7 +33,7 @@ public class ClubManageAction extends ActionSupport implements ModelDriven<ClubD
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger LOGGER = LoggerFactory.getLogger(ClubManageAction.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClubManageAction.class);
 	private ClubDto clubDto=new ClubDto();
 	private ClubService clubService;
 	private UserService userService;

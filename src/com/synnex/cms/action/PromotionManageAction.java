@@ -33,7 +33,7 @@ public class PromotionManageAction extends ActionSupport implements
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Logger LOGGER = LoggerFactory
+	private static final Logger LOGGER = LoggerFactory
 			.getLogger(PromotionManageAction.class);
 	private Promotion promotion = new Promotion();
 	private PromotionService promotionService;
