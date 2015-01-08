@@ -43,7 +43,7 @@
 				<!-- START 以上内容不需更改，保证该TPL页内的标签匹配即可 -->
 				<div class="well">
 					<ul class="nav nav-tabs">
-						<li class="selected"><a href="<%=request.getContextPath()%>/user/addsystemmanager.jsp">按用户名查找</a></li>
+						<li class="active"><a href="#home" data-toggle="tab">按用户名查找</a></li>
 						<li class="selected"><a href="<%=request.getContextPath() %>/InitAddSystemManager.action?userType=1" >浏览全部 </a></li>
 					</ul>
 					<div id="myTabContent" class="tab-content">
