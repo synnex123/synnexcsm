@@ -1,14 +1,11 @@
 package com.synnex.cms.action;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
-import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,19 +26,6 @@ public class ExitClubAction extends ActionSupport implements ModelDriven<SearchU
 	private static Logger LOGGER = LoggerFactory.getLogger(ExitClubAction.class);
 	private SearchUserClubDto searchUserClubDto=new SearchUserClubDto();
 	private UserService userService;
-	private static Properties properties = new Properties();
-	private static InputStream in =ExitClubAction.class.getClassLoader().getResourceAsStream("mail.properties");
-	static{
-		try {
-			properties.load(in);
-		} catch (IOException e) {
-			LOGGER.warn("exception at",e);
-		}
-	}
-	final String SMTP = properties.getProperty("SMTP");
-	final String FORM = properties.getProperty("FORM");
-	final String USERNAME = properties.getProperty("USERNAME");
-	final String PASSWORD = properties.getProperty("PASSWORD");
 	@Override
 	public SearchUserClubDto getModel() {
 		return searchUserClubDto;
@@ -75,8 +59,8 @@ public class ExitClubAction extends ActionSupport implements ModelDriven<SearchU
 			final String to =searchUserClubDto.getManagerEmail();
 			new Thread(){
 				public void run(){
-					EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-							PASSWORD);
+					EmailUtils.send(EmailUtils.SMTP, EmailUtils.FORM, to, subject, content, EmailUtils.USERNAME,
+							EmailUtils.PASSWORD);
 				}
 			}.start();
 		} catch (IOException e) {

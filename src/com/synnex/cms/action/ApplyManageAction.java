@@ -1,9 +1,7 @@
 package com.synnex.cms.action;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,21 +35,6 @@ public class ApplyManageAction extends ActionSupport implements
 	private Integer userId;
 	private ClubService clubService;
 	private UserService userService;
-	private static Properties properties = new Properties();
-	private static InputStream in =ApplyManageAction.class.getClassLoader().getResourceAsStream("mail.properties");
-	static{
-		try {
-			properties.load(in);
-		} catch (IOException e) {
-			LOGGER.warn("exception at",e);
-		}
-	}
-	final String SMTP = properties.getProperty("SMTP");
-	final String FORM = properties.getProperty("FORM");
-	final String USERNAME = properties.getProperty("USERNAME");
-	final String PASSWORD = properties.getProperty("PASSWORD");
-	
-	
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
@@ -85,7 +68,7 @@ public class ApplyManageAction extends ActionSupport implements
 	/**
 	 * @author walkerc 2014/12/18 function saveApply modified by joeyy
 	 *         2014/12/22 function mailsender
-	 * @throws IOException 
+	 * @throws IOException
 	 * @ajax
 	 * @params Entity Apply
 	 */
@@ -114,20 +97,20 @@ public class ApplyManageAction extends ActionSupport implements
 						apply.getClubId()).getManagerId();
 				final String to = userService.getUserByUserId(managerId)
 						.getUserEmail();
-				
-				new Thread(){
-					public void run(){
-						EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-								PASSWORD);
+
+				new Thread() {
+					public void run() {
+						EmailUtils.send(EmailUtils.SMTP, EmailUtils.FORM, to,
+								subject, content, EmailUtils.USERNAME,
+								EmailUtils.PASSWORD);
 					}
 				}.start();
-				
+
 			}
 
 		} catch (Exception e) {
 			LOGGER.warn("exception at" + this.getClass().getName(), e);
 		}
-
 
 	}
 
@@ -170,8 +153,8 @@ public class ApplyManageAction extends ActionSupport implements
 				ApplyDto apply1 = applyService.getApplyDetails(
 						apply.getApplyId()).get(0);
 				final String subject = "您的申请被驳回" + DateUtils.getNowDate();
-				final String content = "您于(" + apply1.getApplyTime() + ")发起的" + "\n"
-						+ "加入" + apply1.getClubName() + "申请被驳回("
+				final String content = "您于(" + apply1.getApplyTime() + ")发起的"
+						+ "\n" + "加入" + apply1.getClubName() + "申请被驳回("
 						+ DateUtils.getNowDate() + ")" + "\n"
 						+ "rejected reason:" + apply1.getCheckRes() + "\n"
 						+ "请登录系统查看" + "http://" + request.getRemoteHost()
@@ -179,12 +162,14 @@ public class ApplyManageAction extends ActionSupport implements
 						+ "/user/login.jsp";
 				Integer userId = apply1.getRequesterId();
 				// 获取当前选择的apply获取请求人的email
-				final String to = userService.getUserByUserId(userId).getUserEmail();
+				final String to = userService.getUserByUserId(userId)
+						.getUserEmail();
 				out.println("{\"status\":1,\"msg\":\"succeed to reject\"}");
-				new Thread(){
-					public void run(){
-						EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-								PASSWORD);
+				new Thread() {
+					public void run() {
+						EmailUtils.send(EmailUtils.SMTP, EmailUtils.FORM, to,
+								subject, content, EmailUtils.USERNAME,
+								EmailUtils.PASSWORD);
 					}
 				}.start();
 
@@ -227,12 +212,14 @@ public class ApplyManageAction extends ActionSupport implements
 						+ request.getRemoteHost() + ":8080"
 						+ request.getContextPath() + "/user/login.jsp";
 				Integer userId = apply1.getRequesterId();
-				final String to = userService.getUserByUserId(userId).getUserEmail();
+				final String to = userService.getUserByUserId(userId)
+						.getUserEmail();
 				out.println("{\"status\":1,\"msg\":\"succeed to process\"}");
-				new Thread(){
-					public void run(){
-						EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-								PASSWORD);
+				new Thread() {
+					public void run() {
+						EmailUtils.send(EmailUtils.SMTP, EmailUtils.FORM, to,
+								subject, content, EmailUtils.USERNAME,
+								EmailUtils.PASSWORD);
 					}
 				}.start();
 

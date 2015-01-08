@@ -1,5 +1,7 @@
 package com.synnex.cms.utils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -26,6 +28,20 @@ import com.synnex.cms.entity.User;
 
 public class EmailUtils {
 	private static Logger LOGGER = LoggerFactory.getLogger(EmailUtils.class);
+	
+	private static Properties properties = new Properties();
+	private static InputStream in =EmailUtils.class.getClassLoader().getResourceAsStream("mail.properties");
+	static{
+		try {
+			properties.load(in);
+		} catch (IOException e) {
+			LOGGER.warn("exception at",e);
+		}
+	}
+	public final static String SMTP = properties.getProperty("SMTP");
+	public final static String FORM = properties.getProperty("FORM");
+	public final static String USERNAME = properties.getProperty("USERNAME");
+	public final static String PASSWORD = properties.getProperty("PASSWORD");
 
 	private MimeMessage mimeMsg; // MIME邮件对象
 	private Session session; // 邮件会话对象
@@ -455,6 +471,7 @@ public class EmailUtils {
 		}
 		return true;
 	}
+
 
 
 }

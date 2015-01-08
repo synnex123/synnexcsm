@@ -3,8 +3,6 @@ package com.synnex.cms.service;
 import java.sql.Timestamp;
 import java.util.List;
 
-import org.hibernate.HibernateException;
-
 import com.synnex.cms.dto.ApplyDto;
 import com.synnex.cms.entity.Apply;
 import com.synnex.cms.entity.UserClub;
