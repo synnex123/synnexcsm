@@ -143,13 +143,26 @@
 													</DIV>
 												</c:if>
 												<c:if test="${sessionScope.usertype==10 }">	
-													<DIV style="float: left;margin-left: 100px">
-													<button class="btn btn-primary" type="button" onclick="return doDeleteUser(${searchDto.userId});">
-													<span><strong><font color="red">
-													注销此用户
-													</font></strong></span>
-													</button>
-													</DIV>
+													<c:choose>
+														<c:when test="${not empty viewNeed}">
+															<DIV style="float: left;margin-left: 100px">
+															<button class="btn btn-primary" type="button" onclick="return doDeleteUser(${searchDto.userId},${userType});">
+															<span><strong><font color="red">
+															注销此用户
+															</font></strong></span>
+															</button>
+															</DIV>
+														</c:when>
+														<c:otherwise>
+															<DIV style="float: left;margin-left: 100px">
+															<button class="btn btn-primary" type="button" onclick="return doDeleteUser(${searchDto.userId},'');">
+															<span><strong><font color="red">
+															注销此用户
+															</font></strong></span>
+															</button>
+															</DIV>
+														</c:otherwise>
+													</c:choose>
 												</c:if>
 												<DIV style="float: left;margin-left: 100px">
 								    				<a href="<%=request.getContextPath() %>/user/search.jsp" class="btn btn-primary">返回查询页</a>

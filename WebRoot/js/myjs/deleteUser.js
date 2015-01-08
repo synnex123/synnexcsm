@@ -1,4 +1,4 @@
-function doDeleteUser(userId){
+function doDeleteUser(userId,userType){
 if (confirm('请确认是否注销此用户,请注意：将删除有关此人的一切信息（申请，投票，俱乐部关系等）')) {
 	$.ajax({
 		type:"POST",
@@ -12,7 +12,11 @@ if (confirm('请确认是否注销此用户,请注意：将删除有关此人的
 					return false;
 				}else if(result.status==1){
 					alert(result.msg);
-					location.reload();
+					if(userType==""){
+						location.href="user/search.jsp";
+					}else{
+						location.href="UserSearch.action?userName=&userType="+userType;
+					}
 					return true;
 				}
 			}
