@@ -1,7 +1,7 @@
 	function dopromotion(){
 			var promotionReson=document.getElementById("promotionReson").value;
 			var recommenduserId=document.getElementById("recommenduserId").value;
-			if(promotionReson.length>=8){
+			if(promotionReson.length==""){
 					if(confirm('你确认提交么？')){
 							$.ajax({
 									type:"POST",
