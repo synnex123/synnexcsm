@@ -35,7 +35,7 @@ if(window != top){
 			<ul class="nav pull-right">
 
 			</ul>
-			<a class="brand" href="#"><span class="first">公司俱乐部管理</span></a>
+			<a class="brand" href="#"><span class="first"><i class="icon-cogs"></i>公司俱乐部管理</span></a>
 		</div>
 	</div>
 
