@@ -27,15 +27,17 @@ import org.slf4j.LoggerFactory;
 import com.synnex.cms.entity.User;
 
 public class EmailUtils {
-	private static final Logger LOGGER = LoggerFactory.getLogger(EmailUtils.class);
-	
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(EmailUtils.class);
+
 	private static Properties properties = new Properties();
-	private static InputStream in =EmailUtils.class.getClassLoader().getResourceAsStream("mail.properties");
-	static{
+	private static InputStream in = EmailUtils.class.getClassLoader()
+			.getResourceAsStream("mail.properties");
+	static {
 		try {
 			properties.load(in);
 		} catch (IOException e) {
-			LOGGER.warn("exception at",e);
+			LOGGER.warn("exception at", e);
 		}
 	}
 	public final static String SMTP = properties.getProperty("SMTP");
@@ -88,7 +90,7 @@ public class EmailUtils {
 			LOGGER.info("准备获取邮件会话对象！");
 			session = Session.getDefaultInstance(props, null); // 获得邮件会话对象
 		} catch (Exception e) {
-			LOGGER.warn("获取邮件会话对象时发生错误！" + e);
+			LOGGER.warn("获取邮件会话对象时发生错误！", e);
 			return false;
 		}
 
@@ -99,7 +101,7 @@ public class EmailUtils {
 
 			return true;
 		} catch (Exception e) {
-			LOGGER.warn("创建MIME邮件对象失败！" + e);
+			LOGGER.warn("创建MIME邮件对象失败！", e);
 			return false;
 		}
 	}
@@ -144,7 +146,7 @@ public class EmailUtils {
 			mimeMsg.setSubject(mailSubject);
 			return true;
 		} catch (MessagingException e) {
-			LOGGER.warn("设置邮件主题发生错误！");
+			LOGGER.warn("设置邮件主题发生错误！", e);
 			return false;
 		}
 	}
@@ -163,7 +165,7 @@ public class EmailUtils {
 
 			return true;
 		} catch (MessagingException e) {
-			LOGGER.warn("设置邮件正文时发生错误！" + e);
+			LOGGER.warn("设置邮件正文时发生错误！", e);
 			return false;
 		}
 	}
@@ -187,7 +189,7 @@ public class EmailUtils {
 
 			return true;
 		} catch (MessagingException e) {
-			LOGGER.warn("增加邮件附件：" + filename + "发生错误！" + e);
+			LOGGER.warn("增加邮件附件：" + filename + "发生错误！", e);
 			return false;
 		}
 	}
@@ -204,7 +206,7 @@ public class EmailUtils {
 			mimeMsg.setFrom(new InternetAddress(from)); // 设置发信人
 			return true;
 		} catch (MessagingException e) {
-			LOGGER.warn("设置发信人时发生错误！" + e);
+			LOGGER.warn("设置发信人时发生错误！", e);
 			return false;
 		}
 	}
@@ -216,14 +218,15 @@ public class EmailUtils {
 	 *            String
 	 */
 	public boolean setTo(String to) {
-		if (to == null)
+		if (to == null) {
 			return false;
+		}
 		try {
 			mimeMsg.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(to));
 			return true;
 		} catch (MessagingException e) {
-			LOGGER.warn("设置收信人时发生错误" + e);
+			LOGGER.warn("设置收信人时发生错误", e);
 			return false;
 		}
 	}
@@ -235,18 +238,19 @@ public class EmailUtils {
 	 *            String
 	 */
 	public boolean setCopyTo(String copyto) {
-		if (copyto == null)
+		if (copyto == null) {
 			return false;
+		}
 		try {
 			mimeMsg.setRecipients(Message.RecipientType.CC,
 					(Address[]) InternetAddress.parse(copyto));
 			return true;
 		} catch (AddressException e) {
-			LOGGER.warn("设置抄送地址时错误" + e);
+			LOGGER.warn("设置抄送地址时错误", e);
 			return false;
 
 		} catch (MessagingException e) {
-			LOGGER.warn("设置抄送地址时错误" + e);
+			LOGGER.warn("设置抄送地址时错误", e);
 		}
 		return false;
 	}
@@ -275,15 +279,13 @@ public class EmailUtils {
 						mimeMsg.getRecipients(Message.RecipientType.TO));
 				LOGGER.info("555555555555555555");
 			}
-			;
-			// transport.send(mimeMsg);
 
 			LOGGER.info("发送邮件成功！");
 			transport.close();
 
 			return true;
 		} catch (MessagingException e) {
-			LOGGER.warn("邮件发送失败！" + e);
+			LOGGER.warn("邮件发送失败！", e);
 			return false;
 		}
 	}
@@ -411,19 +413,22 @@ public class EmailUtils {
 		}
 		return true;
 	}
-	/**@return String emailAdress
-	 * function getEmailAdressByUserList
+
+	/**
+	 * @return String emailAdress function getEmailAdressByUserList
 	 * @author joeyy
-	 * @param List<User>
+	 * @param List
+	 *            <User>
 	 */
 
-	public static String getEmailsByUserList(List<User> userlist){
+	public static String getEmailsByUserList(List<User> userlist) {
 		List<String> emaillist1 = new ArrayList<>();
 		for (int i = 0; i < userlist.size(); i++) {
 			emaillist1.add(userlist.get(i).getUserEmail());
 		}
-		String emails=emaillist1.toString().substring(1, emaillist1.toString().length()-1);
-		return emails;	
+		String emails = emaillist1.toString().substring(1,
+				emaillist1.toString().length() - 1);
+		return emails;
 	}
 
 	/**
@@ -471,7 +476,5 @@ public class EmailUtils {
 		}
 		return true;
 	}
-
-
 
 }

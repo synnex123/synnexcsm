@@ -27,10 +27,6 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 		String hql = "";
 		PageInfo pageInfo = (PageInfo) PageInfo.pageInfo.get();
 		session = getSession();
-		// String countHql = "select count(1) "
-		// + "where a.requesterId=? and a.clubId=c.clubId "
-		// +
-		// "and c.managerId=u.userId and a.applyStatus between ? and ? order by a.applyTime desc";
 		hql = "select a.applyId,c.clubName,u.userPhone,a.applyTime,a.applyStatus,a.checkTime "
 				+ "from Club c,User u,Apply a "
 				+ "where a.requesterId=? and a.clubId=c.clubId "
@@ -80,12 +76,6 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 			applyDto.setCheckTime((Timestamp) row[5]);
 			applyList.add(applyDto);
 		}
-
-		// Page page = AppContext.getContext().get("page");
-		//
-		// PageList<ApplyDto> list = new PageList<ApplyDto>(applyList);
-		// list.setCount(count);
-		// list.setPage(page);
 		return applyList;
 
 	}
@@ -269,7 +259,7 @@ public class ApplyDaoImpl extends BaseDaoImpl implements ApplyDao {
 		query.setInteger(2, clubId);
 		@SuppressWarnings("rawtypes")
 		List result = query.list();
-		if (result.size() == 0) {
+		if (result.isEmpty()) {
 			return false;
 		}
 

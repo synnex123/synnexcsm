@@ -244,8 +244,7 @@ public class ClubServiceImpl implements ClubService {
 				searchDto.setUserEmail(user.getUserEmail());
 				if(user.getUserId()==club.getManagerId()){
 					searchDto.setUserTypeMsg("管理员");
-				}
-				else{
+				}else{
 					searchDto.setUserTypeMsg("普通成员");
 				}
 				userList.add(searchDto);

@@ -69,17 +69,6 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 	 * function UserRegist
 	 */
 	public String UserRegist(){
-		
-//		try{
-//			
-//		}catch(BizException e){
-//			ActionContext.getContext().put("msg", e.getMessage());	
-//			return SUCCESS;	
-//		}catch(Exception e){
-//			logger.error(e.getMessage());
-//			ActionContext.getContext().put("msg", "系统错误");
-//		}
-//		
 		try {
 			user.setUserType(1);
 			if (userService.save(user)) {
@@ -104,7 +93,6 @@ public class UserLoginAction extends ActionSupport implements ModelDriven<User>{
 	public void CheckPassword(){
 		HttpServletResponse response=ServletActionContext.getResponse();
 		response.setCharacterEncoding("UTF-8");
-//		AppContext.getContext().put("page", page);
 		try {
 			PrintWriter out = response.getWriter();
 			if (!password1.equals(password2)) {

@@ -17,16 +17,16 @@ import com.synnex.cms.service.ApplyService;
  * 
  * @author joeyy 2014/11/26
  */
-/**
- * @Author Joeyy 2014/11/26 function getApplyByUserId for myapply.jsp
- */
+
 public class ApplyServiceImpl implements ApplyService {
 	private ApplyDao applyDao;
 	private static Logger LOGGER = LoggerFactory.getLogger(ApplyServiceImpl.class);
 	public void setApplyDao(ApplyDao applyDao) {
 		this.applyDao = applyDao;
 	}
-
+	/**
+	 * @Author Joeyy 2014/11/26 function getApplyByUserId for myapply.jsp
+	 */
 	public List<ApplyDto> getApplyByUserId(Integer userId, Integer pageIndex,
 			Integer applyStatus){
 		List<ApplyDto> applyList=null;
@@ -104,7 +104,7 @@ public class ApplyServiceImpl implements ApplyService {
 	/**
 	 * @author Joeyy function PassApply modified by joeyy 2014/12/18 2014/12/03
 	 * 
-	 * @params applyId,checkTime,userId,clubId
+	 * @params applyId,checkTime,Entity UserClub
 	 */
 	public boolean passApply(Integer applyId, Timestamp checkTime, UserClub uc){
 		try{

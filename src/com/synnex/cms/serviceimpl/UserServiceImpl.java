@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
 		SearchDto searchDto = new SearchDto();
 		try{
 			list1 = userDao.searchUserByUserName(userName);
-			if (list1.size() == 0) {
+			if (list1.isEmpty()) {
 				return list;
 			}
 			searchDto = list1.get(0);
@@ -297,8 +297,8 @@ public class UserServiceImpl implements UserService {
 			//若此人是俱乐部负责人则不能注销
 			if (userDao.getUserByUserId(userId).getUserType()==0) {
 				result="principal";
-			}//若此人正在一个选举中并且已被投票则不能注销
-			else if(promotionVoteRecordDao.getPromotionVoteRecordByVotedUser(userId).size()!=0){
+				//若此人正在一个选举中并且已被投票则不能注销
+			}else if(!promotionVoteRecordDao.getPromotionVoteRecordByVotedUser(userId).isEmpty()){
 				result="votedUser";
 			}else{
 				//删除此人的所有申请

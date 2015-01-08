@@ -110,7 +110,7 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 				return SUCCESS;
 			}else {
 					mixList=userService.search(searchDto.getUserName());
-					if(mixList.size()==0){
+					if(mixList.isEmpty()){
 						request.setAttribute("errorMsg", "你查询的用户不存在，请核对后在输入！");
 						return ERROR;
 					}else{
@@ -144,7 +144,9 @@ public class UserSearchAction extends ActionSupport implements ModelDriven<Searc
 		Integer listNumber=0;
 		List<SearchDto> resultList=new ArrayList<SearchDto>();
 		try {
-			if(location==1)searchDto.setUserType(location);
+			if(location==1){
+				searchDto.setUserType(location);
+			}
 			PageInfo page=new PageInfo();
 			if(0==currentPage){
 				currentPage=1;
