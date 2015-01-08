@@ -15,7 +15,7 @@
 				alert("请输入俱乐部所在地！");
 				return false;
 			}
-			if(clubDescription.length<=8){
+			if(clubDescription==""){
 				alert("请输入关于俱乐部的相关描述！");
 				return false;
 			}

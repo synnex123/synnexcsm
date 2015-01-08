@@ -20,7 +20,7 @@
 <script type="text/javascript">
 	function doApply(){
 			var statement=document.getElementById("statement").value;
-			if(statement.length<=8){
+			if(statement==""){
 					if(confirm('您确认不输入申请陈述？')){
 							$.ajax({
 									type:"post",
