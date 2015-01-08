@@ -7,7 +7,6 @@ import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.synnex.cms.action.InitApplyAction;
 import com.synnex.cms.dao.ApplyDao;
 import com.synnex.cms.dto.ApplyDto;
 import com.synnex.cms.entity.Apply;

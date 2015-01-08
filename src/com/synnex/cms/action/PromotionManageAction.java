@@ -1,11 +1,9 @@
 package com.synnex.cms.action;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,19 +40,6 @@ public class PromotionManageAction extends ActionSupport implements
 	private ClubService clubService;
 	private UserService userService;
 	private Integer promotionUser;
-	private static Properties properties = new Properties();
-	private static InputStream in =PromotionManageAction.class.getClassLoader().getResourceAsStream("mail.properties");
-	static{
-		try {
-			properties.load(in);
-		} catch (IOException e) {
-			LOGGER.warn("exception at",e);
-		}
-	}
-	final String SMTP = properties.getProperty("SMTP");
-	final String FORM = properties.getProperty("FORM");
-	final String USERNAME = properties.getProperty("USERNAME");
-	final String PASSWORD = properties.getProperty("PASSWORD");
 
 	public Integer getPromotionUser() {
 		return promotionUser;
@@ -180,8 +165,8 @@ public class PromotionManageAction extends ActionSupport implements
 					final String to = EmailUtils.getEmailsByUserList(userlist);
 					new Thread(){
 						public void run(){
-							EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-									PASSWORD);
+							EmailUtils.send(EmailUtils.SMTP, EmailUtils.FORM, to, subject, content, EmailUtils.USERNAME,
+									EmailUtils.PASSWORD);
 						}
 					}.start();
 
@@ -243,8 +228,8 @@ public class PromotionManageAction extends ActionSupport implements
 						final String to = EmailUtils.getEmailsByUserList(userlist);
 						new Thread(){
 							public void run(){
-								EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-										PASSWORD);
+								EmailUtils.send(EmailUtils.SMTP, EmailUtils.FORM, to, subject, content, EmailUtils.USERNAME,
+										EmailUtils.PASSWORD);
 							}
 						}.start();
 

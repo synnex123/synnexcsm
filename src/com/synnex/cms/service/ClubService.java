@@ -2,8 +2,6 @@ package com.synnex.cms.service;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
-
 import com.synnex.cms.dto.ClubDto;
 import com.synnex.cms.dto.SearchDto;
 import com.synnex.cms.entity.Club;

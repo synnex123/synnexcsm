@@ -84,8 +84,7 @@
 							<c:choose>
 								<c:when test="${checkapply.applyStatus==0}">
 								<label style="color: red">rejected reason</label>
-								<textarea rows="8" cols="30" name="checkRes" id="checkRes" class="input-xlarge">
-								</textarea>
+								<textarea rows="8" cols="30" name="checkRes" id="checkRes" class="input-xlarge"></textarea>
 								</c:when>	
 							</c:choose>
 							<div>

@@ -2,8 +2,6 @@ package com.synnex.cms.service;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
-
 import com.synnex.cms.dto.PromotionDto;
 import com.synnex.cms.entity.Promotion;
 import com.synnex.cms.entity.PromotionVoteRecord;

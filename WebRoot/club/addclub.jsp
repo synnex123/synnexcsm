@@ -55,7 +55,7 @@
 							     <label>俱乐部名称</label>
 								<input type="text" name="clubName" id="clubName" value=""   class="input-xlarge"/>
 								<label>负责人姓名</label>
-								<input type="text" name="managerName" id="managerName" value="" class="input-xlarge"/>
+								<input type="text" name="managerName" id="managerName" class="input-xlarge" placeholder="只能填写普通用户，具体请查询所有普通用户"/>
 								<label>俱乐部所在地</label>
 								<select name="clubLocation" id="clubLocation" class="input-xlarge">
 								<option label="请选择俱乐部所属地" value="">请选择俱乐部所属地</option>
@@ -65,8 +65,7 @@
 					        </div>
 					        <div style="float:left;margin: 20px">
 							    <label>俱乐部描述</label>
-								<textarea rows="8" cols="30" name="clubDescription" id="clubDescription" value="" class="input-xlarge">
-								</textarea>
+								<textarea rows="8" cols="30" name="clubDescription" id="clubDescription" value="" class="input-xlarge"></textarea>
 							
 							</div>
 							

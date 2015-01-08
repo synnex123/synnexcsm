@@ -1,9 +1,7 @@
 package com.synnex.cms.action;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,19 +28,7 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 	private User user = new User();
 	private String password1;
 	private String oldpassword;
-	private static Properties properties = new Properties();
-	private static InputStream in =UserManageAction.class.getClassLoader().getResourceAsStream("mail.properties");
-	static{
-		try {
-			properties.load(in);
-		} catch (IOException e) {
-			LOGGER.warn("exception at",e);
-		}
-	}
-	final String SMTP = properties.getProperty("SMTP");
-	final String FORM = properties.getProperty("FORM");
-	final String USERNAME = properties.getProperty("USERNAME");
-	final String PASSWORD = properties.getProperty("PASSWORD");
+
 	public String getPassword1() {
 		return password1;
 	}
@@ -162,8 +148,8 @@ public class UserManageAction extends ActionSupport implements ModelDriven<User>
 			final String to =user1.getUserEmail();
 			new Thread(){
 				public void run(){
-					EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-							PASSWORD);
+					EmailUtils.send(EmailUtils.SMTP, EmailUtils.FORM, to, subject, content, EmailUtils.USERNAME,
+							EmailUtils.PASSWORD);
 				}
 			}.start();
 		} catch (IOException e) {
@@ -193,8 +179,8 @@ public void deleteUser(){
 			final String content="因为长期未登录系统或离职你的账户已被系统管理员注销,如有疑问请联系管理员";
 			new Thread(){
 				public void run(){
-					EmailUtils.send(SMTP, FORM, to, subject, content, USERNAME,
-							PASSWORD);
+					EmailUtils.send(EmailUtils.SMTP, EmailUtils.FORM, to, subject, content, EmailUtils.USERNAME,
+							EmailUtils.PASSWORD);
 				}
 			}.start();
 		}
